@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie';
 const AudioGuideApp = () => {
   const [artworks, setArtworks] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [cookies, setCookie] = useCookies(['likes']);
   const audioRef = useRef(null);
   const touchStartX = useRef(0);
@@ -17,24 +17,21 @@ const AudioGuideApp = () => {
 
   useEffect(() => {
     const fetchArtworks = async () => {
-      const localData = localStorage.getItem('artworks');
-
-      if (localData) {
-        setArtworks(JSON.parse(localData));
-      } else {
         try {
-          const response = await fetch('http://localhost:3001/api/artworks');
-          const data = await response.json();
-          setArtworks(data);
-          localStorage.setItem('artworks', JSON.stringify(data));
+            const response = await fetch('/artworks.json');
+            if (!response.ok) {
+                throw new Error('Error al cargar el JSON');
+            }
+            const data = await response.json();
+            setArtworks(data);
         } catch (error) {
-          console.error('Error fetching artworks:', error);
+            console.error('Error fetching artworks from JSON:', error);
         }
-      }
     };
 
     fetchArtworks();
-  }, []);
+}, []);
+
 
   useEffect(() => {
     const savedZoomLevel = sessionStorage.getItem('zoomLevel'); // Recuperar nivel de zoom guardado
