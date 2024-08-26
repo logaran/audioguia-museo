@@ -3,6 +3,7 @@ import { Heart, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { useCookies } from 'react-cookie';
 import IntroScreen from './IntroScreen';
 import FavoritesScreen from './FavoritesScreen';
+import Banner from './Banner'; // Asegúrate de importar el banner
 
 const AudioGuideApp = () => {
   const [artworks, setArtworks] = useState([]);
@@ -15,7 +16,6 @@ const AudioGuideApp = () => {
   const isSwipe = useRef(false);
   const [isMobile, setIsMobile] = useState(false);
   const [swipeOffset, setSwipeOffset] = useState(0);
-  const [zoomLevel, setZoomLevel] = useState(1);
   const [showIntro, setShowIntro] = useState(true);
   const [showFavorites, setShowFavorites] = useState(false);
 
@@ -37,11 +37,6 @@ const AudioGuideApp = () => {
   }, []);
 
   useEffect(() => {
-    const savedZoomLevel = sessionStorage.getItem('zoomLevel');
-    if (savedZoomLevel) {
-      setZoomLevel(parseFloat(savedZoomLevel));
-    }
-
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.play();
@@ -124,17 +119,6 @@ const AudioGuideApp = () => {
     setCookie('likes', newLikes, { path: '/' });
   };
 
-  const zoomIn = () => {
-    const newZoomLevel = Math.min(3, zoomLevel + 0.1);
-    setZoomLevel(newZoomLevel);
-    sessionStorage.setItem('zoomLevel', newZoomLevel);
-  };
-
-  const zoomOut = () => {
-    const newZoomLevel = Math.max(1, zoomLevel - 0.1);
-    setZoomLevel(newZoomLevel);
-    sessionStorage.setItem('zoomLevel', newZoomLevel);
-  };
 
   if (artworks.length === 0) return <div>Cargando...</div>;
 
@@ -142,52 +126,49 @@ const AudioGuideApp = () => {
   const favoriteArtworks = artworks.filter(artwork => cookies.likes?.[artwork.name]);
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden bg-black text-white">
-      {showIntro && <IntroScreen onSwipe={handleSwipe} />}
-      {showFavorites && !showIntro && (
-        <FavoritesScreen favoriteArtworks={favoriteArtworks} onSwipe={handleSwipe} />
-      )}
-      {!showIntro && !showFavorites && (
-        <>
-          <div
-            className="absolute inset-0 flex items-center justify-center"
-            style={{ transform: `scale(${zoomLevel})`, transformOrigin: 'center' }}
-          >
-            <img
-              src={currentArtwork.imageUrl}
-              alt={currentArtwork.name}
-              className="h-full w-full object-contain transition-transform duration-300"
-              style={{ transform: `translateX(${swipeOffset}px)` }}
-            />
-          </div>
+    <div className="relative h-screen w-screen bg-white text-black flex flex-col">
+      <Banner />
+      <div className="relative flex-grow overflow-auto">
+        {showIntro && <IntroScreen onSwipe={handleSwipe} />}
+        {showFavorites && !showIntro && (
+          <FavoritesScreen favoriteArtworks={favoriteArtworks} onSwipe={handleSwipe} />
+        )}
+        {!showIntro && !showFavorites && (
+          <>
+            <div
+              className="absolute inset-0 flex items-center justify-center"
 
-          <div
-            className={`absolute inset-0 flex flex-col justify-between p-4 transition duration-300 ${
-              isPlaying ? 'pointer-events-auto' : 'bg-black bg-opacity-60 pointer-events-auto'
-            }`}
-            onTouchStart={isMobile ? handleTouchStart : null}
-            onTouchMove={isMobile ? handleTouchMove : null}
-            onTouchEnd={isMobile ? handleTouchEnd : null}
-            onClick={!isMobile ? togglePlayPause : null}
-          >
-            <div style={{ pointerEvents: 'none' }}>
-              <h2 className="text-2xl font-bold">{currentArtwork.name}</h2>
-              <p className="text-sm">{currentArtwork.description}</p>
+            >
+              <img
+                src={currentArtwork.imageUrl}
+                alt={currentArtwork.name}
+                className="h-full w-full object-contain transition-transform duration-300"
+                style={{ transform: `translateX(${swipeOffset}px)` }}
+              />
             </div>
 
-            {!isPlaying && (
-              <div className="flex items-center justify-center h-full">
-                <Play color="white" size={64} />
+            <div
+              className={`absolute inset-0 flex flex-col justify-between p-4 transition duration-300 ${isPlaying ? 'pointer-events-auto' : 'bg-black bg-opacity-60 pointer-events-auto'
+                }`}
+              onTouchStart={isMobile ? handleTouchStart : null}
+              onTouchMove={isMobile ? handleTouchMove : null}
+              onTouchEnd={isMobile ? handleTouchEnd : null}
+              onClick={!isMobile ? togglePlayPause : null}
+            >
+              <div style={{ pointerEvents: 'none' }}>
+                <h2 className="text-2xl font-bold">{currentArtwork.name}</h2>
+                <p className="text-sm">{currentArtwork.description}</p>
               </div>
-            )}
-          </div>
 
-          <div className="absolute inset-x-0 bottom-0 h-16 flex items-center justify-between bg-black bg-opacity-70 z-20 p-6">
-            <div className="flex items-center">
-              <button onClick={zoomOut} className="text-3xl mr-4 text-white">-</button>
-              <button onClick={zoomIn} className="text-3xl text-white">+</button>
+              {!isPlaying && (
+                <div className="flex items-center justify-center h-full">
+                  <Play color="white" size={64} />
+                </div>
+              )}
             </div>
-            <div className="flex items-center">
+
+            <div className="absolute inset-x-0 bottom-0 h-16 flex items-center justify-end bg-black bg-opacity-70 z-20 p-6">
+
               <button onClick={toggleLike} className="text-3xl ml-4">
                 <Heart
                   fill={cookies.likes?.[currentArtwork.name] ? 'red' : 'none'}
@@ -195,32 +176,33 @@ const AudioGuideApp = () => {
                   size={32}
                 />
               </button>
-            </div>
-          </div>
 
-          <audio
-            ref={audioRef}
-            src={currentArtwork.audioUrl}
-            onEnded={() => setIsPlaying(false)}
-          />
-          {!isMobile && (
-            <>
-              <button
-                className="absolute left-0 top-1/2 transform -translate-y-1/2 text-white text-3xl z-20"
-                onClick={() => handleSwipe('right')}
-              >
-                <ChevronLeft size={48} />
-              </button>
-              <button
-                className="absolute right-0 top-1/2 transform -translate-y-1/2 text-white text-3xl z-20"
-                onClick={() => handleSwipe('left')}
-              >
-                <ChevronRight size={48} />
-              </button>
-            </>
-          )}
-        </>
-      )}
+            </div>
+
+            <audio
+              ref={audioRef}
+              src={currentArtwork.audioUrl}
+              onEnded={() => setIsPlaying(false)}
+            />
+            {!isMobile && (
+              <>
+                <button
+                  className="absolute left-0 top-1/2 transform -translate-y-1/2 text-white text-3xl z-20"
+                  onClick={() => handleSwipe('right')}
+                >
+                  <ChevronLeft size={48} />
+                </button>
+                <button
+                  className="absolute right-0 top-1/2 transform -translate-y-1/2 text-white text-3xl z-20"
+                  onClick={() => handleSwipe('left')}
+                >
+                  <ChevronRight size={48} />
+                </button>
+              </>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
