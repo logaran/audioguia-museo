@@ -133,6 +133,18 @@ const AudioGuideApp = () => {
   return (
     <div className="relative h-screen w-screen bg-white text-black flex flex-col">
       <Banner />
+      {/* Fondo desaturado y con blur en modo móvil */}
+      {isMobile && (
+        <div
+        className="absolute inset-0 bg-cover bg-center filter blur-md"
+        style={{
+          backgroundImage: `url(${currentArtwork.imageUrl})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.6, // Ajusta la opacidad aquí
+        }}
+      />
+      )}
       <div className="relative flex-grow overflow-auto">
         {showIntro && <IntroScreen onSwipe={handleSwipe} />}
         {showFavorites && !showIntro && (
