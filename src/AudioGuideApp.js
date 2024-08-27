@@ -125,13 +125,18 @@ const AudioGuideApp = () => {
   const currentArtwork = artworks[currentIndex];
   const favoriteArtworks = artworks.filter(artwork => cookies.likes?.[artwork.name]);
 
+  const goBackToGallery = () => {
+    setShowFavorites(false); // Oculta la pantalla de favoritos y vuelve a la audioguía
+    setIsPlaying(true); // Opcional: puede empezar a reproducir el audio al volver a la galería
+  };
+
   return (
     <div className="relative h-screen w-screen bg-white text-black flex flex-col">
       <Banner />
       <div className="relative flex-grow overflow-auto">
         {showIntro && <IntroScreen onSwipe={handleSwipe} />}
         {showFavorites && !showIntro && (
-          <FavoritesScreen favoriteArtworks={favoriteArtworks} onSwipe={handleSwipe} />
+          <FavoritesScreen favoriteArtworks={favoriteArtworks} onBack={goBackToGallery} />
         )}
         {!showIntro && !showFavorites && (
           <>
@@ -142,7 +147,7 @@ const AudioGuideApp = () => {
               <img
                 src={currentArtwork.imageUrl}
                 alt={currentArtwork.name}
-                className="h-full w-full object-contain transition-transform duration-300"
+                className={`object-contain transition-transform duration-300 ${!isMobile ? 'max-h-[60vh] max-w-[60vw]' : 'h-full w-full'}`}
                 style={{ transform: `translateX(${swipeOffset}px)` }}
               />
             </div>
@@ -156,7 +161,7 @@ const AudioGuideApp = () => {
               onClick={!isMobile ? togglePlayPause : null}
             >
               <div style={{ pointerEvents: 'none' }}>
-                <h2 className="text-2xl font-bold">{currentArtwork.name}</h2>
+                <h2 className="text-2xl text-gray-700 font-bold">{currentArtwork.name}</h2>
                 <p className="text-sm">{currentArtwork.description}</p>
               </div>
 
@@ -187,13 +192,13 @@ const AudioGuideApp = () => {
             {!isMobile && (
               <>
                 <button
-                  className="absolute left-0 top-1/2 transform -translate-y-1/2 text-white text-3xl z-20"
+                  className="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-20"
                   onClick={() => handleSwipe('right')}
                 >
                   <ChevronLeft size={48} />
                 </button>
                 <button
-                  className="absolute right-0 top-1/2 transform -translate-y-1/2 text-white text-3xl z-20"
+                  className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-20"
                   onClick={() => handleSwipe('left')}
                 >
                   <ChevronRight size={48} />

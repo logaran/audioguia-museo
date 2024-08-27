@@ -1,7 +1,7 @@
 import React from 'react';
 import { Share2, ShoppingCart, ExternalLink } from 'lucide-react';
 
-const FavoritesScreen = ({ favoriteArtworks, onSwipe }) => {
+const FavoritesScreen = ({ favoriteArtworks, onBack }) => {
   return (
     <div className="w-screen flex flex-col items-center justify-center bg-black text-white p-8">
       <h1 className="text-3xl font-bold mb-8">Obras Favoritas</h1>
@@ -36,7 +36,7 @@ const FavoritesScreen = ({ favoriteArtworks, onSwipe }) => {
         ))}
       </ul>
       <button 
-        onClick={() => onSwipe('right')} 
+        onClick={() => onBack()} 
         className="mt-8 bg-white text-black px-4 py-2 rounded"
       >
         Volver a la Audioguía
