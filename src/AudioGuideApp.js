@@ -18,6 +18,20 @@ const AudioGuideApp = () => {
   const [swipeOffset, setSwipeOffset] = useState(0);
   const [showIntro, setShowIntro] = useState(true);
   const [showFavorites, setShowFavorites] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState('es');
+
+  useEffect(() => {
+    const appHeight = () => {
+      const doc = document.documentElement;
+      doc.style.setProperty('--app-height', `${window.innerHeight}px`);
+    };
+    appHeight();
+    window.addEventListener('resize', appHeight);
+
+    return () => {
+      window.removeEventListener('resize', appHeight);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchArtworks = async () => {
@@ -99,11 +113,15 @@ const AudioGuideApp = () => {
         setShowFavorites(true);
       }
     }
-    setIsPlaying(true);
+    //setIsPlaying(true);
   };
 
   const togglePlayPause = () => {
     setIsPlaying(!isPlaying);
+  };
+
+  const handleLanguageSelect = (language) => {
+    setSelectedLanguage(language); // Actualiza el idioma seleccionado
   };
 
   const toggleLike = (e) => {
@@ -111,10 +129,10 @@ const AudioGuideApp = () => {
     e.preventDefault();
     const currentArtwork = artworks[currentIndex];
     const newLikes = { ...cookies.likes };
-    if (newLikes[currentArtwork.name]) {
-      delete newLikes[currentArtwork.name];
+    if (newLikes[currentArtwork.name.es]) {
+      delete newLikes[currentArtwork.name.es];
     } else {
-      newLikes[currentArtwork.name] = true;
+      newLikes[currentArtwork.name.es] = true;
     }
     setCookie('likes', newLikes, { path: '/' });
   };
@@ -123,11 +141,11 @@ const AudioGuideApp = () => {
   if (artworks.length === 0) return <div>Cargando...</div>;
 
   const currentArtwork = artworks[currentIndex];
-  const favoriteArtworks = artworks.filter(artwork => cookies.likes?.[artwork.name]);
+  const favoriteArtworks = artworks.filter(artwork => cookies.likes?.[artwork.name.es]);
 
   const goBackToGallery = () => {
     setShowFavorites(false); // Oculta la pantalla de favoritos y vuelve a la audioguía
-    setIsPlaying(true); // Opcional: puede empezar a reproducir el audio al volver a la galería
+    setIsPlaying(false); // Opcional: puede empezar a reproducir el audio al volver a la galería
   };
 
   return (
@@ -136,19 +154,21 @@ const AudioGuideApp = () => {
       {/* Fondo desaturado y con blur en modo móvil */}
       {isMobile && (
         <div
-        className="absolute inset-0 bg-cover bg-center filter blur-md"
-        style={{
-          backgroundImage: `url(${currentArtwork.imageUrl})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          opacity: 0.6, // Ajusta la opacidad aquí
-        }}
-      />
+          className="absolute inset-0 bg-cover bg-center filter blur-md"
+          style={{
+            backgroundImage: `url(${currentArtwork.imageUrl})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.6, // Ajusta la opacidad aquí
+          }}
+        />
       )}
       <div className="relative flex-grow overflow-auto">
-        {showIntro && <IntroScreen onSwipe={handleSwipe} />}
+        {showIntro && (
+          <IntroScreen onSwipe={handleSwipe} selectedLanguage={selectedLanguage} onLanguageSelect={handleLanguageSelect} />
+        )}
         {showFavorites && !showIntro && (
-          <FavoritesScreen favoriteArtworks={favoriteArtworks} onBack={goBackToGallery} />
+          <FavoritesScreen favoriteArtworks={favoriteArtworks} onBack={goBackToGallery} selectedLanguage={selectedLanguage}/>
         )}
         {!showIntro && !showFavorites && (
           <>
@@ -173,7 +193,7 @@ const AudioGuideApp = () => {
               onClick={!isMobile ? togglePlayPause : null}
             >
               <div style={{ pointerEvents: 'none' }}>
-                <h2 className="text-2xl text-gray-700 font-bold">{currentArtwork.name}</h2>
+                <h2 className="text-2xl text-gray-700 font-bold">{currentArtwork.name[selectedLanguage]}</h2>
                 <p className="text-sm">{currentArtwork.description}</p>
               </div>
 
@@ -188,7 +208,7 @@ const AudioGuideApp = () => {
 
               <button onClick={toggleLike} className="text-3xl ml-4">
                 <Heart
-                  fill={cookies.likes?.[currentArtwork.name] ? 'red' : 'none'}
+                  fill={cookies.likes?.[currentArtwork.name.es] ? 'red' : 'none'}
                   color="white"
                   size={32}
                 />
@@ -198,7 +218,7 @@ const AudioGuideApp = () => {
 
             <audio
               ref={audioRef}
-              src={currentArtwork.audioUrl}
+              src={currentArtwork.audioUrl[selectedLanguage]}
               onEnded={() => setIsPlaying(false)}
             />
             {!isMobile && (
