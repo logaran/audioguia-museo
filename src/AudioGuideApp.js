@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Heart, ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { useCookies } from 'react-cookie';
-import IntroScreen from './IntroScreen';
-import FavoritesScreen from './FavoritesScreen';
-import Banner from './Banner'; // Asegúrate de importar el banner
+import IntroScreen from './components/IntroScreen';
+import FavoritesScreen from './components/FavoritesScreen';
+import Header from './components/Header';
+import LanguageSelector from './components/LanguageSelector';
+import ControlsBar from './components/ControlsBar';
+import { languages } from './components/Languages';
 
 const AudioGuideApp = () => {
   const [artworks, setArtworks] = useState([]);
@@ -19,6 +22,7 @@ const AudioGuideApp = () => {
   const [showIntro, setShowIntro] = useState(true);
   const [showFavorites, setShowFavorites] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('es');
+  const [showLanguageSelector, setShowLanguageSelector] = useState(false);
 
   useEffect(() => {
     const appHeight = () => {
@@ -69,6 +73,7 @@ const AudioGuideApp = () => {
     return () => window.removeEventListener('resize', updateIsMobile);
   }, []);
 
+
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
     setSwipeOffset(0);
@@ -113,7 +118,6 @@ const AudioGuideApp = () => {
         setShowFavorites(true);
       }
     }
-    //setIsPlaying(true);
   };
 
   const togglePlayPause = () => {
@@ -121,7 +125,8 @@ const AudioGuideApp = () => {
   };
 
   const handleLanguageSelect = (language) => {
-    setSelectedLanguage(language); // Actualiza el idioma seleccionado
+    setSelectedLanguage(language);
+    setShowLanguageSelector(false);
   };
 
   const toggleLike = (e) => {
@@ -150,7 +155,18 @@ const AudioGuideApp = () => {
 
   return (
     <div className="relative h-screen w-screen bg-white text-black flex flex-col">
-      <Banner />
+      {/* Modal selector de idioma (Cerrado por defecto)*/}
+      {showLanguageSelector && (
+        <div className="fixed inset-0 bg-white z-50 flex items-center justify-center p-4">
+          <LanguageSelector
+            setSelectedLanguage={handleLanguageSelect}
+            setIsPlaying={setIsPlaying}
+            onClose={() => setShowLanguageSelector(false)}
+          />
+        </div>
+      )}
+      
+      <Header />
       {/* Fondo desaturado y con blur en modo móvil */}
       {isMobile && (
         <div
@@ -165,10 +181,10 @@ const AudioGuideApp = () => {
       )}
       <div className="relative flex-grow overflow-auto">
         {showIntro && (
-          <IntroScreen onSwipe={handleSwipe} selectedLanguage={selectedLanguage} onLanguageSelect={handleLanguageSelect} />
+          <IntroScreen onSwipe={handleSwipe} selectedLanguage={selectedLanguage} onLanguageSelect={handleLanguageSelect} setIsPlaying={setIsPlaying} />
         )}
         {showFavorites && !showIntro && (
-          <FavoritesScreen favoriteArtworks={favoriteArtworks} onBack={goBackToGallery} selectedLanguage={selectedLanguage}/>
+          <FavoritesScreen favoriteArtworks={favoriteArtworks} onBack={goBackToGallery} selectedLanguage={selectedLanguage} />
         )}
         {!showIntro && !showFavorites && (
           <>
@@ -204,17 +220,13 @@ const AudioGuideApp = () => {
               )}
             </div>
 
-            <div className="absolute inset-x-0 bottom-0 h-16 flex items-center justify-end bg-black bg-opacity-70 z-20 p-6">
-
-              <button onClick={toggleLike} className="text-3xl ml-4">
-                <Heart
-                  fill={cookies.likes?.[currentArtwork.name.es] ? 'red' : 'none'}
-                  color="white"
-                  size={32}
-                />
-              </button>
-
-            </div>
+            <ControlsBar
+              currentArtwork={currentArtwork}
+              toggleLike={toggleLike}
+              setShowLanguageSelector={setShowLanguageSelector}
+              selectedLanguage={selectedLanguage}
+              cookies={cookies}
+            />
 
             <audio
               ref={audioRef}

@@ -1,5 +1,5 @@
 import React from 'react';
-import logoMuseo from './logo-museo.svg'; // Ajusta la ruta si es necesario
+import logoMuseo from '../logo-museo.svg'; // Ajusta la ruta si es necesario
 
 const Banner = () => {
   return (
