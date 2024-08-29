@@ -129,14 +129,14 @@ const fetchAllData = async () => {
         audiodescriptions.forEach(({ name, audiodescriptionUrl }) => {
             let existingArtwork = artworks.find(art => art.name.es === name);
             if (existingArtwork && audiodescriptionUrl) {
-                existingArtwork.audiodescriptionUrl = audiodescriptionUrl;
+                existingArtwork.audiodescriptionUrl = {'es': audiodescriptionUrl};
             } else if (audiodescriptionUrl) {
                 artworks.push({
                     name,
                     audioUrl: {},
                     description: '',
                     imageUrl: null,
-                    audiodescriptionUrl,
+                    audiodescriptionUrl:{},
                     signLanguageUrl: null
                 });
             }
@@ -146,15 +146,15 @@ const fetchAllData = async () => {
         signLanguageVideos.forEach(({ name, signLanguageUrl }) => {
             let existingArtwork = artworks.find(art => art.name.es === name);
             if (existingArtwork && signLanguageUrl) {
-                existingArtwork.signLanguageUrl = signLanguageUrl;
+                existingArtwork.signLanguageUrl = {'es': signLanguageUrl};
             } else if (signLanguageUrl) {
                 artworks.push({
                     name,
                     audioUrl: {},
                     description: '',
                     imageUrl: null,
-                    audiodescriptionUrl: null,
-                    signLanguageUrl
+                    audiodescriptionUrl: {},
+                    signLanguageUrl: {}
                 });
             }
         });

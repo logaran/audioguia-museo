@@ -6,7 +6,7 @@ import FavoritesScreen from './components/FavoritesScreen';
 import Header from './components/Header';
 import LanguageSelector from './components/LanguageSelector';
 import ControlsBar from './components/ControlsBar';
-import { languages } from './components/Languages';
+
 
 const AudioGuideApp = () => {
   const [artworks, setArtworks] = useState([]);
@@ -23,6 +23,7 @@ const AudioGuideApp = () => {
   const [showFavorites, setShowFavorites] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('es');
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
+  const [selectedResource, setSelectedResource] =useState('audioUrl');
 
   useEffect(() => {
     const appHeight = () => {
@@ -147,6 +148,10 @@ const AudioGuideApp = () => {
 
   const currentArtwork = artworks[currentIndex];
   const favoriteArtworks = artworks.filter(artwork => cookies.likes?.[artwork.name.es]);
+  const activeResourceUrl = currentArtwork[selectedResource][selectedLanguage] 
+  ? currentArtwork[selectedResource][selectedLanguage] 
+  : currentArtwork[selectedResource]['es'];
+
 
   const goBackToGallery = () => {
     setShowFavorites(false); // Oculta la pantalla de favoritos y vuelve a la audioguía
@@ -165,7 +170,7 @@ const AudioGuideApp = () => {
           />
         </div>
       )}
-      
+
       <Header />
       {/* Fondo desaturado y con blur en modo móvil */}
       {isMobile && (
@@ -181,7 +186,7 @@ const AudioGuideApp = () => {
       )}
       <div className="relative flex-grow overflow-auto">
         {showIntro && (
-          <IntroScreen onSwipe={handleSwipe} selectedLanguage={selectedLanguage} onLanguageSelect={handleLanguageSelect} setIsPlaying={setIsPlaying} />
+          <IntroScreen onSwipe={handleSwipe} selectedLanguage={selectedLanguage} onLanguageSelect={handleLanguageSelect} setIsPlaying={setIsPlaying} setSelectedResource={setSelectedResource} selectedResource={selectedResource}/>
         )}
         {showFavorites && !showIntro && (
           <FavoritesScreen favoriteArtworks={favoriteArtworks} onBack={goBackToGallery} selectedLanguage={selectedLanguage} />
@@ -230,25 +235,27 @@ const AudioGuideApp = () => {
 
             <audio
               ref={audioRef}
-              src={currentArtwork.audioUrl[selectedLanguage]}
+              src={activeResourceUrl}
               onEnded={() => setIsPlaying(false)}
             />
-            {!isMobile && (
-              <>
+
+            <>
+              {currentIndex !== 0 && (
                 <button
                   className="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-20"
                   onClick={() => handleSwipe('right')}
                 >
                   <ChevronLeft size={48} />
                 </button>
-                <button
-                  className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-20"
-                  onClick={() => handleSwipe('left')}
-                >
-                  <ChevronRight size={48} />
-                </button>
-              </>
-            )}
+              )}
+              <button
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-20"
+                onClick={() => handleSwipe('left')}
+              >
+                <ChevronRight size={48} />
+              </button>
+            </>
+
           </>
         )}
       </div>

@@ -26,8 +26,12 @@
     },
     "description": "Audio nº 1",
     "imageUrl": "https://www.carmenthyssenmalaga.org/img/saludo.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/01.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/1-saludo-carmen-thyssen-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/01.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/1-saludo-carmen-thyssen-mp4"
+    }
   },
   {
     "name": {
@@ -56,8 +60,12 @@
     },
     "description": "Audio nº 2",
     "imageUrl": "https://www.carmenthyssenmalaga.org/img/intro.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/02.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/2-introduccion-visita-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/02.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/2-introduccion-visita-mp4"
+    }
   },
   {
     "name": {
@@ -86,8 +94,12 @@
     },
     "description": "Audio nº 3",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/cropped/497a356f85d6a05090ba565affa9dd442ba205f2.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/03.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/03-cortes-aguilar"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/03.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/03-cortes-aguilar"
+    }
   },
   {
     "name": {
@@ -116,8 +128,12 @@
     },
     "description": "Audio nº 4",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/CTB.1998.11.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/04.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/04-barron-carrillo-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/04.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/04-barron-carrillo-mp4"
+    }
   },
   {
     "name": {
@@ -146,8 +162,12 @@
     },
     "description": "Audio nº 5",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/cropped/c7bff70d4a963b46b011ee1098d9e43abbb9c020.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/05.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/bamberger-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/05.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/bamberger-mp4"
+    }
   },
   {
     "name": {
@@ -176,8 +196,12 @@
     },
     "description": "Audio nº 6",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/CTB.1996.62.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/06.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/06-perez-villaamil-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/06.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/06-perez-villaamil-mp4"
+    }
   },
   {
     "name": {
@@ -206,8 +230,12 @@
     },
     "description": "Audio nº 7",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/cropped/9a0f15804f1f5e026f6996aaa1228f8ed2398c33.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/07.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/07-dominguez-becquer-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/07.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/07-dominguez-becquer-mp4"
+    }
   },
   {
     "name": {
@@ -236,8 +264,12 @@
     },
     "description": "Audio nº 8",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/CTB.1994.35.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/08.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/08-dominguez-becquer-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/08.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/08-dominguez-becquer-mp4"
+    }
   },
   {
     "name": {
@@ -266,8 +298,12 @@
     },
     "description": "Audio nº 9",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/cropped/d43bdcccb3439a2d90d695278f1cc4fc906828d8.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/09.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/09-dehodenq-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/09.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/09-dehodenq-mp4"
+    }
   },
   {
     "name": {
@@ -296,8 +332,12 @@
     },
     "description": "Audio nº 10",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/CTB.2001.22.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/10.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/10-lucas-velazquez-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/10.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/10-lucas-velazquez-mp4"
+    }
   },
   {
     "name": {
@@ -326,8 +366,12 @@
     },
     "description": "Audio nº 11",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/CTB.2000.49.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/11.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/11-lucas-velzquez-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/11.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/11-lucas-velzquez-mp4"
+    }
   },
   {
     "name": {
@@ -356,8 +400,12 @@
     },
     "description": "Audio nº 12",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/CTB.1989.26.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/12.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/12-gomez-gil-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/12.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/12-gomez-gil-mp4"
+    }
   },
   {
     "name": {
@@ -386,8 +434,12 @@
     },
     "description": "Audio nº 13",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/cropped/f315e9bb19b154b67ebe8966ef2dc4e11d876df8.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/13.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/13-fortuny-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/13.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/13-fortuny-mp4"
+    }
   },
   {
     "name": {
@@ -416,8 +468,12 @@
     },
     "description": "Audio nº 14",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/CTB.1999.99.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/14.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/14-pinazo-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/14.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/14-pinazo-mp4"
+    }
   },
   {
     "name": {
@@ -446,8 +502,12 @@
     },
     "description": "Audio nº 15",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/cropped/364e04169592d4f4c07e9ac0c578d356945d4d13.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/15.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/15-madrazo-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/15.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/15-madrazo-mp4"
+    }
   },
   {
     "name": {
@@ -476,8 +536,12 @@
     },
     "description": "Audio nº 16",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/cropped/c65210c240e6777d9fa42ebcfa1a33d66719a7c2.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/16.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/16-moreno-carbonero-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/16.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/16-moreno-carbonero-mp4"
+    }
   },
   {
     "name": {
@@ -506,8 +570,12 @@
     },
     "description": "Audio nº 17",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/CTB.1995.51.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/17.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/17-reyna-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/17.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/17-reyna-mp4"
+    }
   },
   {
     "name": {
@@ -536,8 +604,12 @@
     },
     "description": "Audio nº 18",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/CTB.1997.97.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/18.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/18-haes-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/18.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/18-haes-mp4"
+    }
   },
   {
     "name": {
@@ -566,8 +638,12 @@
     },
     "description": "Audio nº 19",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/cropped/f5dcca127575f4a89db22bc7dafcc74a88954773.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/19.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/19-sanchez-perrier-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/19.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/19-sanchez-perrier-mp4"
+    }
   },
   {
     "name": {
@@ -596,8 +672,12 @@
     },
     "description": "Audio nº 20",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/CTB.1995.208.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/20.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES-1712829455.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/20-gomez-gil-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/20.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES-1712829455.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/20-gomez-gil-mp4"
+    }
   },
   {
     "name": {
@@ -626,8 +706,12 @@
     },
     "description": "Audio nº 21",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/cropped/b38f52ab8bb5b531a0a0f1ca32a5e68ed80d2ce5.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/21.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES-1712829470.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/21-regoyos-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/21.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES-1712829470.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/21-regoyos-mp4"
+    }
   },
   {
     "name": {
@@ -656,8 +740,12 @@
     },
     "description": "Audio nº 22",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/CTB.1999.21.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/22.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES-1712829488.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/22-beruete-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/22.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES-1712829488.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/22-beruete-mp4"
+    }
   },
   {
     "name": {
@@ -686,8 +774,12 @@
     },
     "description": "Audio nº 23",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/cropped/2d0c682b883d0153449ceb53dc06693eaee6e16f.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/23.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES-1712829504.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/23-sorolla-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/23.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES-1712829504.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/23-sorolla-mp4"
+    }
   },
   {
     "name": {
@@ -716,8 +808,12 @@
     },
     "description": "Audio nº 24",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/cropped/f3487800ef7684000c5387a8c7354fdb38805512.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/24.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES-1712829520.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/24-munioz-degrain-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/24.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES-1712829520.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/24-munioz-degrain-mp4"
+    }
   },
   {
     "name": {
@@ -746,8 +842,12 @@
     },
     "description": "Audio nº 25",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/CTB.1994.25.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/25.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES-1712829535.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/25-romero-torres.mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/25.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES-1712829535.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/25-romero-torres.mp4"
+    }
   },
   {
     "name": {
@@ -776,8 +876,12 @@
     },
     "description": "Audio nº 26",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/cropped/ec71310f34cedc4bef636d1c6699ed0ded27cbb1.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/26.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES-1712829555.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/26-casas-carbo-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/26.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES-1712829555.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/26-casas-carbo-mp4"
+    }
   },
   {
     "name": {
@@ -806,8 +910,12 @@
     },
     "description": "Audio nº 27",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/cropped/e27d1371d8ba132958f2c9558e01acc1fdcaf752.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/27.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/27-bacarisas-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/27.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/27-bacarisas-mp4"
+    }
   },
   {
     "name": {
@@ -836,8 +944,12 @@
     },
     "description": "Audio nº 28",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/CTB.1995.20.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/28.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/28-zuloaga-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/28.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/28-zuloaga-mp4"
+    }
   },
   {
     "name": {
@@ -866,8 +978,12 @@
     },
     "description": "Audio nº 29",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/CTB.1996.12.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/29.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/29-solana-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/29.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/29-solana-mp4"
+    }
   },
   {
     "name": {
@@ -896,8 +1012,12 @@
     },
     "description": "Audio nº 30",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/cropped/9aad71c777f242194d80ed13f3fbe7f95726bc30.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/30.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/30-zurbaran-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/30.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/30-zurbaran-mp4"
+    }
   },
   {
     "name": {
@@ -926,7 +1046,11 @@
     },
     "description": "Audio nº 31",
     "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/obras/cropped/59dd6449559063be7617d97ab442c2e557ab713c.jpg",
-    "audiodescriptionUrl": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/31.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3",
-    "signLanguageUrl": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/31-ezquerra-mp4"
+    "audiodescriptionUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/uploads/audiodescripciones/31.%20MCTM%20AUDIODESCRIPCIONES%20CP%20INVIDENTES-ES.mp3"
+    },
+    "signLanguageUrl": {
+      "es": "https://www.carmenthyssenmalaga.org/multimedia/lengua-signos/31-ezquerra-mp4"
+    }
   }
 ]

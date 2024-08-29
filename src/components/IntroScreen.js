@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import LanguageSelector from './LanguageSelector';
 import { languages } from './Languages'; // Importamos el array con idiomas y banderas
+import ResourceSelector from './ResourceSelector';
 
-const IntroScreen = ({ onSwipe, selectedLanguage, onLanguageSelect, setIsPlaying }) => {
+const IntroScreen = ({ onSwipe, selectedLanguage, onLanguageSelect, setIsPlaying, setSelectedResource, selectedResource }) => {
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
 
   const handleLanguageSelect = (languageCode) => {
@@ -16,9 +17,10 @@ const IntroScreen = ({ onSwipe, selectedLanguage, onLanguageSelect, setIsPlaying
 
   return (
     <div className="h-full flex items-center justify-center bg-black text-white p-8">
-      <div className="text-center">
+      <div className="h-full text-center flex flex-col justify-evenly">
         <h1 className="text-4xl font-bold mb-4">Bienvenido a la Audioguía del Museo Carmen Thyssen Málaga</h1>
-        <p className="text-lg mb-8">Explora nuestra colección de obras de arte y escucha descripciones y comentarios mientras navegas.</p>
+        
+        <ResourceSelector setResource={setSelectedResource} selectedResource={selectedResource}/>
 
         {/* Texto y Icono para cambiar el idioma */}
         <div className="mb-4 flex flex-col items-center justify-center cursor-pointer" onClick={() => setShowLanguageSelector(true)}>
@@ -37,7 +39,6 @@ const IntroScreen = ({ onSwipe, selectedLanguage, onLanguageSelect, setIsPlaying
           </div>
         )}
 
-        <p className="text-lg mb-4">Desliza a la izquierda o derecha para alternar entre diferentes obras. Toca para comenzar.</p>
         <button 
           onClick={() => onSwipe('right')} 
           className="bg-white text-black px-4 py-2 rounded"
