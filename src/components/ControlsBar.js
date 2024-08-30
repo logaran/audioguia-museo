@@ -2,7 +2,7 @@ import React from 'react';
 import { Heart } from 'lucide-react';
 import { languages } from './Languages';
 
-const ControlsBar = ({ currentArtwork, toggleLike, toggleShowLangSelector, selectedLanguage, cookies }) => {
+const ControlsBar = ({ currentArtwork, toggleLike, toggleShowLangSelector, selectedLanguage, cookies, toggleShowIntro }) => {
   const currentLanguage = languages.find(lang => lang.code === selectedLanguage);
 
   return (
@@ -10,6 +10,12 @@ const ControlsBar = ({ currentArtwork, toggleLike, toggleShowLangSelector, selec
       <div className="cursor-pointer" onClick={() => toggleShowLangSelector()}>
         <img src={currentLanguage.flag} alt={currentLanguage.name} className="w-8 h-8 rounded-full" />
       </div>
+      <button
+            onClick={() => toggleShowIntro()}
+            className="bg-white text-black px-4 py-2 rounded"
+          >
+            MENU
+          </button>
       <button onClick={toggleLike} className="text-3xl ml-4">
         <Heart fill={cookies.likes?.[currentArtwork.name.es] ? 'red' : 'none'} color="white" size={32} />
       </button>

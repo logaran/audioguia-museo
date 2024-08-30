@@ -138,7 +138,9 @@ const AudioGuideApp = () => {
   };
 
   const toggleShowIntro = () => {
-    setShowIntro(!showIntro)
+    setIsPlaying(false);
+    setCurrentIndex(2);
+    setShowIntro(!showIntro);
   };
 
   const toggleLike = (e) => {
@@ -197,6 +199,13 @@ const AudioGuideApp = () => {
           }}
         />
       )}
+
+      {!isMobile && (
+        <div className='absolute inset-0 h-full w-full flex items-center justify-center text-4xl text-white bg-black bg-opacity-80 z-50'>
+          <span className='p-10 text-center'>Esta aplicación funciona mejor en dispositivo movil en modo retrato.</span>
+        </div>
+
+      )}
       <div className="relative flex-grow overflow-auto">
         {showIntro && (
           <IntroScreen toggleShowIntro={toggleShowIntro} selectedLanguage={selectedLanguage} toggleShowLangSelector={toggleShowLangSelector} handlePlaying={handlePlaying} setSelectedResource={setSelectedResource} selectedResource={selectedResource} />
@@ -210,20 +219,20 @@ const AudioGuideApp = () => {
           <>
             {selectedResource !== 'signLanguageUrl' &&
               <div
-                className="absolute inset-0 flex items-center justify-center"
+                className="flex h-full items-center justify-center"
 
               >
                 <img
                   src={currentArtwork.imageUrl}
                   alt={currentArtwork.name}
-                  className={`object-contain transition-transform duration-300 ${!isMobile ? 'max-h-[60vh] max-w-[60vw]' : 'h-full w-full'}`}
+                  className={`object-contain transition-transform duration-300 ${!isMobile ? 'max-h-[60vh] max-w-[60vw]' : 'h-96 w-full object-cover'}`}
                   style={{ transform: `translateX(${swipeOffset}px)` }}
                 />
               </div>
             }
 
             <div
-              className={`absolute inset-0 flex flex-col justify-between p-4 transition duration-300 ${isPlaying ? 'pointer-events-auto' : 'bg-black bg-opacity-60 pointer-events-auto'
+              className={`absolute inset-0 flex flex-col justify-between p-4 z-20 transition duration-300 ${isPlaying ? 'pointer-events-auto' : 'bg-black bg-opacity-60 pointer-events-auto'
                 }`}
               onTouchStart={isMobile ? handleTouchStart : null}
               onTouchMove={isMobile ? handleTouchMove : null}
@@ -248,19 +257,21 @@ const AudioGuideApp = () => {
               toggleShowLangSelector={toggleShowLangSelector}
               selectedLanguage={selectedLanguage}
               cookies={cookies}
+              toggleShowIntro={toggleShowIntro}
             />
 
             {selectedResource === 'signLanguageUrl'
               ?
-              <div className="w-full h-full">
+              <div className="flex items-center justify-center h-full">
                 <video
-                  controls
+                  preload
                   ref={mediaRef}
                   src={activeResourceUrl}
-                  className="w-full h-full object-cover inset-10"
+                  onEnded={()=>setIsPlaying(false)}
+                  className={`object-contain transition-transform duration-300 ${!isMobile ? 'max-h-[60vh] max-w-[60vw]' : 'h-96 w-full object-cover'}`}
+                  style={{ transform: `translateX(${swipeOffset}px)`}}
                 />
               </div>
-
               :
               <audio
                 ref={mediaRef}
@@ -271,14 +282,14 @@ const AudioGuideApp = () => {
             <>
               {currentIndex !== 0 && (
                 <button
-                  className="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-20"
+                  className="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-40"
                   onClick={() => handleSwipe('right')}
                 >
                   <ChevronLeft size={48} />
                 </button>
               )}
               <button
-                className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-20"
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-40"
                 onClick={() => handleSwipe('left')}
               >
                 <ChevronRight size={48} />

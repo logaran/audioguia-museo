@@ -10,8 +10,8 @@ const IntroScreen = ({ toggleShowIntro, selectedLanguage, setSelectedResource, s
 
   return (
     <div className="h-full flex items-center justify-center bg-intro text-white p-8">
-        <div className="h-full text-center flex flex-col justify-evenly">
-          <h1 className="text-4xl font-bold mb-4">Bienvenido a la Audioguía del Museo Carmen Thyssen Málaga</h1>
+        <div className="h-full text-center flex flex-col justify-evenly bg-gray-400 p-2 bg-opacity-70">
+          <h1 className="text-4xl font-chronicle mb-4">Bienvenido a la Audioguía del Museo Carmen Thyssen Málaga</h1>
 
           <ResourceSelector setResource={setSelectedResource} selectedResource={selectedResource} />
 
