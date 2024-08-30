@@ -67,7 +67,7 @@ const AudioGuideApp = () => {
 
   useEffect(() => {
     const updateIsMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 480);
     };
     updateIsMobile();
     window.addEventListener('resize', updateIsMobile);
