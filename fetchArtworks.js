@@ -84,22 +84,46 @@ const fetchSignLanguageVideos = async () => {
     const response = await axios.get(url);
     const $ = cheerio.load(response.data);
     const signLanguageVideos = [];
-
+  
+    const videoDetailLinks = [];
+  
+    // Paso 1: Obtener los enlaces a las páginas de detalle de los videos
     $('ul > li').each((index, element) => {
-        const name = $(element).find('.title--classic').text().trim();
-        const videoHref = $(element).find('a').attr('href');
-        const signLanguageUrl = videoHref ? new URL(videoHref, baseMuseumUrl).href : null;
-
-        if (name && signLanguageUrl) {
-            signLanguageVideos.push({
-                name,
-                signLanguageUrl
-            });
-        }
+      const name = $(element).find('.title--classic').text().trim();
+      const detailPageHref = $(element).find('a').attr('href');
+      const detailPageUrl = detailPageHref ? new URL(detailPageHref, baseMuseumUrl).href : null;
+  
+      if (name && detailPageUrl) {
+        videoDetailLinks.push({
+          name,
+          detailPageUrl
+        });
+      }
     });
-
+  
+    // Paso 2: Para cada enlace de detalle, hacer una petición y extraer la URL del video
+    for (const videoDetail of videoDetailLinks) {
+      try {
+        const detailResponse = await axios.get(videoDetail.detailPageUrl);
+        const detailPage = cheerio.load(detailResponse.data);
+  
+        // Extraer la URL del archivo .mp4 desde el video en la página de detalle
+        const videoSrc = detailPage('video > source').attr('src');
+        const signLanguageUrl = videoSrc ? new URL(videoSrc, baseMuseumUrl).href : null;
+  
+        if (signLanguageUrl) {
+          signLanguageVideos.push({
+            name: videoDetail.name,
+            signLanguageUrl
+          });
+        }
+      } catch (error) {
+        console.error(`Error obteniendo la URL del video para ${videoDetail.name}:`, error);
+      }
+    }
+  
     return signLanguageVideos;
-};
+  };
 
 // Función principal para obtener todos los datos y guardarlos en un archivo JSON
 const fetchAllData = async () => {

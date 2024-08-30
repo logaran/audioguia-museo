@@ -10,10 +10,10 @@ import ControlsBar from './components/ControlsBar';
 
 const AudioGuideApp = () => {
   const [artworks, setArtworks] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(2);
   const [isPlaying, setIsPlaying] = useState(false);
   const [cookies, setCookie] = useCookies(['likes']);
-  const audioRef = useRef(null);
+  const mediaRef = useRef(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
   const isSwipe = useRef(false);
@@ -23,7 +23,7 @@ const AudioGuideApp = () => {
   const [showFavorites, setShowFavorites] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('es');
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
-  const [selectedResource, setSelectedResource] =useState('audioUrl');
+  const [selectedResource, setSelectedResource] = useState('audioUrl');
 
   useEffect(() => {
     const appHeight = () => {
@@ -56,11 +56,11 @@ const AudioGuideApp = () => {
   }, []);
 
   useEffect(() => {
-    if (audioRef.current) {
+    if (mediaRef.current) {
       if (isPlaying) {
-        audioRef.current.play();
+        mediaRef.current.play();
       } else {
-        audioRef.current.pause();
+        mediaRef.current.pause();
       }
     }
   }, [isPlaying, currentIndex]);
@@ -124,10 +124,21 @@ const AudioGuideApp = () => {
   const togglePlayPause = () => {
     setIsPlaying(!isPlaying);
   };
+  const handlePlaying = (state) => {
+    setIsPlaying(state);
+  };
 
-  const handleLanguageSelect = (language) => {
+  const handleLangSelect = (language) => {
     setSelectedLanguage(language);
     setShowLanguageSelector(false);
+  };
+
+  const toggleShowLangSelector = () => {
+    setShowLanguageSelector(!showLanguageSelector)
+  };
+
+  const toggleShowIntro = () => {
+    setShowIntro(!showIntro)
   };
 
   const toggleLike = (e) => {
@@ -148,26 +159,28 @@ const AudioGuideApp = () => {
 
   const currentArtwork = artworks[currentIndex];
   const favoriteArtworks = artworks.filter(artwork => cookies.likes?.[artwork.name.es]);
-  const activeResourceUrl = currentArtwork[selectedResource][selectedLanguage] 
-  ? currentArtwork[selectedResource][selectedLanguage] 
-  : currentArtwork[selectedResource]['es'];
+  const activeResourceUrl = currentArtwork[selectedResource][selectedLanguage]
+    ? currentArtwork[selectedResource][selectedLanguage]
+    : currentArtwork[selectedResource]['es'];
 
 
   const goBackToGallery = () => {
+    setCurrentIndex(0);
     setShowFavorites(false); // Oculta la pantalla de favoritos y vuelve a la audioguía
     setIsPlaying(false); // Opcional: puede empezar a reproducir el audio al volver a la galería
   };
 
   return (
     <div className="relative h-screen w-screen bg-white text-black flex flex-col">
-      {/* Modal selector de idioma (Cerrado por defecto)*/}
+      {/* Modal selector idioma */}
       {showLanguageSelector && (
         <div className="fixed inset-0 bg-white z-50 flex items-center justify-center p-4">
           <LanguageSelector
-            setSelectedLanguage={handleLanguageSelect}
-            setIsPlaying={setIsPlaying}
-            onClose={() => setShowLanguageSelector(false)}
-          />
+            handleLangSelect={handleLangSelect}
+            handlePlaying={handlePlaying}
+            artworks={artworks}
+            currentIndex={currentIndex}
+            selectedResource={selectedResource} />
         </div>
       )}
 
@@ -186,24 +199,28 @@ const AudioGuideApp = () => {
       )}
       <div className="relative flex-grow overflow-auto">
         {showIntro && (
-          <IntroScreen onSwipe={handleSwipe} selectedLanguage={selectedLanguage} onLanguageSelect={handleLanguageSelect} setIsPlaying={setIsPlaying} setSelectedResource={setSelectedResource} selectedResource={selectedResource}/>
+          <IntroScreen toggleShowIntro={toggleShowIntro} selectedLanguage={selectedLanguage} toggleShowLangSelector={toggleShowLangSelector} handlePlaying={handlePlaying} setSelectedResource={setSelectedResource} selectedResource={selectedResource} />
         )}
         {showFavorites && !showIntro && (
           <FavoritesScreen favoriteArtworks={favoriteArtworks} onBack={goBackToGallery} selectedLanguage={selectedLanguage} />
         )}
+
+        {/* Pase de obras */}
         {!showIntro && !showFavorites && (
           <>
-            <div
-              className="absolute inset-0 flex items-center justify-center"
+            {selectedResource !== 'signLanguageUrl' &&
+              <div
+                className="absolute inset-0 flex items-center justify-center"
 
-            >
-              <img
-                src={currentArtwork.imageUrl}
-                alt={currentArtwork.name}
-                className={`object-contain transition-transform duration-300 ${!isMobile ? 'max-h-[60vh] max-w-[60vw]' : 'h-full w-full'}`}
-                style={{ transform: `translateX(${swipeOffset}px)` }}
-              />
-            </div>
+              >
+                <img
+                  src={currentArtwork.imageUrl}
+                  alt={currentArtwork.name}
+                  className={`object-contain transition-transform duration-300 ${!isMobile ? 'max-h-[60vh] max-w-[60vw]' : 'h-full w-full'}`}
+                  style={{ transform: `translateX(${swipeOffset}px)` }}
+                />
+              </div>
+            }
 
             <div
               className={`absolute inset-0 flex flex-col justify-between p-4 transition duration-300 ${isPlaying ? 'pointer-events-auto' : 'bg-black bg-opacity-60 pointer-events-auto'
@@ -228,16 +245,28 @@ const AudioGuideApp = () => {
             <ControlsBar
               currentArtwork={currentArtwork}
               toggleLike={toggleLike}
-              setShowLanguageSelector={setShowLanguageSelector}
+              toggleShowLangSelector={toggleShowLangSelector}
               selectedLanguage={selectedLanguage}
               cookies={cookies}
             />
 
-            <audio
-              ref={audioRef}
-              src={activeResourceUrl}
-              onEnded={() => setIsPlaying(false)}
-            />
+            {selectedResource === 'signLanguageUrl'
+              ?
+              <div className="w-full h-full">
+                <video
+                  controls
+                  ref={mediaRef}
+                  src={activeResourceUrl}
+                  className="w-full h-full object-cover inset-10"
+                />
+              </div>
+
+              :
+              <audio
+                ref={mediaRef}
+                src={activeResourceUrl}
+                onEnded={() => setIsPlaying(false)}
+              />}
 
             <>
               {currentIndex !== 0 && (
