@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# Audioguía Museo
+Este proyecto es una aplicación web para ofrecer una experiencia de audioguía digital en un museo. La aplicación proporciona información detallada sobre las obras de arte disponibles en el museo, permitiendo a los usuarios navegar a través de una interfaz fácil de usar, consultar detalles sobre las piezas y acceder a contenido multimedia relacionado.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Características
+- Interfaz interactiva para explorar obras de arte del museo.
+- Información detallada y multimedia asociada a cada obra de arte.
+- Capacidad de integrar descripciones en formato de audio.
+- Navegación intuitiva a través de una interfaz web moderna.
+## Tecnologías Utilizadas
+- React: Librería principal para la creación de la interfaz de usuario.
+- Tailwind CSS: Utilizado para la estilización de la interfaz de manera eficiente.
+- JavaScript: Para la lógica del frontend.
+- Node.js y npm: Para la gestión del proyecto y sus dependencias.
+- Vercel: Despliegue de la aplicación.
+## Estructura del Proyecto
+- `public/:` Contiene archivos estáticos como imágenes y otros recursos públicos.
+- `src/:` Contiene todo el código fuente de la aplicación, incluidos los componentes React y lógica de la aplicación.
+- `fetchArtworks.js`: Script que maneja la obtención de los datos de las obras de arte desde un backend o API.
+- `tailwind.config.js`: Archivo de configuración para Tailwind CSS.
+- `postcss.config.js`: Configuración para PostCSS utilizado en conjunto con Tailwind CSS.
+## Requisitos
+Para ejecutar este proyecto en tu entorno local, necesitarás tener instalados:
 
-## Available Scripts
+- Node.js (versión 14 o superior)
+- npm (gestor de paquetes para Node.js)
+## Instalación y Configuración
+Sigue los siguientes pasos para ejecutar el proyecto en tu entorno local:
 
-In the project directory, you can run:
+- Clona el repositorio:
+```bash
+Copiar código
+git clone https://github.com/logaran/audioguia-museo.git
+```
+- Navega al directorio del proyecto:
+```bash
+Copiar código
+cd audioguia-museo
+```
+- Instala las dependencias del proyecto:
+```bash
+Copiar código
+npm install
+```
+## Scripts Disponibles
+En el directorio del proyecto, puedes ejecutar los siguientes comandos:
 
-### `npm start`
+- `npm start`: Inicia la aplicación en modo de desarrollo.
+- `npm run build`: Crea una versión optimizada de la aplicación para producción.
+- `npm test`: Ejecuta las pruebas de la aplicación.
+## Despliegue
+La aplicación está desplegada en Vercel. Para desplegar tu propia versión, sigue los pasos detallados en la documentación de Vercel. Después de crear el build de la aplicación con `npm run build`, simplemente sube la carpeta `build/` a tu servidor de elección.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Contribución
+Si deseas contribuir a este proyecto:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Haz un fork del repositorio.
+2. Crea una nueva rama para tu funcionalidad (`git checkout -b nueva-funcionalidad`).
+3. Realiza tus cambios y realiza un commit (`git commit -m 'Añadir nueva funcionalidad`').
+4. Sube tus cambios a tu repositorio (`git push origin nueva-funcionalidad`).
+5. Abre una solicitud de pull request para revisión.
 
-### `npm test`
+## Licencia
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Atribuciones
+Las imágenes y el contenido multimedia utilizados en esta aplicación son cortesía del Museo Carmen Thyssen Málaga. El contenido está disponible para uso público bajo los términos especificados por el museo. Para más detalles, consulta [[terminos de uso Museo Carmen Thyssen Málaga].](https://www.carmenthyssenmalaga.org/advertencias-legales)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Enlaces
+- Aplicación en vivo: [Audioguía Museo en Vercel](https://audioguia-museo.vercel.app/)
+- Repositorio en GitHub: [Audioguía museo](https://github.com/logaran/audioguia-museo)
