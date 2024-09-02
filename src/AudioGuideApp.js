@@ -24,23 +24,48 @@ const AudioGuideApp = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('es');
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
   const [selectedResource, setSelectedResource] = useState('audioUrl');
+  const [guides, setGuides] = useState([]);
+  const [selectedGuide, setSelectedGuide] = useState(null);
 
+
+  // Cargar la lista de guías
   useEffect(() => {
-    const fetchArtworks = async () => {
+    const fetchGuides = async () => {
       try {
-        const response = await fetch('/artworks.json');
+        const response = await fetch('/guides/index.json');
         if (!response.ok) {
-          throw new Error('Error al cargar el JSON');
+          throw new Error('Error al cargar el índice de guías');
         }
         const data = await response.json();
-        setArtworks(data);
+        setGuides(data);
+        setSelectedGuide(data[0]?.path || null); // Seleccionar la primera guía por defecto
       } catch (error) {
-        console.error('Error fetching artworks from JSON:', error);
+        console.error('Error fetching guides index:', error);
       }
     };
 
-    fetchArtworks();
+    fetchGuides();
   }, []);
+
+  // Cargar los datos de la guía seleccionada
+  useEffect(() => {
+    if (selectedGuide) {
+      const fetchGuide = async () => {
+        try {
+          const response = await fetch(`/${selectedGuide}`);
+          if (!response.ok) {
+            throw new Error('Error al cargar el JSON');
+          }
+          const data = await response.json();
+          setArtworks(data);
+        } catch (error) {
+          console.error('Error fetching guide data:', error);
+        }
+      };
+
+      fetchGuide();
+    }
+  }, [selectedGuide]);
 
   useEffect(() => {
     if (mediaRef.current) {
@@ -60,7 +85,7 @@ const AudioGuideApp = () => {
     window.addEventListener('resize', updateIsMobile);
     return () => window.removeEventListener('resize', updateIsMobile);
   }, []);
-  
+
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
     setSwipeOffset(0);
@@ -151,7 +176,7 @@ const AudioGuideApp = () => {
     ? currentArtwork[selectedResource][selectedLanguage]
     : currentArtwork[selectedResource]['es'];
 
-   const goBackToGallery = () => {
+  const goBackToGallery = () => {
     setCurrentIndex(0);
     setShowFavorites(false); // Oculta la pantalla de favoritos y vuelve a la audioguía
     setIsPlaying(false); // Opcional: puede empezar a reproducir el audio al volver a la galería
@@ -193,7 +218,7 @@ const AudioGuideApp = () => {
       )}
       <div className="relative flex-grow overflow-auto">
         {showIntro && (
-          <IntroScreen toggleShowIntro={toggleShowIntro} selectedLanguage={selectedLanguage} toggleShowLangSelector={toggleShowLangSelector} handlePlaying={handlePlaying} setSelectedResource={setSelectedResource} selectedResource={selectedResource} />
+          <IntroScreen toggleShowIntro={toggleShowIntro} selectedLanguage={selectedLanguage} toggleShowLangSelector={toggleShowLangSelector} handlePlaying={handlePlaying} setSelectedResource={setSelectedResource} selectedResource={selectedResource} guides={guides} selectedGuide={selectedGuide} setSelectedGuide={setSelectedGuide}/>
         )}
         {showFavorites && !showIntro && (
           <FavoritesScreen favoriteArtworks={favoriteArtworks} onBack={goBackToGallery} selectedLanguage={selectedLanguage} />
@@ -252,9 +277,9 @@ const AudioGuideApp = () => {
                   preload
                   ref={mediaRef}
                   src={activeResourceUrl}
-                  onEnded={()=>setIsPlaying(false)}
+                  onEnded={() => setIsPlaying(false)}
                   className={`object-contain transition-transform duration-300 ${!isMobile ? 'max-h-[60vh] max-w-[60vw]' : 'h-96 w-full object-cover'}`}
-                  style={{ transform: `translateX(${swipeOffset}px)`}}
+                  style={{ transform: `translateX(${swipeOffset}px)` }}
                 />
               </div>
               :

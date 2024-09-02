@@ -184,7 +184,7 @@
                             });
 
                             // Guardar las obras de arte en un archivo JSON en la carpeta public
-                            const publicDir = path.join(__dirname, 'public', 'artworks.json'); // Cambia la ruta aquí
+                            const publicDir = path.join(__dirname, 'public/guides', 'artworks.json'); // Cambia la ruta aquí
                             fs.writeFileSync(publicDir, JSON.stringify(artworks, null, 2), 'utf8');
                             console.log('Artworks saved to public/artworks.json');
                         } catch (error) {
