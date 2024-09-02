@@ -274,7 +274,7 @@ const AudioGuideApp = () => {
               ?
               <div className="flex items-center justify-center h-full">
                 <video
-                  preload
+                  preload="auto"
                   ref={mediaRef}
                   src={activeResourceUrl}
                   onEnded={() => setIsPlaying(false)}
