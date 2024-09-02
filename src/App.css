@@ -1,3 +1,7 @@
+:root {
+  --app-height: 100vh; /* Valor por defecto si la variable no está disponible */
+}
+
 * {
   box-sizing: border-box;
 }
@@ -43,5 +47,6 @@
 
 .app-container {
   height: var(--app-height);
+  overflow: auto;
 }
 

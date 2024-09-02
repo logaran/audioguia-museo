@@ -73,8 +73,7 @@ const AudioGuideApp = () => {
     window.addEventListener('resize', updateIsMobile);
     return () => window.removeEventListener('resize', updateIsMobile);
   }, []);
-
-
+  
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
     setSwipeOffset(0);
@@ -165,8 +164,7 @@ const AudioGuideApp = () => {
     ? currentArtwork[selectedResource][selectedLanguage]
     : currentArtwork[selectedResource]['es'];
 
-
-  const goBackToGallery = () => {
+   const goBackToGallery = () => {
     setCurrentIndex(0);
     setShowFavorites(false); // Oculta la pantalla de favoritos y vuelve a la audioguía
     setIsPlaying(false); // Opcional: puede empezar a reproducir el audio al volver a la galería

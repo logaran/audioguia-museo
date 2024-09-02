@@ -3,7 +3,7 @@ import AudioGuideApp from './AudioGuideApp';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App app-container">
       <AudioGuideApp />
     </div>
   );

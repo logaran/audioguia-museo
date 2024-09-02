@@ -2,11 +2,12 @@
 import { languages } from './Languages'; // Importamos el array con idiomas y banderas
 import ResourceSelector from './ResourceSelector';
 
+
+
 const IntroScreen = ({ toggleShowIntro, selectedLanguage, setSelectedResource, selectedResource, toggleShowLangSelector }) => {
   
   // Encontramos el idioma seleccionado en el array de idiomas
   const currentLanguage = languages.find(lang => lang.code === selectedLanguage);
-  
 
   return (
     <div className="h-full flex items-center justify-center bg-intro text-white p-8">
