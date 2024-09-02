@@ -26,19 +26,6 @@ const AudioGuideApp = () => {
   const [selectedResource, setSelectedResource] = useState('audioUrl');
 
   useEffect(() => {
-    const appHeight = () => {
-      const doc = document.documentElement;
-      doc.style.setProperty('--app-height', `${window.innerHeight}px`);
-    };
-    appHeight();
-    window.addEventListener('resize', appHeight);
-
-    return () => {
-      window.removeEventListener('resize', appHeight);
-    };
-  }, []);
-
-  useEffect(() => {
     const fetchArtworks = async () => {
       try {
         const response = await fetch('/artworks.json');
