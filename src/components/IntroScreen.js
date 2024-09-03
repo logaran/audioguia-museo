@@ -16,7 +16,7 @@ const IntroScreen = ({ toggleShowIntro, selectedLanguage, setSelectedResource, s
         {/* Selector de guías */}
         <div>
           <label htmlFor="guide-selector" className="text-lg mb-2">Selecciona recorrido</label>
-          <select id="guide-selector" onChange={(e) => setSelectedGuide(e.target.value)} value={selectedGuide} className='text-gray-700 p-2 rounded appearance-none'>
+          <select id="guide-selector" onChange={(e) => setSelectedGuide(e.target.value)} value={selectedGuide} className='text-gray-700 p-2 rounded appearance-none focus:outline-cyan-400'>
             {guides.map((guide) => (
               <option key={guide.path} value={guide.path}>
                 {guide.name}
