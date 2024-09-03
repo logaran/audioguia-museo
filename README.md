@@ -63,7 +63,7 @@ Si deseas contribuir a este proyecto:
 Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
 ## Atribuciones
-Las imágenes y el contenido multimedia utilizados en esta aplicación son cortesía del Museo Carmen Thyssen Málaga. El contenido está disponible para uso público bajo los términos especificados por el museo. Para más detalles, consulta [[terminos de uso Museo Carmen Thyssen Málaga].](https://www.carmenthyssenmalaga.org/advertencias-legales)
+Las imágenes y el contenido multimedia utilizados en esta aplicación son cortesía del Museo Carmen Thyssen Málaga. El contenido está disponible para uso público bajo los términos especificados por el museo. Para más detalles, consulta [terminos de uso Museo Carmen Thyssen Málaga](https://www.carmenthyssenmalaga.org/advertencias-legales)
 
 
 ## Enlaces
