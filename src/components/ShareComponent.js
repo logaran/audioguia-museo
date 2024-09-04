@@ -1,5 +1,5 @@
 import React from 'react';
-import { Facebook, Twitter, MessageCircle, CopyIcon } from 'lucide-react'; // Asegúrate de tener estos iconos o usa otros
+import { Facebook, Twitter, MessageCircle, CopyIcon, Send } from 'lucide-react'; 
 
 const ShareComponent = ({ url, title }) => {
     const encodedURL = encodeURIComponent(url);
@@ -20,6 +20,10 @@ const ShareComponent = ({ url, title }) => {
             icon: <MessageCircle size={24} />,
             url: `https://api.whatsapp.com/send?text=${encodedTitle}%20${encodedURL}`,
             label: 'WhatsApp'
+        }, {
+            icon: <Send size={24} />,
+            url:`https://t.me/share/url?url=${encodedURL}&text=${encodedTitle}`,
+            label: 'Telegram'
         }
     ];
 
