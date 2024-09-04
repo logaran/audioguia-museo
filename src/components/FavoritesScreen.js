@@ -1,11 +1,11 @@
 import React from 'react';
-import { Share2, ShoppingCart, ExternalLink } from 'lucide-react';
+import ShareComponent from './ShareComponent';
 
 const FavoritesScreen = ({ favoriteArtworks, onBack, selectedLanguage }) => {
   return (
-    <div className="w-screen flex flex-col items-center justify-center bg-black text-white p-8">
-      <h1 className="text-3xl font-bold mb-8">Obras Favoritas</h1>
-      <ul className="h-full w-full max-w-2xl">
+    <div className="w-screen h-full flex flex-col items-center justify-start bg-white text-gray-700 px-8 py-2">
+      <h1 className="text-2xl font-bold mb-4">Comparte tus obras Favoritas</h1>
+      <ul className="h-full w-full max-w-2xl overflow-auto">
         {favoriteArtworks.map(artwork => (
           <li key={artwork.name[selectedLanguage]} className="mb-6 flex items-center">
             <img 
@@ -15,29 +15,17 @@ const FavoritesScreen = ({ favoriteArtworks, onBack, selectedLanguage }) => {
             />
             <div className="flex-1">
               <h2 className="text-xl font-semibold">{artwork.name[selectedLanguage]}</h2>
-              <div className="flex items-center mt-2 space-x-4">
-                <button className="text-white">
-                  <Share2 size={24} />
-                </button>
-                <button className="text-white">
-                  <ShoppingCart size={24} />
-                </button>
-                <a 
-                  href={artwork.pageUrl} 
-                  className="text-white" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  <ExternalLink size={24} />
-                </a>
-              </div>
+              <ShareComponent
+                url={artwork.imageUrl}
+                title={`He estado en el Museo Carmen Thyssen Málaga y me ha encantado esta obra`} 
+                />
             </div>
           </li>
         ))}
       </ul>
       <button 
         onClick={() => onBack()} 
-        className="mt-8 bg-white text-black px-4 py-2 rounded"
+        className="mt-8 bg-gray-200 text-black px-4 py-2 rounded"
       >
         Volver a la Audioguía
       </button>
