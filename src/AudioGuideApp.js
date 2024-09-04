@@ -4,13 +4,14 @@ import { useCookies } from 'react-cookie';
 import IntroScreen from './components/IntroScreen';
 import FavoritesScreen from './components/FavoritesScreen';
 import Header from './components/Header';
-import LanguageSelector from './components/LanguageSelector';
 import ControlsBar from './components/ControlsBar';
+import ArtworkInfo from './components/ArtworkInfo';
+import ArtworksList from './components/ArtworksList';
 
 
 const AudioGuideApp = () => {
   const [artworks, setArtworks] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(2);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [cookies, setCookie] = useCookies(['likes']);
   const mediaRef = useRef(null);
@@ -22,50 +23,26 @@ const AudioGuideApp = () => {
   const [showIntro, setShowIntro] = useState(true);
   const [showFavorites, setShowFavorites] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('es');
-  const [showLanguageSelector, setShowLanguageSelector] = useState(false);
-  const [selectedResource, setSelectedResource] = useState('audioUrl');
-  const [guides, setGuides] = useState([]);
-  const [selectedGuide, setSelectedGuide] = useState(null);
+  const [showArtworksList, setShowArtworksList] = useState(false);
 
 
-  // Cargar la lista de guías
   useEffect(() => {
-    const fetchGuides = async () => {
+    const fetchArtworks = async () => {
       try {
-        const response = await fetch('/guides/index.json');
+        const response = await fetch('/guides/artworks.json');
         if (!response.ok) {
-          throw new Error('Error al cargar el índice de guías');
+          throw new Error('Error al cargar el JSON');
         }
         const data = await response.json();
-        setGuides(data);
-        setSelectedGuide(data[0]?.path || null); // Seleccionar la primera guía por defecto
+        setArtworks(data);
       } catch (error) {
-        console.error('Error fetching guides index:', error);
+        console.error('Error fetching artworks data:', error);
       }
     };
 
-    fetchGuides();
+    fetchArtworks();
   }, []);
 
-  // Cargar los datos de la guía seleccionada
-  useEffect(() => {
-    if (selectedGuide) {
-      const fetchGuide = async () => {
-        try {
-          const response = await fetch(`/${selectedGuide}`);
-          if (!response.ok) {
-            throw new Error('Error al cargar el JSON');
-          }
-          const data = await response.json();
-          setArtworks(data);
-        } catch (error) {
-          console.error('Error fetching guide data:', error);
-        }
-      };
-
-      fetchGuide();
-    }
-  }, [selectedGuide]);
 
   useEffect(() => {
     if (mediaRef.current) {
@@ -135,22 +112,25 @@ const AudioGuideApp = () => {
   const togglePlayPause = () => {
     setIsPlaying(!isPlaying);
   };
-  const handlePlaying = (state) => {
-    setIsPlaying(state);
-  };
 
   const handleLangSelect = (language) => {
+    if (isPlaying) setIsPlaying(false);
     setSelectedLanguage(language);
-    setShowLanguageSelector(false);
   };
 
-  const toggleShowLangSelector = () => {
-    setShowLanguageSelector(!showLanguageSelector)
-  };
+  const handleShowArtworksList = (show) => {
+    if (show) {
+      setIsPlaying(false);
+      setShowArtworksList(true);
+    } else {
+      setIsPlaying(true);
+      setShowArtworksList(false);
+    }
+  }
 
   const toggleShowIntro = () => {
     setIsPlaying(false);
-    setCurrentIndex(2);
+    setCurrentIndex(0);
     setShowIntro(!showIntro);
   };
 
@@ -172,9 +152,7 @@ const AudioGuideApp = () => {
 
   const currentArtwork = artworks[currentIndex];
   const favoriteArtworks = artworks.filter(artwork => cookies.likes?.[artwork.name.es]);
-  const activeResourceUrl = currentArtwork[selectedResource][selectedLanguage]
-    ? currentArtwork[selectedResource][selectedLanguage]
-    : currentArtwork[selectedResource]['es'];
+  const activeResourceUrl = currentArtwork['audioUrl'][selectedLanguage];
 
   const goBackToGallery = () => {
     setCurrentIndex(0);
@@ -184,17 +162,6 @@ const AudioGuideApp = () => {
 
   return (
     <div className="relative h-screen w-screen bg-white text-black flex flex-col">
-      {/* Modal selector idioma */}
-      {showLanguageSelector && (
-        <div className="fixed inset-0 bg-white z-50 flex items-center justify-center p-4">
-          <LanguageSelector
-            handleLangSelect={handleLangSelect}
-            handlePlaying={handlePlaying}
-            artworks={artworks}
-            currentIndex={currentIndex}
-            selectedResource={selectedResource} />
-        </div>
-      )}
 
       <Header />
       {/* Fondo desaturado y con blur en modo móvil */}
@@ -211,35 +178,38 @@ const AudioGuideApp = () => {
       )}
 
       {!isMobile && (
-        <div className='absolute inset-0 h-full w-full flex items-center justify-center text-4xl text-white bg-black bg-opacity-80 z-50'>
+        <div className='absolute inset-0 h-full w-full flex items-center justify-center text-4xl text-white bg-black bg-opacity-80 z-40'>
           <span className='p-10 text-center'>Esta aplicación funciona mejor en dispositivo movil en modo retrato.</span>
         </div>
 
       )}
       <div className="relative flex-grow overflow-auto">
         {showIntro && (
-          <IntroScreen toggleShowIntro={toggleShowIntro} selectedLanguage={selectedLanguage} toggleShowLangSelector={toggleShowLangSelector} handlePlaying={handlePlaying} setSelectedResource={setSelectedResource} selectedResource={selectedResource} guides={guides} selectedGuide={selectedGuide} setSelectedGuide={setSelectedGuide}/>
+          <IntroScreen toggleShowIntro={toggleShowIntro} langSelect={handleLangSelect} selectedLanguage={selectedLanguage}/>
         )}
         {showFavorites && !showIntro && (
           <FavoritesScreen favoriteArtworks={favoriteArtworks} onBack={goBackToGallery} selectedLanguage={selectedLanguage} />
+        )}
+        {showArtworksList && (
+          <ArtworksList artworks={artworks} setIndex={setCurrentIndex} showList={handleShowArtworksList} selectedLanguage={selectedLanguage}/>
         )}
 
         {/* Pase de obras */}
         {!showIntro && !showFavorites && (
           <>
-            {selectedResource !== 'signLanguageUrl' &&
-              <div
-                className="flex h-full items-center justify-center"
 
-              >
-                <img
-                  src={currentArtwork.imageUrl}
-                  alt={currentArtwork.name}
-                  className={`object-contain transition-transform duration-300 ${!isMobile ? 'max-h-[60vh] max-w-[60vw]' : 'h-96 w-full object-cover'}`}
-                  style={{ transform: `translateX(${swipeOffset}px)` }}
-                />
-              </div>
-            }
+            <div
+              className="flex h-full items-center justify-center"
+
+            >
+              <img
+                src={currentArtwork.imageUrl}
+                alt={currentArtwork.name}
+                className={`object-contain transition-transform duration-300 ${!isMobile ? 'max-h-[60vh] max-w-[60vw]' : 'h-96 w-full object-cover'}`}
+                style={{ transform: `translateX(${swipeOffset}px)` }}
+              />
+            </div>
+
 
             <div
               className={`absolute inset-0 flex flex-col justify-between p-4 z-20 transition duration-300 ${isPlaying ? 'pointer-events-auto' : 'bg-black bg-opacity-60 pointer-events-auto'
@@ -249,13 +219,10 @@ const AudioGuideApp = () => {
               onTouchEnd={isMobile ? handleTouchEnd : null}
               onClick={!isMobile ? togglePlayPause : null}
             >
-              <div style={{ pointerEvents: 'none' }}>
-                <h2 className="text-2xl text-gray-700 font-bold">{currentArtwork.name[selectedLanguage]}</h2>
-                <p className="text-sm">{currentArtwork.description}</p>
-              </div>
+              <ArtworkInfo artwok={currentArtwork} selectedLanguage={selectedLanguage} />
 
               {!isPlaying && (
-                <div className="flex items-center justify-center h-full">
+                <div className="flex items-center justify-center h-full z-40">
                   <Play color="white" size={64} />
                 </div>
               )}
@@ -264,30 +231,17 @@ const AudioGuideApp = () => {
             <ControlsBar
               currentArtwork={currentArtwork}
               toggleLike={toggleLike}
-              toggleShowLangSelector={toggleShowLangSelector}
+              langSelect={handleLangSelect}
               selectedLanguage={selectedLanguage}
               cookies={cookies}
-              toggleShowIntro={toggleShowIntro}
+              handleShowArtworks={handleShowArtworksList}
             />
 
-            {selectedResource === 'signLanguageUrl'
-              ?
-              <div className="flex items-center justify-center h-full">
-                <video
-                  preload="auto"
-                  ref={mediaRef}
-                  src={activeResourceUrl}
-                  onEnded={() => setIsPlaying(false)}
-                  className={`object-contain transition-transform duration-300 ${!isMobile ? 'max-h-[60vh] max-w-[60vw]' : 'h-96 w-full object-cover'}`}
-                  style={{ transform: `translateX(${swipeOffset}px)` }}
-                />
-              </div>
-              :
-              <audio
-                ref={mediaRef}
-                src={activeResourceUrl}
-                onEnded={() => setIsPlaying(false)}
-              />}
+            <audio
+              ref={mediaRef}
+              src={activeResourceUrl}
+              onEnded={() => setIsPlaying(false)}
+            />
 
             <>
               {currentIndex !== 0 && (
