@@ -29,14 +29,14 @@ const ShareComponent = ({ url, title }) => {
     };
 
     return (
-        <div className="flex space-x-4">
+        <div className="flex space-x-3">
             {shareOptions.map((option, index) => (
                 <a
                     key={index}
                     href={option.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-2 bg-gray-200 p-2 rounded hover:bg-gray-300"
+                    className="flex items-center bg-gray-200 p-2 rounded hover:bg-gray-300"
                 >
                     {option.icon}
                     <span className="hidden sm:inline">{option.label}</span>
