@@ -29,7 +29,7 @@ const AudioGuideApp = () => {
   useEffect(() => {
     const fetchArtworks = async () => {
       try {
-        const response = await fetch('/guides/artworks.json');
+        const response = await fetch('/guides/modernidad.json');
         if (!response.ok) {
           throw new Error('Error al cargar el JSON');
         }
@@ -169,7 +169,7 @@ const AudioGuideApp = () => {
         <div
           className="absolute inset-0 bg-cover bg-center filter blur-md"
           style={{
-            backgroundImage: `url(${currentArtwork.imageUrl})`,
+            backgroundImage: `url(${currentArtwork.imageUrl[selectedLanguage]})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             opacity: 0.6, // Ajusta la opacidad aquí
@@ -203,7 +203,7 @@ const AudioGuideApp = () => {
 
             >
               <img
-                src={currentArtwork.imageUrl}
+                src={currentArtwork.imageUrl[selectedLanguage]}
                 alt={currentArtwork.name}
                 className={`object-contain transition-transform duration-300 ${!isMobile ? 'max-h-[60vh] max-w-[60vw]' : 'h-96 w-full object-cover'}`}
                 style={{ transform: `translateX(${swipeOffset}px)` }}
