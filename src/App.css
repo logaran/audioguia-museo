@@ -51,8 +51,3 @@ html,
     transform: rotate(360deg);
   }
 }
-
-.app-container {
-  height: var(--app-height);
-  overflow: auto;
-}
