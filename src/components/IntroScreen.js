@@ -1,9 +1,12 @@
 // Componente Hijo (IntroScreen)
 import { languages } from './Languages'; // Importamos el array con idiomas y banderas
 
-const IntroScreen = ({ toggleShowIntro, langSelect, selectedLanguage }) => {
+const IntroScreen = ({ toggleShowIntro, langSelect, selectedLanguage, setShowArtworksList }) => {
 
-  // Encontramos el idioma seleccionado en el array de idiomas
+  const handleStartClick = () => {
+    toggleShowIntro(false);
+    setShowArtworksList(true);
+  }
 
   return (
     <div className="h-full flex items-center justify-center bg-intro text-white p-8">
@@ -39,7 +42,7 @@ const IntroScreen = ({ toggleShowIntro, langSelect, selectedLanguage }) => {
         </div>
 
         <button
-          onClick={() => toggleShowIntro()}
+          onClick={handleStartClick}
           className="bg-white text-black px-4 py-2 w-24 rounded"
         >
           {selectedLanguage === 'es'? 'Empezar' : 'Start'}

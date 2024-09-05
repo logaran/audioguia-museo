@@ -1,5 +1,5 @@
 import React from 'react';
-import { Facebook, Twitter, MessageCircle, CopyIcon, Send } from 'lucide-react'; 
+import { Facebook, Twitter, MessageCircle, Send } from 'lucide-react'; 
 
 const ShareComponent = ({ url, title }) => {
     const encodedURL = encodeURIComponent(url);

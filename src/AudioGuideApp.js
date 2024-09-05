@@ -185,7 +185,7 @@ const AudioGuideApp = () => {
       )}
       <div className="relative flex-grow overflow-auto">
         {showIntro && (
-          <IntroScreen toggleShowIntro={toggleShowIntro} langSelect={handleLangSelect} selectedLanguage={selectedLanguage}/>
+          <IntroScreen toggleShowIntro={toggleShowIntro} langSelect={handleLangSelect} selectedLanguage={selectedLanguage} setShowArtworksList={setShowArtworksList} />
         )}
         {showFavorites && !showIntro && (
           <FavoritesScreen favoriteArtworks={favoriteArtworks} onBack={goBackToGallery} selectedLanguage={selectedLanguage} />
