@@ -9,7 +9,7 @@ import ArtworkInfo from './components/ArtworkInfo';
 import ArtworksList from './components/ArtworksList';
 
 
-const AudioGuideApp = ({isMobile}) => {
+const AudioGuideApp = ({ isMobile }) => {
   const [artworks, setArtworks] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -175,7 +175,8 @@ const AudioGuideApp = ({isMobile}) => {
         </div>
 
       )}
-      <div className="relative flex-grow">
+
+      <div className="relative flex flex-grow">
         {showIntro && (
           <IntroScreen toggleShowIntro={toggleShowIntro} langSelect={handleLangSelect} selectedLanguage={selectedLanguage} setShowArtworksList={setShowArtworksList} />
         )}
@@ -186,23 +187,21 @@ const AudioGuideApp = ({isMobile}) => {
           <ArtworksList artworks={artworks} setIndex={setCurrentIndex} showList={handleShowArtworksList} selectedLanguage={selectedLanguage} />
         )}
 
-        {/* Pase de obras */}
+
         {!showIntro && !showFavorites && (
           <>
-
-            <div
-              className="flex flex-col h-full w-full items-center justify-betwen"
-
-            >
+            <div className="flex flex-col h-full w-full items-center justify-between" >
               <ArtworkInfo artwok={currentArtwork} selectedLanguage={selectedLanguage} />
-              <div className='flex-grow-0'>
+
+              <div className={`max-w-full max-h-[60vh] flex-shrink overflow-hidden`}>
                 <img
                   src={currentArtwork.imageUrl[selectedLanguage]}
                   alt={currentArtwork.name}
-                  className={`object-cover w-90 transition-transform duration-300 ${!isMobile ? 'max-h-[60vh] max-w-[60vw]' : 'h-96 w-full object-cover'}`}
+                  className={`transition-transform duration-300 ${isMobile ? 'h-full w-auto object-cover' : 'h-full w-auto object-contain'}`}
                   style={{ transform: `translateX(${swipeOffset}px)` }}
                 />
               </div>
+
               <ControlsBar
                 currentArtwork={currentArtwork}
                 toggleLike={toggleLike}
@@ -215,7 +214,7 @@ const AudioGuideApp = ({isMobile}) => {
 
 
             <div
-              className={`absolute inset-0 flex flex-col justify-between p-4 z-20 transition duration-300 ${isPlaying ? 'pointer-events-auto' : 'bg-black bg-opacity-60 pointer-events-auto'
+              className={`absolute inset-0 flex flex-col justify-between p-4 z-30 transition duration-300 ${isPlaying ? 'pointer-events-auto' : 'bg-black bg-opacity-60 pointer-events-auto'
                 }`}
               onTouchStart={isMobile ? handleTouchStart : null}
               onTouchMove={isMobile ? handleTouchMove : null}
@@ -224,7 +223,7 @@ const AudioGuideApp = ({isMobile}) => {
             >
 
               {!isPlaying && (
-                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-400 text-3xl z-40">
+                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-400 text-3xl z-30">
                   <Play color="white" size={64} />
                 </div>
               )}
@@ -240,14 +239,14 @@ const AudioGuideApp = ({isMobile}) => {
             <>
               {currentIndex !== 0 && (
                 <button
-                  className="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-40"
+                  className="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-30"
                   onClick={() => handleSwipe('right')}
                 >
                   <ChevronLeft size={48} />
                 </button>
               )}
               <button
-                className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-40"
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-30"
                 onClick={() => handleSwipe('left')}
               >
                 <ChevronRight size={48} />
