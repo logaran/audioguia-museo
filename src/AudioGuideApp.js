@@ -9,7 +9,7 @@ import ArtworkInfo from './components/ArtworkInfo';
 import ArtworksList from './components/ArtworksList';
 
 
-const AudioGuideApp = () => {
+const AudioGuideApp = ({isMobile}) => {
   const [artworks, setArtworks] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -18,7 +18,6 @@ const AudioGuideApp = () => {
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
   const isSwipe = useRef(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [swipeOffset, setSwipeOffset] = useState(0);
   const [showIntro, setShowIntro] = useState(true);
   const [showFavorites, setShowFavorites] = useState(false);
@@ -54,14 +53,6 @@ const AudioGuideApp = () => {
     }
   }, [isPlaying, currentIndex]);
 
-  useEffect(() => {
-    const updateIsMobile = () => {
-      setIsMobile(window.innerWidth <= 480);
-    };
-    updateIsMobile();
-    window.addEventListener('resize', updateIsMobile);
-    return () => window.removeEventListener('resize', updateIsMobile);
-  }, []);
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
@@ -161,13 +152,14 @@ const AudioGuideApp = () => {
   };
 
   return (
-    <div className="relative h-screen w-screen bg-white text-black flex flex-col">
+    <div className="relative h-full w-full bg-white text-black flex flex-col">
 
       <Header />
+
       {/* Fondo desaturado y con blur en modo móvil */}
       {isMobile && (
         <div
-          className="absolute inset-0 bg-cover bg-center filter blur-md"
+          className="absolute h-full inset-0 bg-cover bg-center filter blur-md"
           style={{
             backgroundImage: `url(${currentArtwork.imageUrl[selectedLanguage]})`,
             backgroundSize: 'cover',
@@ -183,7 +175,7 @@ const AudioGuideApp = () => {
         </div>
 
       )}
-      <div className="relative flex-grow overflow-auto">
+      <div className="relative flex-grow">
         {showIntro && (
           <IntroScreen toggleShowIntro={toggleShowIntro} langSelect={handleLangSelect} selectedLanguage={selectedLanguage} setShowArtworksList={setShowArtworksList} />
         )}
@@ -191,7 +183,7 @@ const AudioGuideApp = () => {
           <FavoritesScreen favoriteArtworks={favoriteArtworks} onBack={goBackToGallery} selectedLanguage={selectedLanguage} />
         )}
         {showArtworksList && (
-          <ArtworksList artworks={artworks} setIndex={setCurrentIndex} showList={handleShowArtworksList} selectedLanguage={selectedLanguage}/>
+          <ArtworksList artworks={artworks} setIndex={setCurrentIndex} showList={handleShowArtworksList} selectedLanguage={selectedLanguage} />
         )}
 
         {/* Pase de obras */}
@@ -199,14 +191,25 @@ const AudioGuideApp = () => {
           <>
 
             <div
-              className="flex h-full items-center justify-center"
+              className="flex flex-col h-full w-full items-center justify-betwen"
 
             >
-              <img
-                src={currentArtwork.imageUrl[selectedLanguage]}
-                alt={currentArtwork.name}
-                className={`object-contain transition-transform duration-300 ${!isMobile ? 'max-h-[60vh] max-w-[60vw]' : 'h-96 w-full object-cover'}`}
-                style={{ transform: `translateX(${swipeOffset}px)` }}
+              <ArtworkInfo artwok={currentArtwork} selectedLanguage={selectedLanguage} />
+              <div className='flex-grow-0'>
+                <img
+                  src={currentArtwork.imageUrl[selectedLanguage]}
+                  alt={currentArtwork.name}
+                  className={`object-cover w-90 transition-transform duration-300 ${!isMobile ? 'max-h-[60vh] max-w-[60vw]' : 'h-96 w-full object-cover'}`}
+                  style={{ transform: `translateX(${swipeOffset}px)` }}
+                />
+              </div>
+              <ControlsBar
+                currentArtwork={currentArtwork}
+                toggleLike={toggleLike}
+                langSelect={handleLangSelect}
+                selectedLanguage={selectedLanguage}
+                cookies={cookies}
+                handleShowArtworks={handleShowArtworksList}
               />
             </div>
 
@@ -219,7 +222,6 @@ const AudioGuideApp = () => {
               onTouchEnd={isMobile ? handleTouchEnd : null}
               onClick={!isMobile ? togglePlayPause : null}
             >
-              <ArtworkInfo artwok={currentArtwork} selectedLanguage={selectedLanguage} />
 
               {!isPlaying && (
                 <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-400 text-3xl z-40">
@@ -228,14 +230,6 @@ const AudioGuideApp = () => {
               )}
             </div>
 
-            <ControlsBar
-              currentArtwork={currentArtwork}
-              toggleLike={toggleLike}
-              langSelect={handleLangSelect}
-              selectedLanguage={selectedLanguage}
-              cookies={cookies}
-              handleShowArtworks={handleShowArtworksList}
-            />
 
             <audio
               ref={mediaRef}

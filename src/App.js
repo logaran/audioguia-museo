@@ -1,27 +1,23 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import AudioGuideApp from './AudioGuideApp';
 
-
 function App() {
-  
-  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
-      setViewportHeight(window.innerHeight);
+      setIsMobile(window.innerWidth <= 480);
     };
 
-    window.addEventListener('resize', handleResize);   
-
+    handleResize(); // Inicializa al cargar
+    window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
-    <div className="App" style={{ height:   
-      viewportHeight }}>
-      <AudioGuideApp />
+    <div className='h-screen w-screen'>
+      <AudioGuideApp isMobile={isMobile} />
     </div>
   );
 }

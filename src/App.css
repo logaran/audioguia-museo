@@ -1,7 +1,3 @@
-:root {
-  --app-height: 100vh;
-  /* Valor por defecto si la variable no está disponible */
-}
 
 html,
 :host {
