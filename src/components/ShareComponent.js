@@ -27,11 +27,6 @@ const ShareComponent = ({ url, title }) => {
         }
     ];
 
-    const copyToClipboard = () => {
-        navigator.clipboard.writeText(url);
-        alert('Enlace copiado al portapapeles');
-    };
-
     return (
         <div className="flex space-x-3">
             {shareOptions.map((option, index) => (
@@ -46,13 +41,7 @@ const ShareComponent = ({ url, title }) => {
                     <span className="hidden sm:inline">{option.label}</span>
                 </a>
             ))}
-            <button
-                onClick={copyToClipboard}
-                className="flex items-center space-x-2 bg-gray-200 p-2 rounded hover:bg-gray-300"
-            >
-                <CopyIcon size={24} />
-                <span className="hidden sm:inline">Copiar enlace</span>
-            </button>
+            
         </div>
     );
 };

@@ -222,7 +222,7 @@ const AudioGuideApp = () => {
               <ArtworkInfo artwok={currentArtwork} selectedLanguage={selectedLanguage} />
 
               {!isPlaying && (
-                <div className="flex items-center justify-center h-full z-40">
+                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-400 text-3xl z-40">
                   <Play color="white" size={64} />
                 </div>
               )}
