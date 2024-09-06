@@ -12,7 +12,7 @@ const ControlsBar = ({ currentArtwork, toggleLike, langSelect, selectedLanguage,
   };
 
   return (
-    <div className="h-16 w-full flex items-center justify-between bg-black bg-opacity-70 z-40 p-6">
+    <div className="h-16 w-full flex items-center justify-between bg-gray-900 p-6 z-50">
       <div className="cursor-pointer" onClick={switchLang}>
         <img src={currentLanguage.flag} alt={currentLanguage.name} className="w-8 h-8 rounded-full" />
       </div>

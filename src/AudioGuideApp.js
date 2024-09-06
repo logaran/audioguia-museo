@@ -152,83 +152,92 @@ const AudioGuideApp = ({ isMobile }) => {
   };
 
   return (
-    <div className="relative h-full w-full bg-white text-black flex flex-col">
-
-      <Header />
-
-      {/* Fondo desaturado y con blur en modo móvil */}
+    <div className="relative h-full w-full text-black flex flex-col">
+      
+      {/* Fondo borroso en modo movil */}
       {isMobile && (
         <div
-          className="absolute h-full inset-0 bg-cover bg-center filter blur-md"
+          className="absolute h-100 inset-0 bg-cover bg-center filter blur-md -z-10"
           style={{
             backgroundImage: `url(${currentArtwork.imageUrl[selectedLanguage]})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            opacity: 0.6, // Ajusta la opacidad aquí
+            opacity: 0.8, // Ajusta la opacidad aquí
           }}
         />
       )}
 
-      {!isMobile && (
-        <div className='absolute inset-0 h-full w-full flex items-center justify-center text-4xl text-white bg-black bg-opacity-80 z-40'>
-          <span className='p-10 text-center'>Esta aplicación funciona mejor en dispositivo movil en modo retrato.</span>
-        </div>
-
+      {/* Cabecera con logo del Museo */}
+      <Header />
+      {/* Intro */}
+      {showIntro && (
+        <IntroScreen toggleShowIntro={toggleShowIntro} langSelect={handleLangSelect} selectedLanguage={selectedLanguage} setShowArtworksList={setShowArtworksList} />
+      )}
+      {/* Favoritos (Outro) */}
+      {showFavorites && !showIntro && (
+        <FavoritesScreen favoriteArtworks={favoriteArtworks} onBack={goBackToGallery} selectedLanguage={selectedLanguage} />
+      )}
+      {/* Listado de obras */}
+      {showArtworksList && (
+        <ArtworksList artworks={artworks} setIndex={setCurrentIndex} showList={handleShowArtworksList} selectedLanguage={selectedLanguage} />
       )}
 
-      <div className="relative flex flex-grow">
-        {showIntro && (
-          <IntroScreen toggleShowIntro={toggleShowIntro} langSelect={handleLangSelect} selectedLanguage={selectedLanguage} setShowArtworksList={setShowArtworksList} />
-        )}
-        {showFavorites && !showIntro && (
-          <FavoritesScreen favoriteArtworks={favoriteArtworks} onBack={goBackToGallery} selectedLanguage={selectedLanguage} />
-        )}
-        {showArtworksList && (
-          <ArtworksList artworks={artworks} setIndex={setCurrentIndex} showList={handleShowArtworksList} selectedLanguage={selectedLanguage} />
-        )}
+
+      {/* Player */}
+      {!showIntro && !showFavorites &&
+        (
+          <div className="relative flex-col h-full justify-between">
 
 
-        {!showIntro && !showFavorites && (
-          <>
-            <div className="flex flex-col h-full w-full items-center justify-between" >
-              <ArtworkInfo artwok={currentArtwork} selectedLanguage={selectedLanguage} />
+            <ArtworkInfo artwok={currentArtwork} selectedLanguage={selectedLanguage} />
 
-              <div className={`max-w-full max-h-[60vh] flex-shrink overflow-hidden`}>
-                <img
-                  src={currentArtwork.imageUrl[selectedLanguage]}
-                  alt={currentArtwork.name}
-                  className={`transition-transform duration-300 ${isMobile ? 'h-full w-auto object-cover' : 'h-full w-auto object-contain'}`}
-                  style={{ transform: `translateX(${swipeOffset}px)` }}
-                />
-              </div>
+            <div className="relative flex-1 w-auto border-4 border-red-700 overflow-hidden">
 
-              <ControlsBar
-                currentArtwork={currentArtwork}
-                toggleLike={toggleLike}
-                langSelect={handleLangSelect}
-                selectedLanguage={selectedLanguage}
-                cookies={cookies}
-                handleShowArtworks={handleShowArtworksList}
-              />
-            </div>
+              {/* Controles de reproducción y pase de obras*/}
+              <>
+                {/*Play*/}
+                <div
+                  className={`absolute inset-0 flex flex-grow flex-col justify-between p-4 z-30 transition duration-300 ${isPlaying ? 'pointer-events-auto' : 'bg-black bg-opacity-60 pointer-events-auto'
+                    }`}
+                  onTouchStart={isMobile ? handleTouchStart : null}
+                  onTouchMove={isMobile ? handleTouchMove : null}
+                  onTouchEnd={isMobile ? handleTouchEnd : null}
+                  onClick={!isMobile ? togglePlayPause : null}
+                >
 
-
-            <div
-              className={`absolute inset-0 flex flex-col justify-between p-4 z-30 transition duration-300 ${isPlaying ? 'pointer-events-auto' : 'bg-black bg-opacity-60 pointer-events-auto'
-                }`}
-              onTouchStart={isMobile ? handleTouchStart : null}
-              onTouchMove={isMobile ? handleTouchMove : null}
-              onTouchEnd={isMobile ? handleTouchEnd : null}
-              onClick={!isMobile ? togglePlayPause : null}
-            >
-
-              {!isPlaying && (
-                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-400 text-3xl z-30">
-                  <Play color="white" size={64} />
+                  {!isPlaying && (
+                    <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-400 text-3xl z-30">
+                      <Play color="white" size={64} />
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
 
+                {/*Flechas*/}
+                {currentIndex !== 0 && (
+                  <button
+                    className="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-30"
+                    onClick={() => handleSwipe('right')}
+                  >
+                    <ChevronLeft size={48} />
+                  </button>
+                )}
+                <button
+                  className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-30"
+                  onClick={() => handleSwipe('left')}
+                >
+                  <ChevronRight size={48} />
+                </button>
+              </>
+
+              <img
+                src={currentArtwork.imageUrl[selectedLanguage]}
+                alt={currentArtwork.name}
+                className="transition-transform duration-300 object-contain"
+                style={{ transform: `translateX(${swipeOffset}px)` }}
+              />
+
+
+            </div>
 
             <audio
               ref={mediaRef}
@@ -236,26 +245,21 @@ const AudioGuideApp = ({ isMobile }) => {
               onEnded={() => setIsPlaying(false)}
             />
 
-            <>
-              {currentIndex !== 0 && (
-                <button
-                  className="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-30"
-                  onClick={() => handleSwipe('right')}
-                >
-                  <ChevronLeft size={48} />
-                </button>
-              )}
-              <button
-                className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-30"
-                onClick={() => handleSwipe('left')}
-              >
-                <ChevronRight size={48} />
-              </button>
-            </>
+            {/* Barra de control. Visible en el pase de imagenes */}
+            {!showFavorites && !showIntro && !showArtworksList && <ControlsBar currentArtwork={currentArtwork} toggleLike={toggleLike} langSelect={handleLangSelect} selectedLanguage={selectedLanguage} cookies={cookies} handleShowArtworks={handleShowArtworksList} />}
 
-          </>
+
+
+          </div>
         )}
-      </div>
+      {/* Advertencia en modo escritorio */}
+      {!isMobile && (
+        <div className='absolute inset-0 h-full w-full flex items-center justify-center text-4xl text-white bg-black bg-opacity-80 z-40'>
+          <span className='p-10 text-center'>Esta aplicación funciona mejor en dispositivo movil en modo retrato.</span>
+        </div>
+
+      )}
+
     </div>
   );
 };
