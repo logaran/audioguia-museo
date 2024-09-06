@@ -152,7 +152,7 @@ const AudioGuideApp = ({ isMobile }) => {
   };
 
   return (
-    <div className="relative h-full w-full text-black flex flex-col">
+    <div className="relative h-screen w-full text-black flex flex-col">
       
       {/* Fondo borroso en modo movil */}
       {isMobile && (
@@ -186,18 +186,15 @@ const AudioGuideApp = ({ isMobile }) => {
       {/* Player */}
       {!showIntro && !showFavorites &&
         (
-          <div className="relative flex-col h-full justify-between">
-
-
+          <div className="relative flex flex-col h-full justify-between">
+            <div className="relative flex flex-col sm:flex-row sm:w-1/3 items-center justify-center w-auto">
             <ArtworkInfo artwok={currentArtwork} selectedLanguage={selectedLanguage} />
-
-            <div className="relative flex-1 w-auto border-4 border-red-700 overflow-hidden">
 
               {/* Controles de reproducción y pase de obras*/}
               <>
                 {/*Play*/}
                 <div
-                  className={`absolute inset-0 flex flex-grow flex-col justify-between p-4 z-30 transition duration-300 ${isPlaying ? 'pointer-events-auto' : 'bg-black bg-opacity-60 pointer-events-auto'
+                  className={`absolute inset-0 flex h-full flex-col justify-between p-4 z-30 transition duration-300 ${isPlaying ? 'pointer-events-auto' : 'bg-black bg-opacity-60 pointer-events-auto'
                     }`}
                   onTouchStart={isMobile ? handleTouchStart : null}
                   onTouchMove={isMobile ? handleTouchMove : null}
@@ -232,7 +229,7 @@ const AudioGuideApp = ({ isMobile }) => {
               <img
                 src={currentArtwork.imageUrl[selectedLanguage]}
                 alt={currentArtwork.name}
-                className="transition-transform duration-300 object-contain"
+                className="transition-transform h-[50vh] duration-300 object-contain"
                 style={{ transform: `translateX(${swipeOffset}px)` }}
               />
 
