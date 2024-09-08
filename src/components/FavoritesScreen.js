@@ -25,7 +25,7 @@ const FavoritesScreen = ({ favoriteArtworks, onBack, selectedLanguage }) => {
       </ul>
       <button 
         onClick={() => onBack()} 
-        className="mt-6 mb-4 bg-gray-200 text-black px-4 py-2 rounded"
+        className="mt-6 mb-4 bg-gray-200 text-black px-4 py-2 rounded z-30"
       >
         {selectedLanguage === 'es' ? 'Volver a la Audioguía' : 'Return to audioguide'}
       </button>

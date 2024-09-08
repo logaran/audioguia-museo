@@ -35,7 +35,7 @@ const IntroScreen = ({ toggleShowIntro, langSelect, selectedLanguage, setShowArt
 
         <div className="mb-4 flex flex-col w-full items-center justify-center cursor-pointer">
           <span className="text-lg mb-2">{selectedLanguage === 'es' ? 'Selecciona idioma' : 'Select language'}</span>
-          <div className='flex w-40 justify-evenly items-center'>
+          <div className='flex w-40 justify-evenly items-center z-30'>
             <img src={languages[0].flag} alt={languages[0].name} className={`rounded-full ${selectedLanguage === 'es' ? 'w-12 h-12 border-2 border-white' : 'w-10 h-10'}`} onClick={() => langSelect('es')} />
             <img src={languages[1].flag} alt={languages[1].name} className={`rounded-full ${selectedLanguage === 'en' ? 'w-12 h-12 border-2 border-white' : 'w-10 h-10'}`} onClick={() => langSelect('en')} />
           </div>
@@ -43,7 +43,7 @@ const IntroScreen = ({ toggleShowIntro, langSelect, selectedLanguage, setShowArt
 
         <button
           onClick={handleStartClick}
-          className="bg-white text-black px-4 py-2 w-24 rounded"
+          className="bg-white text-black px-4 py-2 w-24 rounded z-30"
         >
           {selectedLanguage === 'es'? 'Empezar' : 'Start'}
         </button>

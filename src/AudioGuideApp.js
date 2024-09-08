@@ -153,19 +153,19 @@ const AudioGuideApp = ({ isMobile }) => {
 
   return (
     <div className="relative h-screen w-full text-black flex flex-col">
-      
-      {/* Fondo borroso en modo movil */}
-      {isMobile && (
-        <div
-          className="absolute h-100 inset-0 bg-cover bg-center filter blur-md -z-10"
-          style={{
-            backgroundImage: `url(${currentArtwork.imageUrl[selectedLanguage]})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            opacity: 0.8, // Ajusta la opacidad aquí
-          }}
-        />
-      )}
+
+
+
+      <div
+        className="absolute h-100 inset-0 bg-cover bg-center filter blur-md -z-10"
+        style={{
+          backgroundImage: `url(${currentArtwork.imageUrl[selectedLanguage]})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.8, // Ajusta la opacidad aquí
+        }}
+      />
+
 
       {/* Cabecera con logo del Museo */}
       <Header />
@@ -186,9 +186,9 @@ const AudioGuideApp = ({ isMobile }) => {
       {/* Player */}
       {!showIntro && !showFavorites &&
         (
-          <div className="relative flex flex-col h-full justify-between">
-            <div className="relative flex flex-col sm:flex-row sm:w-1/3 items-center justify-center w-auto">
-            <ArtworkInfo artwok={currentArtwork} selectedLanguage={selectedLanguage} />
+          <div className="relative h-full flex flex-col justify-between">
+            <div className="relative h-full flex flex-col sm:flex-row sm:justify-evenly items-center justify-evenly w-auto pt-3">
+              <ArtworkInfo artwok={currentArtwork} selectedLanguage={selectedLanguage} />
 
               {/* Controles de reproducción y pase de obras*/}
               <>
@@ -249,13 +249,14 @@ const AudioGuideApp = ({ isMobile }) => {
 
           </div>
         )}
-      {/* Advertencia en modo escritorio */}
+      {/* Advertencia en modo escritorio 
       {!isMobile && (
-        <div className='absolute inset-0 h-full w-full flex items-center justify-center text-4xl text-white bg-black bg-opacity-80 z-40'>
-          <span className='p-10 text-center'>Esta aplicación funciona mejor en dispositivo movil en modo retrato.</span>
+        <div className='absolute inset-0 h-full w-full flex items-center justify-center text-4xl text-white bg-black bg-opacity-60 z-20'>
+          <span className='p-10 text-center'>{selectedLanguage==='es' ? 'Esta aplicación funciona mejor en modo vertical.' : 'This application works better in portraid mode'}</span>
         </div>
 
       )}
+        */}
 
     </div>
   );
