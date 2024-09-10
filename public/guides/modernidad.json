@@ -1,4 +1,24 @@
-[
+{
+    "exposition":{
+        "name":{
+            "es": "Modernidad Latente",
+            "en": "Latent Modernity"
+        },
+        "description":{
+            "es":"Vanguardistas y renovadores en la figuración española (1920-1970).",
+            "en":"Avant-garde and Innovative Painters in Spanish Figurative Art (1920–1970)."
+        },
+        "copy":{
+            "es":"Colección Telefónica",
+            "en":"Telefónica Collection"
+        },
+        "date":{
+            "es":"Del 16 de marzo al 08 de septiembre de 2024",
+            "en":"From March 16 to September 08, 2024"
+        },
+        "imageUrl":"https://www.carmenthyssenmalaga.org/uploads/exposiciones/cropped/ee1f22a7e8597e2494beda0b4309d3aad1d649a4.jpg"
+    },
+    "artworks":[
     {
         "name": {
             "es": "Modernidad Latente",
@@ -204,3 +224,4 @@
             }
         }
     ]
+}

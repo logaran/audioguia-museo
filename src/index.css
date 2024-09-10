@@ -24,11 +24,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-
-.bg-intro {
-  background-image: url(/public/modernidad.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}

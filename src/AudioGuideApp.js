@@ -23,6 +23,7 @@ const AudioGuideApp = ({ isMobile }) => {
   const [showFavorites, setShowFavorites] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('es');
   const [showArtworksList, setShowArtworksList] = useState(false);
+  const [expositionData, setExpositionData] = useState(null);
 
 
   useEffect(() => {
@@ -33,7 +34,8 @@ const AudioGuideApp = ({ isMobile }) => {
           throw new Error('Error al cargar el JSON');
         }
         const data = await response.json();
-        setArtworks(data);
+        setArtworks(data.artworks);
+        setExpositionData(data.exposition);
       } catch (error) {
         console.error('Error fetching artworks data:', error);
       }
@@ -171,7 +173,7 @@ const AudioGuideApp = ({ isMobile }) => {
       <Header />
       {/* Intro */}
       {showIntro && (
-        <IntroScreen toggleShowIntro={toggleShowIntro} langSelect={handleLangSelect} selectedLanguage={selectedLanguage} setShowArtworksList={setShowArtworksList} />
+        <IntroScreen toggleShowIntro={toggleShowIntro} langSelect={handleLangSelect} selectedLanguage={selectedLanguage} setShowArtworksList={setShowArtworksList} expositionData={expositionData}/>
       )}
       {/* Favoritos (Outro) */}
       {showFavorites && !showIntro && (
