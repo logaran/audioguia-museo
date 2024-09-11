@@ -1,28 +1,25 @@
+import React, { useState, useEffect } from 'react';
+import AudioGuideApp from './AudioGuideApp';
 
-const appData = {
-    museumLogo: 'https://www.carmenthyssenmalaga.org/bundles/thyssenmalagaweb/svg/logo.svg',
-    locals: {
-        museumName: {
-            es: "Museo Carmen Thyssen Málaga",
-            en: "Carmen Thyssen Málaga Museum"
-        },
-        appName: {
-            es: "Audioguía",
-            en: "Audioguide",
-        },
-        startButton: {
-            es: "Empezar",
-            en: "Start",
-        },
-        backButton: {
-            es: "Volver a la audioguía",
-            en: "Back to audioguide",
-        },
-        shareText: {
-            es: "Comparte tus obras favoritas",
-            en: "Share your favourite artworks",
-        },
-    },
-};
+function App() {
+  const [isMobile, setIsMobile] = useState(false);
 
-export default appData;
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 480);
+    };
+
+    handleResize(); // Inicializa al cargar
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return (
+    <div className='h-screen w-screen'>
+      <AudioGuideApp isMobile={isMobile} />
+    </div>
+  );
+}
+
+export default App;
