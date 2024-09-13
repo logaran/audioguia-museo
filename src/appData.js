@@ -4,7 +4,7 @@ const appData = {
     locals: {
         museumName: {
             es: "Museo Carmen Thyssen Málaga",
-            en: "Carmen Thyssen Málaga Museum"
+            en: "Museo Carmen Thyssen Málaga"
         },
         appName: {
             es: "Audioguía",
