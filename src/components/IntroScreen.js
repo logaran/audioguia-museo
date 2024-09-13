@@ -14,18 +14,19 @@ const IntroScreen = ({ toggleShowIntro, langSelect, selectedLanguage, setShowArt
       backgroundImage: `url(${expositionData.imageUrl})`,
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
-      backgroundSize: "cover",
+      backgroundSize: "160%",
     }}>
       <div className="h-full text-center flex flex-col items-center justify-evenly bg-gray-400 p-2 bg-opacity-70">
 
 
-        <div>
-          <h1 className="text-2xl font-chronicle mb-4">{appData.locals.museumName[selectedLanguage]}</h1>
+        <div className='flex flex-col items-center gap-2'> 
+          <h1 className="text-2xl font-chronicle">{appData.locals.museumName[selectedLanguage]}</h1>
           <h2 className='text-4xl uppercase'>{expositionData.name[selectedLanguage]}</h2>
           <p>{expositionData.description[selectedLanguage]}</p>
-          <p>{expositionData.copy[selectedLanguage]}</p>
           <p>{expositionData.date[selectedLanguage]}</p>
-          <h3 className="text-2xl mt-8">{appData.locals.appName[selectedLanguage]}</h3>
+          <p>{expositionData.copy[selectedLanguage]}</p>
+          <img className="max-w-28 mix-blend-multiply" src="https://www.carmenthyssenmalaga.org/bundles/thyssenmalagaweb/img/sonata/logo_fundacion_lacaixa.jpg" alt="logo de fundación La Caixa"/>
+          <h3 className="text-2xl">{appData.locals.appName[selectedLanguage]}</h3>
         </div>
 
 
