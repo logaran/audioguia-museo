@@ -25,7 +25,7 @@ const AudioGuideApp = ({ isMobile }) => {
   useEffect(() => {
     const fetchArtworks = async () => {
       try {
-        const response = await fetch('/guides/modernidad.json');
+        const response = await fetch(`${process.env.PUBLIC_URL}/guides/modernidad.json`);
         if (!response.ok) {
           throw new Error('Error al cargar el JSON');
         }
