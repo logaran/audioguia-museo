@@ -11,7 +11,7 @@ const IntroScreen = ({ toggleShowIntro, langSelect, selectedLanguage, setShowArt
 
   return (
     <div className="h-full flex items-center justify-center text-white p-8" style={{
-      backgroundImage: `url(${expositionData.imageUrl})`,
+      backgroundImage: `url(${process.env.PUBLIC_URL}${expositionData.imageUrl})`,
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
       backgroundSize: "160%",
@@ -25,7 +25,7 @@ const IntroScreen = ({ toggleShowIntro, langSelect, selectedLanguage, setShowArt
           <p>{expositionData.description[selectedLanguage]}</p>
           <p>{expositionData.date[selectedLanguage]}</p>
           <p>{expositionData.copy[selectedLanguage]}</p>
-          {/* <img className="max-w-28 mix-blend-multiply" src="https://www.carmenthyssenmalaga.org/bundles/thyssenmalagaweb/img/sonata/logo_fundacion_lacaixa.jpg" alt="logo de fundación La Caixa"/> */}
+          <img className="max-w-28 mix-blend-multiply" src="https://www.carmenthyssenmalaga.org/bundles/thyssenmalagaweb/img/sonata/logo_fundacion_lacaixa.jpg" alt="logo de fundación La Caixa"/>
           <h3 className="text-2xl">{appData.locals.appName[selectedLanguage]}</h3>
         </div>
 

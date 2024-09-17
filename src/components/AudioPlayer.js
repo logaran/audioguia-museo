@@ -101,7 +101,7 @@ const AudioPlayer = ({ currentArtwork, currentIndex, showIntro, setShowIntro, sh
         </>
 
         <img
-          src={currentArtwork.imageUrl[selectedLanguage]}
+          src={currentArtwork.imageUrl[selectedLanguage] || `${process.env.PUBLIC_URL}/img/placeholder.jpg`}
           alt={currentArtwork.name}
           className="transition-transform h-[50vh] duration-300 object-contain"
           style={{ transform: `translateX(${swipeOffset}px)` }}
@@ -110,12 +110,11 @@ const AudioPlayer = ({ currentArtwork, currentIndex, showIntro, setShowIntro, sh
 
       </div>
 
-      <audio
+      { activeResourceUrl && (<audio
         ref={mediaRef}
         src={activeResourceUrl}
         onEnded={() => setIsPlaying(false)}
-      />
-
+      />)}
 
     </div>
   );

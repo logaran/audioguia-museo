@@ -16,7 +16,7 @@
             "es": "Del 08 de octubre de 2024 al 09 de marzo de 2025",
             "en": "From October 08, 2024 to March 09, 2025"
         },
-        "imageUrl": "https://www.carmenthyssenmalaga.org/uploads/exposiciones/cropped/71fe077ad039784e589d36f24cb82e4d16e4290a.jpg"
+        "imageUrl": "/img/introImage.jpg"
     },
     "artworks": [{
         "name": {
@@ -24,15 +24,15 @@
             "en": "Naked"
         },
         "audioUrl": {
-            "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/es/100.modernidadlatente_es.mp3",
-            "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/en/100.modernidadlatente_en.mp3"
+            "es": "",
+            "en": ""
         },
         "author": "Museo Carmen Thyssen Málaga",
         "date": "1920-1970",
         "description": "Introducción",
         "imageUrl": {
-            "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/100_es.jpg",
-            "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/100_en.jpg"
+            "es": "",
+            "en": ""
         }
     }]
 }
