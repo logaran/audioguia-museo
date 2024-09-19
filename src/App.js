@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AudioGuideApp from './AudioGuideApp';
-
+import { ArtworksProvider } from './context/ArtworksContext';
 function App() {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -17,7 +17,9 @@ function App() {
 
   return (
     <div className='h-screen w-screen'>
-      <AudioGuideApp isMobile={isMobile} />
+      <ArtworksProvider>
+        <AudioGuideApp isMobile={isMobile} />
+      </ArtworksProvider>
     </div>
   );
 }
