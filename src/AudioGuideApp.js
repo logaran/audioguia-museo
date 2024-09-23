@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useCookies } from 'react-cookie';
 import IntroScreen from './components/IntroScreen';
 import FavoritesScreen from './components/FavoritesScreen';
@@ -7,10 +7,11 @@ import ControlsBar from './components/ControlsBar';
 import ArtworkInfo from './components/ArtworkInfo';
 import ArtworksList from './components/ArtworksList';
 import AudioPlayer from './components/AudioPlayer';
+import { ArtworksContext } from './context/ArtworksContext';
 
 
 const AudioGuideApp = ({ isMobile }) => {
-  const [artworks, setArtworks] = useState([]);
+  
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [cookies, setCookie] = useCookies(['likes']);
@@ -19,27 +20,8 @@ const AudioGuideApp = ({ isMobile }) => {
   const [showFavorites, setShowFavorites] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('es');
   const [showArtworksList, setShowArtworksList] = useState(false);
-  const [expositionData, setExpositionData] = useState(null);
-
-
-  useEffect(() => {
-    const fetchArtworks = async () => {
-      try {
-        const response = await fetch(`${process.env.PUBLIC_URL}/guides/desnudos.json`);
-        if (!response.ok) {
-          throw new Error('Error al cargar el JSON');
-        }
-        const data = await response.json();
-        setArtworks(data.artworks);
-        setExpositionData(data.exposition);
-      } catch (error) {
-        console.error('Error fetching artworks data:', error);
-      }
-    };
-
-    fetchArtworks();
-  }, []);
-
+  
+  const {artworks, expositionData} = useContext(ArtworksContext);
 
   useEffect(() => {
     if (mediaRef.current) {
