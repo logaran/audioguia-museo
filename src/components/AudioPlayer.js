@@ -101,7 +101,13 @@ const AudioPlayer = ({ currentArtwork, currentIndex, showIntro, setShowIntro, sh
         </>
 
         <img
-          src={currentArtwork.imageUrl[selectedLanguage] || `${process.env.PUBLIC_URL}/img/placeholder.jpg`}
+            src={`${process.env.PUBLIC_URL}/img/${currentArtwork.id}${selectedLanguage}.jpg`} 
+            onError={(e) => {
+              e.target.src = `${process.env.PUBLIC_URL}/img/${currentArtwork.id}.jpg`;
+              e.target.onerror = () => {
+                e.target.src = `${process.env.PUBLIC_URL}/img/placeholder.jpg`;
+              };
+            }}  
           alt={currentArtwork.name}
           className="transition-transform h-[50vh] duration-300 object-contain"
           style={{ transform: `translateX(${swipeOffset}px)` }}

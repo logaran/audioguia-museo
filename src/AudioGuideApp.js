@@ -73,8 +73,9 @@ const AudioGuideApp = ({ isMobile }) => {
 
   const currentArtwork = artworks[currentIndex];
   const favoriteArtworks = artworks.filter(artwork => cookies.likes?.[artwork.name.es]);
-  const activeResourceUrl = currentArtwork['audioUrl'][selectedLanguage];
-
+  const activeResourceUrl = `${process.env.PUBLIC_URL}/audios/${selectedLanguage}/${currentArtwork.id}.mp3`;
+  const activeBackgroundUrl = `${process.env.PUBLIC_URL}/img/${selectedLanguage}/${currentArtwork.id}.jpg` || `${process.env.PUBLIC_URL}/img/placeholder.jpg`;
+  
   const goBackToGallery = () => {
     setCurrentIndex(0);
     setShowFavorites(false); // Oculta la pantalla de favoritos y vuelve a la audioguía
@@ -87,7 +88,7 @@ const AudioGuideApp = ({ isMobile }) => {
       <div
         className="absolute h-100 inset-0 bg-cover bg-center filter blur-md -z-10"
         style={{
-          backgroundImage: `url(${currentArtwork.imageUrl[selectedLanguage]})`,
+          backgroundImage: `url(${activeBackgroundUrl})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           opacity: 0.8, // Ajusta la opacidad aquí

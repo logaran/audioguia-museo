@@ -7,7 +7,7 @@ const ArtworksList = ({ artworks, setIndex, showList, selectedLanguage }) => {
             <div className="space-y-1 overflow-auto absolute inset-0 p-2 bg-white z-50">
                 {artworks.map((item, index) => (
                     <ArtworkThumbnail
-                        key={item.description}
+                        key={item.id}
                         artwork={item}
                         selectedLanguage={selectedLanguage}
                         setIndex={setIndex}
