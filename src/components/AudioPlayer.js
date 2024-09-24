@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useRef } from "react";
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import ArtworkImage from "./ArtworkImage";
 
 const AudioPlayer = ({ currentArtwork, currentIndex, showIntro, setShowIntro, showFavorites, artworks, setShowFavorites, setCurrentIndex, selectedLanguage, isMobile, isPlaying, ArtworkInfo, mediaRef, activeResourceUrl, setIsPlaying }) => {
 
@@ -100,18 +101,7 @@ const AudioPlayer = ({ currentArtwork, currentIndex, showIntro, setShowIntro, sh
           </button>
         </>
 
-        <img
-            src={`${process.env.PUBLIC_URL}/img/${currentArtwork.id}${selectedLanguage}.jpg`} 
-            onError={(e) => {
-              e.target.src = `${process.env.PUBLIC_URL}/img/${currentArtwork.id}.jpg`;
-              e.target.onerror = () => {
-                e.target.src = `${process.env.PUBLIC_URL}/img/placeholder.jpg`;
-              };
-            }}  
-          alt={currentArtwork.name}
-          className="transition-transform h-[50vh] duration-300 object-contain"
-          style={{ transform: `translateX(${swipeOffset}px)` }}
-        />
+      <ArtworkImage currentArtwork={currentArtwork} selectedLanguage={selectedLanguage} swipeOffset={swipeOffset} />
 
 
       </div>
