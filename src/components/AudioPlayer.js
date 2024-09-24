@@ -1,14 +1,17 @@
 import React from "react";
 import { useState, useRef } from "react";
-import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ArtworkImage from "./ArtworkImage";
+import { usePlayback } from "../context/PlaybackContext";
+import PlayIcon from "./PlayIcon";
 
-const AudioPlayer = ({ currentArtwork, currentIndex, showIntro, setShowIntro, showFavorites, artworks, setShowFavorites, setCurrentIndex, selectedLanguage, isMobile, isPlaying, ArtworkInfo, mediaRef, activeResourceUrl, setIsPlaying }) => {
+const AudioPlayer = ({ currentArtwork, currentIndex, showIntro, setShowIntro, showFavorites, artworks, setShowFavorites, setCurrentIndex, selectedLanguage, isMobile, ArtworkInfo, mediaRef, activeResourceUrl }) => {
 
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
   const isSwipe = useRef(false);
   const [swipeOffset, setSwipeOffset] = useState(0);
+  const {isPlaying, togglePlayPause, setIsPlaying} = usePlayback();
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
@@ -42,77 +45,72 @@ const AudioPlayer = ({ currentArtwork, currentIndex, showIntro, setShowIntro, sh
     if (direction === 'right') {
       if (currentIndex > 0) {
         setCurrentIndex(currentIndex - 1);
-      } else if (showIntro) {
-        setShowIntro(false);
+        setIsPlaying(false);
+      } else if (!showIntro) {
+        setShowIntro(true);
       } else if (showFavorites) {
         setShowFavorites(false);
       }
-      setShowIntro(true);
     } else if (direction === 'left') {
       if (currentIndex < artworks.length - 1) {
         setCurrentIndex(currentIndex + 1);
+        setIsPlaying(false);
       } else if (!showFavorites) {
         setShowFavorites(true);
       }
     }
   };
 
-  const togglePlayPause = () => {
-    setIsPlaying(!isPlaying);
-  };
 
   return (
-    <div className="relative h-full flex flex-col justify-between">
-      <div className="relative h-full flex flex-col sm:flex-row sm:justify-evenly items-center justify-evenly w-auto pt-3">
-        <ArtworkInfo artwok={currentArtwork} selectedLanguage={selectedLanguage} />
+    
+      <div className="relative h-full flex flex-col justify-between">
+        <div className="relative h-full flex flex-col sm:flex-row sm:justify-evenly items-center justify-evenly w-auto pt-3">
+          <ArtworkInfo artwok={currentArtwork} selectedLanguage={selectedLanguage} />
 
-        {/* Controles de reproducción y pase de obras*/}
-        <>
-          {/*Play*/}
-          <div
-            className={`absolute inset-0 flex h-full flex-col justify-between p-4 z-30 transition duration-300 ${isPlaying ? 'pointer-events-auto' : 'bg-black bg-opacity-60 pointer-events-auto'
-              }`}
-            onTouchStart={isMobile ? handleTouchStart : null}
-            onTouchMove={isMobile ? handleTouchMove : null}
-            onTouchEnd={isMobile ? handleTouchEnd : null}
-            onClick={!isMobile ? togglePlayPause : null}
-          >
+          {/* Controles de reproducción y pase de obras*/}
+          <>
+            {/*Play*/}
+            <div
+              className={`absolute inset-0 flex h-full flex-col justify-between p-4 z-30 transition duration-300 ${isPlaying ? 'pointer-events-auto' : 'bg-black bg-opacity-30 pointer-events-auto'
+                }`}
+              onTouchStart={isMobile ? handleTouchStart : null}
+              onTouchMove={isMobile ? handleTouchMove : null}
+              onTouchEnd={isMobile ? handleTouchEnd : null}
+              onClick={!isMobile ? togglePlayPause : null}
+            >
+              <PlayIcon />
+            </div>
 
-            {!isPlaying && (
-              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-400 text-3xl z-30">
-                <Play color="white" size={64} />
-              </div>
-            )}
-          </div>
+            {/*Flechas*/}
+            <button
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-30"
+              onClick={() => handleSwipe('right')}
+            >
+              <ChevronLeft size={48} />
+            </button>
 
-          {/*Flechas*/}
-          <button
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-30"
-            onClick={() => handleSwipe('right')}
-          >
-            <ChevronLeft size={48} />
-          </button>
+            <button
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-30"
+              onClick={() => handleSwipe('left')}
+            >
+              <ChevronRight size={48} />
+            </button>
+          </>
 
-          <button
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-400 text-3xl z-30"
-            onClick={() => handleSwipe('left')}
-          >
-            <ChevronRight size={48} />
-          </button>
-        </>
+          <ArtworkImage currentArtwork={currentArtwork} selectedLanguage={selectedLanguage} swipeOffset={swipeOffset} />
 
-      <ArtworkImage currentArtwork={currentArtwork} selectedLanguage={selectedLanguage} swipeOffset={swipeOffset} />
 
+        </div>
+
+        {activeResourceUrl && (<audio
+          ref={mediaRef}
+          src={activeResourceUrl}
+          onEnded={() => setIsPlaying(false)}
+        />)}
 
       </div>
-
-      { activeResourceUrl && (<audio
-        ref={mediaRef}
-        src={activeResourceUrl}
-        onEnded={() => setIsPlaying(false)}
-      />)}
-
-    </div>
+    
   );
 };
 
