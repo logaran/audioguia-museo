@@ -20,7 +20,7 @@ const ThemeAdaptableImage = () => {
 
     return (
         <img
-            src={isDarkMode ? `${process.env.PUBLIC_URL}/img/colaboratorLogoDark.png` : `${process.env.PUBLIC_URL}/img/colaboratorLogoLight.png`}
+            src={isDarkMode ? `${process.env.PUBLIC_URL}/img/ColaboratorLogoDark.png` : `${process.env.PUBLIC_URL}/img/ColaboratorLogoLight.png`}
             className="max-w-28 mix-blend-multiply"
             alt="Logo de entidad colaboradora"
         />
