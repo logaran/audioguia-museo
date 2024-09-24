@@ -6,15 +6,15 @@
         },
         "description": {
             "es": "Cuerpos normativos e insurrectos en el arte español (1870-1970)",
-            "en": "Normative and Rebellioos Nudes in Spanish Art (1870-1970)"
+            "en": "Normative and Rebellious Nudes in Spanish Art (1870-1970)"
         },
         "copy": {
             "es": "Con la colaboración de",
             "en": "In collaboration with"
         },
         "date": {
-            "es": "Del 08 de octubre de 2024 al 09 de marzo de 2025",
-            "en": "From October 08, 2024 to March 09, 2025"
+            "es": "Del 8 de octubre de 2024 al 09 de marzo de 2025",
+            "en": "From October 8, 2024 to March 09, 2025"
         },
         "imageUrl": "/img/introImage.jpg"
     },
@@ -24,7 +24,7 @@
                 "en": "Naked"
             },
             "author": "Museo Carmen Thyssen Málaga",
-            "date": "1920-1970",
+            "date": "1870-1970",
             "description": "Introducción",
             "id": "100"
         },
@@ -134,7 +134,7 @@
                 "en": "The Mannequins"
             },
             "author": "Gregorio Prieto",
-            "date": "ca.1932",
+            "date": "c.1932",
             "description": "Audio 111",
             "id": "111"
         },
