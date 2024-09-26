@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useCookies } from 'react-cookie';
-import IntroScreen from './components/IntroScreen';
-import FavoritesScreen from './components/FavoritesScreen';
-import Header from './components/Header';
-import ControlsBar from './components/ControlsBar';
-import ArtworkInfo from './components/ArtworkInfo';
-import ArtworksList from './components/ArtworksList';
-import AudioPlayer from './components/AudioPlayer';
-import { ArtworksContext } from './context/ArtworksContext';
-
+import IntroScreen from './IntroScreen';
+import FavoritesScreen from './FavoritesScreen';
+import Header from './Header';
+import ControlsBar from './ControlsBar';
+import ArtworkInfo from './ArtworkInfo';
+import ArtworksList from './ArtworksList';
+import AudioPlayer from './AudioPlayer';
+import { ArtworksContext } from '../context/ArtworksContext';
+import { useAnalytics } from '../context/AnaliticsContext';
 
 const AudioGuideApp = ({ isMobile }) => {
   
@@ -22,6 +22,7 @@ const AudioGuideApp = ({ isMobile }) => {
   const [showArtworksList, setShowArtworksList] = useState(false);
   
   const {artworks, expositionData} = useContext(ArtworksContext);
+  const {trackEvent} = useAnalytics();
 
   useEffect(() => {
     if (mediaRef.current) {
