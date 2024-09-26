@@ -14,7 +14,7 @@ export const PlaybackProvider = ({ children })=>{
     };
 
     return (
-        <PlaybackContext.Provider value={{ isPlaying, togglePlayPause }} >
+        <PlaybackContext.Provider value={{ isPlaying, setIsPlaying, togglePlayPause }} >
             {children}
         </PlaybackContext.Provider>
     )

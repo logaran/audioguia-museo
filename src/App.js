@@ -7,7 +7,6 @@ const trackingId = process.env.REACT_APP_GA_TRACKING_ID;
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
-
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 480);
