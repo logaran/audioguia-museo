@@ -1,6 +1,6 @@
 // Componente Hijo (IntroScreen)
 import { languages } from './Languages'; // Importamos el array con idiomas y banderas
-import appData from '../appData';
+import appData from '../config/appData';
 import ThemeAdaptableImage from './ThemeAdaptableImage';
 
 const IntroScreen = ({ toggleShowIntro, langSelect, selectedLanguage, setShowArtworksList, expositionData }) => {

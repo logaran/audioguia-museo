@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import AudioGuideApp from './AudioGuideApp';
+import AudioGuideApp from './components/AudioGuideApp';
 import { ArtworksProvider } from './context/ArtworksContext';
+import { AnalyticsProvider } from './context/AnaliticsContext';
+
+const trackingId = process.env.REACT_APP_GA_TRACKING_ID;
+
 function App() {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -17,9 +21,11 @@ function App() {
 
   return (
     <div className='h-screen w-screen'>
-      <ArtworksProvider>
-        <AudioGuideApp isMobile={isMobile} />
-      </ArtworksProvider>
+      <AnalyticsProvider trackingId={trackingId} >
+        <ArtworksProvider>
+          <AudioGuideApp isMobile={isMobile} />
+        </ArtworksProvider>
+      </AnalyticsProvider>
     </div>
   );
 }

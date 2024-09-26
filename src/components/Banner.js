@@ -1,5 +1,5 @@
 import React from 'react';
-import appData from '../appData';
+import appData from '../config/appData';
 
 const Banner = () => {
   const logo = appData.museumLogo;
