@@ -13,4 +13,5 @@ export const AnalyticsEvents = {
             timestamp: new Date().toISOString()
         }
     }),
+    
 };
