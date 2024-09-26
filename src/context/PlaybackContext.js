@@ -10,7 +10,8 @@ export const PlaybackProvider = ({ children })=>{
     const [isPlaying, setIsPlaying] = useState(false);
 
     const togglePlayPause = ()=>{
-        setIsPlaying((prev) => !prev);
+        setIsPlaying((prev) => {
+            return !prev});
     };
 
     return (

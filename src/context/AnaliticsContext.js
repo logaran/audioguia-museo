@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useContext } from 'react';
 import ReactGA from 'react-ga4'; // Usamos 'react-ga4' para GA4
-
 const AnalyticsContext = createContext();
 
 export const AnalyticsProvider = ({ trackingId, children }) => {
@@ -29,9 +28,17 @@ export const AnalyticsProvider = ({ trackingId, children }) => {
         if (!trackingId) return;
         ReactGA.event(eventName, params); // Envía el evento a GA4
     };
-
+    const analyticsEvents = {
+        FAVORITE_MARK: (itemName) => ({
+            category: 'Audioguide',
+            action: 'Liked',
+            label: itemName,
+            timestamp: new Date().toISOString()
+        })
+    };
+    
     return (
-        <AnalyticsContext.Provider value={{ trackPageView, trackEvent }}>
+        <AnalyticsContext.Provider value={{ trackPageView, trackEvent, analyticsEvents }}>
             {children}
         </AnalyticsContext.Provider>
     );

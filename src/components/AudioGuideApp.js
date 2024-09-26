@@ -9,20 +9,20 @@ import ArtworksList from './ArtworksList';
 import AudioPlayer from './AudioPlayer';
 import { ArtworksContext } from '../context/ArtworksContext';
 import { useAnalytics } from '../context/AnaliticsContext';
+import { usePlayback } from '../context/PlaybackContext';
 
 const AudioGuideApp = ({ isMobile }) => {
   
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [cookies, setCookie] = useCookies(['likes']);
   const mediaRef = useRef(null);
   const [showIntro, setShowIntro] = useState(true);
   const [showFavorites, setShowFavorites] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('es');
   const [showArtworksList, setShowArtworksList] = useState(false);
-  
+  const {isPlaying, setIsPlaying} = usePlayback();
   const {artworks, expositionData} = useContext(ArtworksContext);
-  const {trackEvent} = useAnalytics();
+  const {trackEvent, analyticsEvents} = useAnalytics();
 
   useEffect(() => {
     if (mediaRef.current) {
@@ -65,6 +65,7 @@ const AudioGuideApp = ({ isMobile }) => {
       delete newLikes[currentArtwork.name.es];
     } else {
       newLikes[currentArtwork.name.es] = true;
+      trackEvent(analyticsEvents.FAVORITE_MARK(currentArtwork.name[selectedLanguage]));
     }
     setCookie('likes', newLikes, { path: '/' });
   };
@@ -122,15 +123,7 @@ const AudioGuideApp = ({ isMobile }) => {
 
         </>
         )}
-      {/* Advertencia en modo escritorio 
-      {!isMobile && (
-        <div className='absolute inset-0 h-full w-full flex items-center justify-center text-4xl text-white bg-black bg-opacity-60 z-20'>
-          <span className='p-10 text-center'>{selectedLanguage==='es' ? 'Esta aplicación funciona mejor en modo vertical.' : 'This application works better in portraid mode'}</span>
-        </div>
-
-      )}
-        */}
-
+     
     </div>
   );
 };
