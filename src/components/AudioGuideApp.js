@@ -11,7 +11,7 @@ import { ArtworksContext } from '../context/ArtworksContext';
 import { useAnalytics } from '../context/AnaliticsContext';
 import { usePlayback } from '../context/PlaybackContext';
 
-const AudioGuideApp = ({ isMobile }) => {
+const AudioGuideApp = ({ isMobile, isDarkMode }) => {
   
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cookies, setCookie] = useCookies(['likes']);
@@ -98,10 +98,10 @@ const AudioGuideApp = ({ isMobile }) => {
       />
 
       {/* Cabecera con logo del Museo */}
-      <Header />
+      <Header isDarkMode={isDarkMode}/>
       {/* Intro */}
       {showIntro && (
-        <IntroScreen toggleShowIntro={toggleShowIntro} langSelect={handleLangSelect} selectedLanguage={selectedLanguage} setShowArtworksList={setShowArtworksList} expositionData={expositionData} />
+        <IntroScreen toggleShowIntro={toggleShowIntro} langSelect={handleLangSelect} selectedLanguage={selectedLanguage} setShowArtworksList={setShowArtworksList} expositionData={expositionData} isDarkMode={isDarkMode}/>
       )}
       {/* Favoritos (Outro) */}
       {showFavorites && !showIntro && (

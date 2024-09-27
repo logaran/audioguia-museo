@@ -17,7 +17,7 @@ const FavoritesScreen = ({ favoriteArtworks, onBack, selectedLanguage }) => {
                 };
               }}
               alt={artwork.name[selectedLanguage]}
-              className="w-14 h-14 object-cover rounded-md mr-4"
+              className="w-14 h-14 object-contain rounded-md mr-4"
             />
             <div className="flex-1">
               <h2 className="text-xl font-semibold">{artwork.name[selectedLanguage]}</h2>

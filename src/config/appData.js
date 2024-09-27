@@ -1,6 +1,5 @@
 
 const appData = {
-    museumLogo: 'https://www.carmenthyssenmalaga.org/bundles/thyssenmalagaweb/svg/logo.svg',
     locals: {
         museumName: {
             es: "Museo Carmen Thyssen Málaga",
