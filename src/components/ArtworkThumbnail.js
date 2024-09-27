@@ -19,7 +19,7 @@ const ArtworkThumbnail = ({ artwork, selectedLanguage, setIndex, showList, selec
             }} alt={artwork.name[selectedLanguage]} className="w-16 h-16 rounded mr-4" /> {/* Miniatura */}
             <div className="flex flex-col">
                 <h3 className="text-lg font-semibold">{`${artwork.author}, ${artwork.name[selectedLanguage]}`}</h3> {/* Título */}
-                <p className="text-lg text-gray-600">{artwork.description}</p> {/* Descripción */}
+                <p className="text-lg text-gray-600 dark:text-gray-300">{artwork.description}</p> {/* Descripción */}
             </div>
         </div>
     );

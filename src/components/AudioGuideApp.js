@@ -85,7 +85,7 @@ const AudioGuideApp = ({ isMobile }) => {
   };
 
   return (
-    <div className="relative h-screen w-full text-black flex flex-col">
+    <div className="relative h-screen w-full text-black dark:text-white flex flex-col">
 
       <div
         className="absolute h-100 inset-0 bg-cover bg-center filter blur-md -z-10"

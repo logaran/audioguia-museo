@@ -3,7 +3,7 @@ import ShareComponent from './ShareComponent';
 
 const FavoritesScreen = ({ favoriteArtworks, onBack, selectedLanguage }) => {
   return (
-    <div className="w-screen h-full flex flex-col items-center justify-start bg-white text-gray-700 px-8 py-2">
+    <div className="w-screen h-full flex flex-col items-center justify-start bg-white text-gray-700 dark:bg-gray-900 dark:text-white px-8 py-2">
       <h1 className="text-2xl font-bold mb-4">{selectedLanguage === 'es' ? 'Comparte tus obras favoritas' : 'Share your favourite artworks'}</h1>
       <ul className="h-full w-full max-w-2xl overflow-auto">
         {favoriteArtworks.map(artwork => (
@@ -37,7 +37,7 @@ const FavoritesScreen = ({ favoriteArtworks, onBack, selectedLanguage }) => {
       </ul>
       <button
         onClick={() => onBack()}
-        className="mt-6 mb-4 bg-gray-200 text-black px-4 py-2 rounded z-30"
+        className="bg-gray-800 dark:bg-gray-100 text-white dark:text-gray-900 px-4 py-2 w-48 rounded hover:bg-gray-700 dark:hover:bg-gray-300 transition duration-300"
       >
         {selectedLanguage === 'es' ? 'Volver a la Audioguía' : 'Return to audioguide'}
       </button>

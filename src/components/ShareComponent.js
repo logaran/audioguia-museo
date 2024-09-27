@@ -35,7 +35,7 @@ const ShareComponent = ({ url, title }) => {
                     href={option.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center bg-gray-200 p-2 rounded hover:bg-gray-300"
+                    className="flex items-center bg-gray-200 dark:bg-transparent p-2 rounded hover:bg-gray-300"
                 >
                     {option.icon}
                     <span className="hidden sm:inline">{option.label}</span>
