@@ -4,6 +4,7 @@ import { ArtworksProvider } from './context/ArtworksContext';
 import { AnalyticsProvider } from './context/AnaliticsContext';
 import { PlaybackProvider } from './context/PlaybackContext';
 
+
 function App() {
   const [isMobile, setIsMobile] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);

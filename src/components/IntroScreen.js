@@ -2,12 +2,13 @@
 import { languages } from './Languages'; // Importamos el array con idiomas y banderas
 import appData from '../config/appData';
 import ThemeAdaptableImage from './ThemeAdaptableImage';
+import { useNavigate } from 'react-router-dom';
 
-const IntroScreen = ({ toggleShowIntro, langSelect, selectedLanguage, setShowArtworksList, expositionData, isDarkMode }) => {
-
+const IntroScreen = ({ langSelect, selectedLanguage, setShowArtworksList, expositionData, isDarkMode }) => {
+  const navigate = useNavigate();
   const handleStartClick = () => {
-    toggleShowIntro(false);
     setShowArtworksList(true);
+    navigate('/list');
   }
 
   return (
