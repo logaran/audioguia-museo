@@ -1,9 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ArtworkThumbnail = ({ artwork, selectedLanguage, setIndex, showList, selectedIndex }) => {
+    const navigate = useNavigate();
+
     const handleClick = (index) => {
         setIndex(selectedIndex);
-        showList(false);
+        navigate('/guide');
     }
     return (
         <div

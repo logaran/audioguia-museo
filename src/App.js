@@ -3,6 +3,7 @@ import AudioGuideApp from './components/AudioGuideApp';
 import { ArtworksProvider } from './context/ArtworksContext';
 import { AnalyticsProvider } from './context/AnaliticsContext';
 import { PlaybackProvider } from './context/PlaybackContext';
+import { LanguageProvider } from './context/LanguageContext';
 
 
 function App() {
@@ -21,34 +22,36 @@ function App() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-   useEffect(() => {
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        
-        const handleChange = (e) => {
-            setIsDarkMode(e.matches);
-        };
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-        // Inicializar el estado con la preferencia actual
-        setIsDarkMode(mediaQuery.matches);
-        
-        // Agregar el listener
-        mediaQuery.addEventListener('change', handleChange);
+    const handleChange = (e) => {
+      setIsDarkMode(e.matches);
+    };
 
-        // Cleanup listener on unmount
-        return () => {
-            mediaQuery.removeEventListener('change', handleChange);
-        };
-    }, []);
+    // Inicializar el estado con la preferencia actual
+    setIsDarkMode(mediaQuery.matches);
+
+    // Agregar el listener
+    mediaQuery.addEventListener('change', handleChange);
+
+    // Cleanup listener on unmount
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, []);
 
 
   return (
     <div className='h-screen w-screen'>
       <AnalyticsProvider trackingId={trackingId} >
-        <PlaybackProvider>
+        <LanguageProvider>
           <ArtworksProvider>
-            <AudioGuideApp isMobile={isMobile} isDarkMode={isDarkMode}/>
+            <PlaybackProvider>
+              <AudioGuideApp isMobile={isMobile} isDarkMode={isDarkMode} />
+            </PlaybackProvider>
           </ArtworksProvider>
-        </PlaybackProvider>
+        </LanguageProvider>
       </AnalyticsProvider>
     </div>
   );

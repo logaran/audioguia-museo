@@ -1,14 +1,23 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
 import { languages } from './Languages';
+import { useLanguage } from '../context/LanguageContext';
+import { useArtworks } from '../context/ArtworksContext';
+import { useNavigate } from 'react-router-dom';
+import { usePlayback } from '../context/PlaybackContext';
 
-const ControlsBar = ({ currentArtwork, toggleLike, langSelect, selectedLanguage, cookies, handleShowArtworks }) => {
+const ControlsBar = () => {
+  
+  const {selectedLanguage, setSelectedLanguage} = useLanguage();
+  const {favorites, currentArtwork, toggleLike } = useArtworks(); 
+  const {setIsPlaying} = usePlayback();
+  const navigate = useNavigate();
   const currentLanguage = languages.find(lang => lang.code === selectedLanguage);
 
-  // Cambia el idioma a través de la función langSelect
   const switchLang = () => {
     const newLang = selectedLanguage === 'es' ? 'en' : 'es';
-    langSelect(newLang); // Llama a la función para cambiar el idioma
+    setIsPlaying(false);
+    setSelectedLanguage(newLang); 
   };
 
   return (
@@ -17,13 +26,15 @@ const ControlsBar = ({ currentArtwork, toggleLike, langSelect, selectedLanguage,
         <img src={currentLanguage.flag} alt={currentLanguage.name} className="w-8 h-8 rounded-full" />
       </div>
       <button
-        onClick={() => handleShowArtworks(true)}
+        onClick={() => {
+          navigate('/list');
+          setIsPlaying(false)}}
         className="bg-gray-800 dark:bg-gray-100 text-white dark:text-gray-900 px-4 py-2 w-24 rounded hover:bg-gray-700 dark:hover:bg-gray-300 transition duration-300"
       >
         AUDIOS
       </button>
       <button onClick={toggleLike} className="text-3xl ml-4">
-        <Heart fill={cookies.likes?.[currentArtwork.name.es] ? 'red' : 'none'} color="gray" size={32} />
+        <Heart fill={ favorites[currentArtwork.name.es] ? 'red' : 'none'} color="gray" size={32} />
       </button>
     </div>
   );

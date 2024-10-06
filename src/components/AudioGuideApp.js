@@ -1,27 +1,23 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
-import { useCookies } from 'react-cookie';
+import React, { useEffect, useRef } from 'react';
+
 import IntroScreen from './IntroScreen';
 import FavoritesScreen from './FavoritesScreen';
 import Header from './Header';
-import ControlsBar from './ControlsBar';
 import ArtworkInfo from './ArtworkInfo';
 import ArtworksList from './ArtworksList';
 import AudioPlayer from './AudioPlayer';
-import { ArtworksContext } from '../context/ArtworksContext';
-import { useAnalytics } from '../context/AnaliticsContext';
+import { useArtworks } from '../context/ArtworksContext';
 import { usePlayback } from '../context/PlaybackContext';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 const AudioGuideApp = ({ isMobile, isDarkMode }) => {
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [cookies, setCookie] = useCookies(['likes']);
-  const mediaRef = useRef(null);
-  const [showFavorites, setShowFavorites] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState('es');
+  const { selectedLanguage } = useLanguage();
   const { isPlaying, setIsPlaying } = usePlayback();
-  const { artworks, expositionData } = useContext(ArtworksContext);
-  const { trackEvent, analyticsEvents } = useAnalytics();
+  const { artworks, cookies, currentArtwork, setCurrentIndex } = useArtworks();
+  const mediaRef = useRef(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,13 +28,8 @@ const AudioGuideApp = ({ isMobile, isDarkMode }) => {
         mediaRef.current.pause();
       }
     }
-  }, [isPlaying, currentIndex]);
+  }, [isPlaying]);
 
-
-  const handleLangSelect = (language) => {
-    if (isPlaying) setIsPlaying(false);
-    setSelectedLanguage(language);
-  };
 
   const handleShowArtworksList = (show) => {
     if (show) {
@@ -47,51 +38,34 @@ const AudioGuideApp = ({ isMobile, isDarkMode }) => {
 
     } else {
       setIsPlaying(true);
-      navigate('/');
+      navigate('/artworks');
     }
   }
-
-  const toggleShowIntro = () => {
-    setIsPlaying(false);
-    setCurrentIndex(0);
-    navigate('/intro');
-  };
-
-  const toggleLike = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    const currentArtwork = artworks[currentIndex];
-    const newLikes = { ...cookies.likes };
-    if (newLikes[currentArtwork.name.es]) {
-      delete newLikes[currentArtwork.name.es];
-    } else {
-      newLikes[currentArtwork.name.es] = true;
-      trackEvent(analyticsEvents.FAVORITE_MARK(currentArtwork.name[selectedLanguage]));
-    }
-    setCookie('likes', newLikes, { path: '/' });
-  };
 
 
   if (artworks.length === 0) return <div>Cargando...</div>;
 
-  const currentArtwork = artworks[currentIndex];
-  const favoriteArtworks = artworks.filter(artwork => cookies.likes?.[artwork.name.es]);
+  if (!currentArtwork) return (<div>Cargando...</div>);
   const activeResourceUrl = `${process.env.PUBLIC_URL}/audios/${selectedLanguage}/${currentArtwork.id}.mp3`;
   const activeBackgroundUrl = `url(${process.env.PUBLIC_URL}/img/${currentArtwork.id}.jpg)`;
 
   const goBackToGallery = () => {
     setCurrentIndex(0);
-    setShowFavorites(false); // Oculta la pantalla de favoritos y vuelve a la audioguía
-    setIsPlaying(false); // Opcional: puede empezar a reproducir el audio al volver a la galería
+    setIsPlaying(false);
+
   };
 
   return (
 
     <div className="relative h-screen w-full text-black dark:text-white flex flex-col">
+      {/* Cabecera con logo del Museo */}
+      <Header isDarkMode={isDarkMode} />
       <Routes>
-        <Route path="*" element={<AudioGuideApp />} />
-        <Route path="/intro" element={<IntroScreen toggleShowIntro={toggleShowIntro} langSelect={handleLangSelect} selectedLanguage={selectedLanguage} expositionData={expositionData} isDarkMode={isDarkMode} />} />
+        <Route path="/guide" element={<AudioPlayer isMobile={isMobile} ArtworkInfo={ArtworkInfo} mediaRef={mediaRef} activeResourceUrl={activeResourceUrl} setIsPlaying={setIsPlaying}  />} />
+        <Route path="/intro" element={<IntroScreen isDarkMode={isDarkMode} />} />
         <Route path="/list" element={<ArtworksList artworks={artworks} setIndex={setCurrentIndex} showList={handleShowArtworksList} selectedLanguage={selectedLanguage} />} />
+        <Route path="/favorites" element={<FavoritesScreen />} />
+        <Route path="*" element={<Navigate to="/intro" />} />
       </Routes>
       <div
         className="absolute h-100 inset-0 bg-cover bg-center filter blur-md -z-10"
@@ -102,24 +76,6 @@ const AudioGuideApp = ({ isMobile, isDarkMode }) => {
           opacity: 0.7, // Ajusta la opacidad aquí
         }}
       />
-
-      {/* Cabecera con logo del Museo */}
-      <Header isDarkMode={isDarkMode} />
-       {/* Favoritos (Outro) */}
-      {showFavorites && (
-        <FavoritesScreen favoriteArtworks={favoriteArtworks} onBack={goBackToGallery} selectedLanguage={selectedLanguage} />
-      )}
- 
-      {/* Player */}
-      {!showFavorites &&
-        (<>
-          <AudioPlayer currentArtwork={currentArtwork} currentIndex={currentIndex} selectedLanguage={selectedLanguage} isMobile={isMobile} isPlaying={isPlaying} ArtworkInfo={ArtworkInfo} mediaRef={mediaRef} activeResourceUrl={activeResourceUrl} setIsPlaying={setIsPlaying} artworks={artworks} setShowFavorites={setShowFavorites} setCurrentIndex={setCurrentIndex} />
-
-          {/* Barra de control. Visible en el pase de imagenes */}
-          {!showFavorites && <ControlsBar currentArtwork={currentArtwork} toggleLike={toggleLike} langSelect={handleLangSelect} selectedLanguage={selectedLanguage} cookies={cookies} handleShowArtworks={handleShowArtworksList} />}
-
-        </>
-        )}
 
     </div>
   );

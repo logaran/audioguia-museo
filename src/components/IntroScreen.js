@@ -3,11 +3,14 @@ import { languages } from './Languages'; // Importamos el array con idiomas y ba
 import appData from '../config/appData';
 import ThemeAdaptableImage from './ThemeAdaptableImage';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
+import { useArtworks } from '../context/ArtworksContext';
 
-const IntroScreen = ({ langSelect, selectedLanguage, setShowArtworksList, expositionData, isDarkMode }) => {
+const IntroScreen = ({ isDarkMode }) => {
   const navigate = useNavigate();
+  const {selectedLanguage, setSelectedLanguage} = useLanguage();
+  const {expositionData} = useArtworks();
   const handleStartClick = () => {
-    setShowArtworksList(true);
     navigate('/list');
   }
 
@@ -42,13 +45,13 @@ const IntroScreen = ({ langSelect, selectedLanguage, setShowArtworksList, exposi
               src={languages[0].flag}
               alt={languages[0].name}
               className={`rounded-full ${selectedLanguage === 'es' ? 'w-12 h-12 border-2 border-gray-800 dark:border-gray-100' : 'w-10 h-10'}`}
-              onClick={() => langSelect('es')}
+              onClick={() => setSelectedLanguage('es')}
             />
             <img
               src={languages[1].flag}
               alt={languages[1].name}
               className={`rounded-full ${selectedLanguage === 'en' ? 'w-12 h-12 border-2 border-gray-800 dark:border-gray-100' : 'w-10 h-10'}`}
-              onClick={() => langSelect('en')}
+              onClick={() => setSelectedLanguage('en')}
             />
           </div>
           <button
