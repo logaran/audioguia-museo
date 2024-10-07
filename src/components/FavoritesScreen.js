@@ -1,41 +1,42 @@
 import React from 'react';
 import ShareComponent from './ShareComponent';
-import { useArtworks } from '../context/ArtworksContext';
 import { useLanguage } from '../context/LanguageContext';
 import { useNavigate } from 'react-router-dom';
+import { useFavorites } from '../context/FavoritesContext';
 
 const FavoritesScreen = () => {
-  const {favorites} = useArtworks();
-  const {selectedLanguage} = useLanguage();
+  
+  const { selectedLanguage } = useLanguage();
   const navigate = useNavigate();
+  const {favorites} = useFavorites();
 
   const goBack = () => {
     navigate('/guide')
   };
-  
+
   return (
     <div className="w-screen h-full flex flex-col items-center justify-start bg-white text-gray-700 dark:bg-gray-900 dark:text-white px-8 py-2">
       <h1 className="text-2xl font-bold mb-4">{selectedLanguage === 'es' ? 'Comparte tus obras favoritas' : 'Share your favourite artworks'}</h1>
-      <ul className="h-full w-full max-w-2xl overflow-auto">
-        {Object.entries(favorites).map(([name, info]) => (
-          <li key={name[selectedLanguage]} className="mb-6 flex items-center">
+      <ul className="h-full w-full border-3 overflow-auto">
+        {favorites.map((favorite) => (
+          <li key={favorite.id} className="mb-6 w-full flex items-center justify-between">
             <img
-              src={`${process.env.PUBLIC_URL}/img/${info.id}${selectedLanguage}.jpg`}
+              src={`${process.env.PUBLIC_URL}/img/${favorite.id}${selectedLanguage}.jpg`}
               onError={(e) => {
-                e.target.src = `${process.env.PUBLIC_URL}/img/${info.id}.jpg`;
+                e.target.src = `${process.env.PUBLIC_URL}/img/${favorite.id}.jpg`;
                 e.target.onerror = () => {
                   e.target.src = `${process.env.PUBLIC_URL}/img/placeholder.jpg`;
                 };
               }}
-              alt={name[selectedLanguage]}
+              alt={favorite.name[selectedLanguage]}
               className="w-14 h-14 object-contain rounded-md mr-4"
             />
             <div className="flex-1">
-              <h2 className="text-xl font-semibold">{name[selectedLanguage]}</h2>
+              <h2 className="text-xl font-semibold">{favorite.name[selectedLanguage]}</h2>
               <ShareComponent
-                url={`${process.env.PUBLIC_URL}/img/${info.id}${selectedLanguage}.jpg`}
+                url={`${process.env.PUBLIC_URL}/img/${favorite.id}${selectedLanguage}.jpg`}
                 onError={(e) => {
-                  e.target.src = `${process.env.PUBLIC_URL}/img/${info.id}.jpg`;
+                  e.target.src = `${process.env.PUBLIC_URL}/img/${favorite.id}.jpg`;
                   e.target.onerror = () => {
                     e.target.src = `${process.env.PUBLIC_URL}/img/placeholder.jpg`;
                   };

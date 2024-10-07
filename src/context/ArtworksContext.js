@@ -1,8 +1,5 @@
 // ArtworksContext.js
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { useCookies } from 'react-cookie';
-import { useAnalytics } from "./AnaliticsContext";
-import { useLanguage } from "./LanguageContext";
 
 const ArtworksContext = createContext();
 export const useArtworks = () => { return useContext(ArtworksContext) };
@@ -12,35 +9,8 @@ export const ArtworksProvider = ({ children }) => {
   const [expositionData, setExpositionData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [cookies, setCookie] = useCookies(['likes']);
-  const [favorites, setFavorite] = useState({});
-  const { trackEvent, analyticsEvents } = useAnalytics();
-  const { selectedLanguage } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentArtwork, setCurrentartwork] = useState(null);
-
-  const toggleLike = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    const newLikes = { ...cookies.likes };
-    const newFavorites = { ...favorites };
-
-    if (newLikes[currentArtwork.name.es]) {
-      delete newLikes[currentArtwork.name.es];
-      delete newFavorites[currentArtwork.name.es];
-
-    } else {
-      newLikes[currentArtwork.name.es] = true;
-      newFavorites[currentArtwork.name.es] = {
-        ...currentArtwork,
-      };
-
-      trackEvent(analyticsEvents.FAVORITE_MARK(currentArtwork.name[selectedLanguage]));
-    }
-    setCookie('likes', newLikes, { path: '/' });
-    setFavorite(newFavorites);
-  };
-
 
   useEffect(() => {
     let isMounted = true;
@@ -88,7 +58,7 @@ export const ArtworksProvider = ({ children }) => {
 
 
   return (
-    <ArtworksContext.Provider value={{ artworks, currentArtwork, currentIndex, setCurrentIndex, expositionData, favorites, toggleLike, loading, error }}>
+    <ArtworksContext.Provider value={{ artworks, currentArtwork, currentIndex, setCurrentIndex, expositionData, loading, error }}>
       {children}
     </ArtworksContext.Provider>
   );

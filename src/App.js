@@ -4,6 +4,7 @@ import { ArtworksProvider } from './context/ArtworksContext';
 import { AnalyticsProvider } from './context/AnaliticsContext';
 import { PlaybackProvider } from './context/PlaybackContext';
 import { LanguageProvider } from './context/LanguageContext';
+import { FavoritesProvider } from './context/FavoritesContext';
 
 
 function App() {
@@ -28,14 +29,9 @@ function App() {
     const handleChange = (e) => {
       setIsDarkMode(e.matches);
     };
-
-    // Inicializar el estado con la preferencia actual
     setIsDarkMode(mediaQuery.matches);
-
-    // Agregar el listener
     mediaQuery.addEventListener('change', handleChange);
 
-    // Cleanup listener on unmount
     return () => {
       mediaQuery.removeEventListener('change', handleChange);
     };
@@ -47,9 +43,11 @@ function App() {
       <AnalyticsProvider trackingId={trackingId} >
         <LanguageProvider>
           <ArtworksProvider>
-            <PlaybackProvider>
-              <AudioGuideApp isMobile={isMobile} isDarkMode={isDarkMode} />
-            </PlaybackProvider>
+            <FavoritesProvider>
+              <PlaybackProvider>
+                <AudioGuideApp isMobile={isMobile} isDarkMode={isDarkMode} />
+              </PlaybackProvider>
+            </FavoritesProvider>
           </ArtworksProvider>
         </LanguageProvider>
       </AnalyticsProvider>

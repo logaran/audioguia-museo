@@ -49,12 +49,6 @@ const AudioGuideApp = ({ isMobile, isDarkMode }) => {
   const activeResourceUrl = `${process.env.PUBLIC_URL}/audios/${selectedLanguage}/${currentArtwork.id}.mp3`;
   const activeBackgroundUrl = `url(${process.env.PUBLIC_URL}/img/${currentArtwork.id}.jpg)`;
 
-  const goBackToGallery = () => {
-    setCurrentIndex(0);
-    setIsPlaying(false);
-
-  };
-
   return (
 
     <div className="relative h-screen w-full text-black dark:text-white flex flex-col">
