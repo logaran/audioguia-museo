@@ -32,7 +32,7 @@ const IntroScreen = ({ isDarkMode }) => {
             <h2 className='text-4xl uppercase text-gray-900 dark:text-gray-100'>{expositionData.name[selectedLanguage]}</h2>
             <p className="text-gray-800 dark:text-gray-200">{expositionData.description[selectedLanguage]}</p> {/* Colores de texto */}
             <p className="text-gray-800 dark:text-gray-200">{expositionData.date[selectedLanguage]}</p>
-            <p className="text-gray-800 dark:text-gray-200">{expositionData.copy[selectedLanguage]}</p>
+            <p className="text-sm text-gray-800 dark:text-gray-200 mt-3">{expositionData.copy[selectedLanguage]}</p>
             <ThemeAdaptableImage isDarkMode={isDarkMode} />
           </div>
           <h3 className="text-2xl text-gray-900 dark:text-gray-100">{appData.locals.appName[selectedLanguage]}</h3>

@@ -5,6 +5,7 @@ import { AnalyticsProvider } from './context/AnaliticsContext';
 import { PlaybackProvider } from './context/PlaybackContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { FavoritesProvider } from './context/FavoritesContext';
+import { GesturesProvider } from './context/GesturesContext';
 
 
 function App() {
@@ -45,7 +46,9 @@ function App() {
           <ArtworksProvider>
             <FavoritesProvider>
               <PlaybackProvider>
-                <AudioGuideApp isMobile={isMobile} isDarkMode={isDarkMode} />
+                <GesturesProvider>
+                  <AudioGuideApp isMobile={isMobile} isDarkMode={isDarkMode} />
+                </GesturesProvider>
               </PlaybackProvider>
             </FavoritesProvider>
           </ArtworksProvider>

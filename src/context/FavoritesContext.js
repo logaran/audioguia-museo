@@ -5,7 +5,7 @@ import { useArtworks } from './ArtworksContext';
 import { useLanguage } from './LanguageContext';
 
 const FavoritesContext = createContext();
-export const useFavorites = () => { return useContext(FavoritesContext) };
+export const useFavorites = () => useContext(FavoritesContext);
 
 export const FavoritesProvider = ({ children }) => {
 

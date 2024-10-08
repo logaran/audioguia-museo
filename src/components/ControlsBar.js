@@ -35,7 +35,7 @@ const ControlsBar = () => {
         AUDIOS
       </button>
       <button onClick={toggleLike} className="text-3xl ml-4">
-      <Heart fill={ cookies?.likes.includes(currentArtwork.id) ? 'red' : 'none'} color="gray" size={32} />
+      <Heart fill={ cookies?.likes?.includes(currentArtwork.id) ? 'red' : 'none'} color="gray" size={32} />
       </button>
     </div>
   );
