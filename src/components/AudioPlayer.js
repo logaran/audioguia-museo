@@ -18,8 +18,8 @@ const AudioPlayer = ({ isMobile, mediaRef, activeResourceUrl }) => {
   return (
 
     <div className="relative h-full flex flex-col justify-between">
-      <div className="relative h-full flex flex-col sm:flex-row sm:justify-evenly items-center justify-evenly w-auto pt-3">
-        <ArtworkInfo artwok={currentArtwork} selectedLanguage={selectedLanguage} />
+      <div className="relative h-full flex flex-col sm:flex-row sm:justify-evenly items-center justify-start w-auto pt-3">
+        <ArtworkInfo artwok={currentArtwork} selectedLanguage={selectedLanguage} isPlaying={isPlaying}/>
 
         {/* Controles de reproducción y pase de obras*/}
         <>

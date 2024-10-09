@@ -13,7 +13,7 @@ const ArtworkImage = ({ currentArtwork, selectedLanguage, swipeOffset }) => {
         <img
             src={imageSrc}
             alt={currentArtwork.name[selectedLanguage]}
-            className="transition-transform h-[50vh] duration-300 object-contain"
+            className="transition-transform h-[50vh] duration-300 object-contain object-top"
             style={{ transform: `translateX(${swipeOffset}px)` }}
         />
     );
