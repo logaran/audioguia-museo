@@ -42,13 +42,13 @@ const IntroScreen = ({ isDarkMode }) => {
           <span className="text-lg mb-2 text-gray-800 dark:text-gray-200">{selectedLanguage === 'es' ? 'Selecciona idioma' : 'Select language'}</span>
           <div className='flex w-40 justify-evenly items-center z-30'>
             <img
-              src={languages[0].flag}
+              src={languages[0].flag()}
               alt={languages[0].name}
               className={`rounded-full ${selectedLanguage === 'es' ? 'w-12 h-12 border-2 border-gray-800 dark:border-gray-100' : 'w-10 h-10'}`}
               onClick={() => setSelectedLanguage('es')}
             />
             <img
-              src={languages[1].flag}
+              src={languages[1].flag()}
               alt={languages[1].name}
               className={`rounded-full ${selectedLanguage === 'en' ? 'w-12 h-12 border-2 border-gray-800 dark:border-gray-100' : 'w-10 h-10'}`}
               onClick={() => setSelectedLanguage('en')}

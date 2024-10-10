@@ -24,7 +24,7 @@ const ControlsBar = () => {
   return (
     <div className="h-16 w-full flex items-center justify-between bg-white dark:bg-gray-800 bg-opacity-80 p-6 z-50">
       <div className="cursor-pointer" onClick={switchLang}>
-        <img src={currentLanguage.flag} alt={currentLanguage.name} className="w-8 h-8 rounded-full" />
+        <img src={currentLanguage.flag()} alt={currentLanguage.name} className="w-8 h-8 rounded-full" />
       </div>
       <button
         onClick={() => {

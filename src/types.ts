@@ -1,26 +1,17 @@
-export interface LocalizedString
+type LanguageCodes = 'es' | 'es' | 'it' | 'du';
+
+type LocalizedString = { [key in LanguageCodes]: string | null; }
+
 
 export interface ExpositionInfo {
-    name: {
-        es: string,
-        en: string,
-    },
-    description: {
-        es: string,
-        en: string
-    },
-    date: {
-        es: string,
-        en: string
-    },
+    name: LocalizedString,
+    description: LocalizedString,
+    date: LocalizedString,
     imageUrl: string
 }
 
 export interface Artwork {
-    name: {
-        es: string,
-        en: string
-    },
+    name: LocalizedString,
     author: string,
     date: string,
     description: string,
