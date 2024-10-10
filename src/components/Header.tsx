@@ -1,6 +1,9 @@
 import React from 'react';
 import Banner from './Banner';
-import { HeaderProps } from '../types';
+
+interface HeaderProps {
+  isDarkMode: boolean
+}
 
 const Header: React.FC<HeaderProps> = ({ isDarkMode }) => (
   <header className="relative z-10">

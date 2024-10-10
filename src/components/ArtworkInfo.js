@@ -1,4 +1,4 @@
-const ArtworkInfo = ({ artwok, selectedLanguage, isPlaying }) => {
+const ArtworkInfo = ({ artwok, selectedLanguage }) => {
 
     return (
 

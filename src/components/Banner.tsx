@@ -1,7 +1,9 @@
 import React from 'react';
-import { HeaderProps } from '../types';
+interface BannerProps {
+  isDarkMode: boolean
+}
 
-const Banner: React.FC<HeaderProps> = ({ isDarkMode }) => {
+const Banner: React.FC<BannerProps> = ({ isDarkMode }) => {
 
   const logo = isDarkMode ? process.env.PUBLIC_URL + '/img/logo-dark.svg' : process.env.PUBLIC_URL + '/img/logo.svg';
   return (
