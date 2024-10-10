@@ -1,7 +1,8 @@
 import React from 'react';
+import { HeaderProps } from '../types';
 
-const Banner = ({ isDarkMode }) => {
-  
+const Banner: React.FC<HeaderProps> = ({ isDarkMode }) => {
+
   const logo = isDarkMode ? process.env.PUBLIC_URL + '/img/logo-dark.svg' : process.env.PUBLIC_URL + '/img/logo.svg';
   return (
     <div className="flex items-center justify-center bg-white dark:bg-gray-900 p-6 z-20">

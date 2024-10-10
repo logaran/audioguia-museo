@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 import IntroScreen from './IntroScreen';
 import FavoritesScreen from './FavoritesScreen';
-import Header from './Header';
+import Header from './Header.tsx';
 import ArtworkInfo from './ArtworkInfo';
 import ArtworksList from './ArtworksList';
 import AudioPlayer from './AudioPlayer';
