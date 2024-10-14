@@ -21,7 +21,7 @@ export interface Artwork {
 export interface AppData {
     locals: {
         museumName: LocalizedString;
-        appName: LocalizedString;
+        appName: LocalizedString | any;
         startButton: LocalizedString;
         backButton: LocalizedString;
         shareText: LocalizedString;

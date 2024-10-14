@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useArtworks } from '../context/ArtworksContext';
 
-
 interface IntroScreenProps {
   isDarkMode: boolean;
 }
