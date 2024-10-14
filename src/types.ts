@@ -1,6 +1,6 @@
-type LanguageCodes = 'es' | 'es' | 'it' | 'du';
+export type LanguageCodes = 'es' | 'en' | 'eus' | 'fr' | 'ge' | 'it' | 'nl' | 'da' | 'ru' | 'jp';
 
-type LocalizedString = { [key in LanguageCodes]: string | null; }
+export type LocalizedString = { [key in LanguageCodes]?: string; }
 
 
 export interface ExpositionInfo {
@@ -16,4 +16,14 @@ export interface Artwork {
     date: string,
     description: string,
     id: string
+}
+
+export interface AppData {
+    locals: {
+        museumName: LocalizedString;
+        appName: LocalizedString;
+        startButton: LocalizedString;
+        backButton: LocalizedString;
+        shareText: LocalizedString;
+    }
 }

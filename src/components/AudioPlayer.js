@@ -8,18 +8,26 @@ import ArtworkInfo from "./ArtworkInfo";
 import { useLanguage } from "../context/LanguageContext";
 import { useArtworks } from "../context/ArtworksContext";
 import { useGestures } from "../context/GesturesContext";
+import BackButtonHandler from "./BackButtonHandler";
+import { useNavigate } from "react-router-dom";
 
 const AudioPlayer = ({ isMobile, mediaRef, activeResourceUrl }) => {
   const {handleSwipe, handleTouchEnd, handleTouchMove, handleTouchStart, swipeOffset} = useGestures();
   const { isPlaying, togglePlayPause, setIsPlaying } = usePlayback();
   const { selectedLanguage } = useLanguage();
   const { currentArtwork } = useArtworks();
+  const navigate = useNavigate();
+
+  const handleBackButton = ()=>{
+    navigate('/list');
+  }
   
   return (
 
     <div className="relative h-full flex flex-col justify-between">
+      <BackButtonHandler onBack={handleBackButton}/>
       <div className="relative h-full flex flex-col sm:flex-row sm:justify-evenly items-center justify-start w-auto pt-3">
-        <ArtworkInfo artwok={currentArtwork} selectedLanguage={selectedLanguage} isPlaying={isPlaying}/>
+        <ArtworkInfo artwork={currentArtwork} selectedLanguage={selectedLanguage} isPlaying={isPlaying}/>
 
         {/* Controles de reproducción y pase de obras*/}
         <>

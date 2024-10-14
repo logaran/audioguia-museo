@@ -15,7 +15,7 @@ const AudioGuideApp = ({ isMobile, isDarkMode }) => {
 
   const { selectedLanguage } = useLanguage();
   const { isPlaying, setIsPlaying } = usePlayback();
-  const { artworks, cookies, currentArtwork, setCurrentIndex } = useArtworks();
+  const { artworks, currentArtwork, setCurrentIndex } = useArtworks();
   const mediaRef = useRef(null);
 
   const navigate = useNavigate();

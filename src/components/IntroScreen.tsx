@@ -1,4 +1,5 @@
-// Componente Hijo (IntroScreen)
+import React from 'react';
+
 import { languages } from './Languages'; // Importamos el array con idiomas y banderas
 import appData from '../config/appData';
 import ThemeAdaptableImage from './ThemeAdaptableImage';
@@ -6,7 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useArtworks } from '../context/ArtworksContext';
 
-const IntroScreen = ({ isDarkMode }) => {
+
+interface IntroScreenProps {
+  isDarkMode: boolean;
+}
+
+const IntroScreen:React.FC<IntroScreenProps> = ({ isDarkMode }: IntroScreenProps) => {
   const navigate = useNavigate();
   const {selectedLanguage, setSelectedLanguage} = useLanguage();
   const {expositionData} = useArtworks();
@@ -35,21 +41,23 @@ const IntroScreen = ({ isDarkMode }) => {
             <p className="text-sm text-gray-800 dark:text-gray-200 mt-3">{expositionData.copy[selectedLanguage]}</p>
             <ThemeAdaptableImage isDarkMode={isDarkMode} />
           </div>
-          <h3 className="text-2xl text-gray-900 dark:text-gray-100">{appData.locals.appName[selectedLanguage]}</h3>
+          <h3 className="text-2xl text-gray-900 dark:text-gray-100">{appData.locals.appName[selectedLanguage] || "Esto no pirula"}</h3>
         </div>
 
         <div className="mb-4 sm:w-2/5 sm:h-1/2 flex flex-col items-center justify-center sm:justify-between cursor-pointer">
           <span className="text-lg mb-2 text-gray-800 dark:text-gray-200">{selectedLanguage === 'es' ? 'Selecciona idioma' : 'Select language'}</span>
           <div className='flex w-40 justify-evenly items-center z-30'>
             <img
-              src={languages[0].flag()}
-              alt={languages[0].name}
+              src={languages.es.flag()}
+              alt={languages.es.name}
+              title={languages.en.name}
               className={`rounded-full ${selectedLanguage === 'es' ? 'w-12 h-12 border-2 border-gray-800 dark:border-gray-100' : 'w-10 h-10'}`}
               onClick={() => setSelectedLanguage('es')}
             />
             <img
-              src={languages[1].flag()}
-              alt={languages[1].name}
+              src={languages.en.flag()}
+              alt={languages.en.name}
+              title={languages.en.name}
               className={`rounded-full ${selectedLanguage === 'en' ? 'w-12 h-12 border-2 border-gray-800 dark:border-gray-100' : 'w-10 h-10'}`}
               onClick={() => setSelectedLanguage('en')}
             />

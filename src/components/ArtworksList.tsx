@@ -1,6 +1,14 @@
+import React from 'react';
 import ArtworkThumbnail from './ArtworkThumbnail';
+import { Artwork } from '../types';
+import { LanguageCodes } from '../types';
 
-const ArtworksList = ({ artworks, setIndex, showList, selectedLanguage }) => {
+interface ArtworksListProps {
+    artworks: Artwork[];
+    selectedLanguage: LanguageCodes;
+}
+
+const ArtworksList = ({ artworks, selectedLanguage }: ArtworksListProps) => {
 
     return (
         <div>
@@ -10,8 +18,6 @@ const ArtworksList = ({ artworks, setIndex, showList, selectedLanguage }) => {
                         key={item.id}
                         artwork={item}
                         selectedLanguage={selectedLanguage}
-                        setIndex={setIndex}
-                        showList={showList}
                         selectedIndex={index}
                     />
                 ))}

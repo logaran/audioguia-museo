@@ -1,8 +1,12 @@
 import { useEffect } from 'react';
 
-const BackButtonHandler = ({ onBack }) => {
+interface BackButtonHandlerProps {
+    onBack?: ()=> void;
+}
+
+const BackButtonHandler: React.FC<BackButtonHandlerProps> = ({ onBack }: BackButtonHandlerProps) => {
     useEffect(() => {
-        const handlePopState = (event) => {
+        const handlePopState = (event: Event) => {
             // Llama a la función onBack cuando se detecta un evento popstate
             if (onBack) {
                 onBack();

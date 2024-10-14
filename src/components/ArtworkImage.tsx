@@ -1,8 +1,15 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
+import { Artwork, LanguageCodes } from '../types';
 
-const ArtworkImage = ({ currentArtwork, selectedLanguage, swipeOffset }) => {
+interface ArtworkImageProps {
+    currentArtwork: Artwork;
+    selectedLanguage: LanguageCodes;
+    swipeOffset: number;
+};
+const ArtworkImage = ({ currentArtwork, selectedLanguage, swipeOffset }: ArtworkImageProps) => {
 
-    const [ imageSrc, setImageSrc ] = useState('');
+    const [imageSrc, setImageSrc] = useState('');
     useEffect(() => {
 
         currentArtwork.id === '100' ? setImageSrc(`${process.env.PUBLIC_URL}/img/${currentArtwork.id}${selectedLanguage}.jpg`) : setImageSrc(`${process.env.PUBLIC_URL}/img/${currentArtwork.id}.jpg`);
