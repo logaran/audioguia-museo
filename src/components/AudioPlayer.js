@@ -21,7 +21,7 @@ const AudioPlayer = ({ isMobile, mediaRef, activeResourceUrl }) => {
   const handleBackButton = ()=>{
     navigate('/list');
   }
-  
+
   return (
 
     <div className="relative h-full flex flex-col justify-between">
