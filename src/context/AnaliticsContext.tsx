@@ -1,10 +1,19 @@
 import React, { createContext, useEffect, useContext } from "react";
 import ReactGA from "react-ga4";
-import { AnalitycsContextValue } from "../types";
+import { AnalitycsContextValue, AnalyticsEvent } from "../types";
 
 const AnalyticsContext = createContext<AnalitycsContextValue | undefined>(
   undefined
 );
+
+
+export const useAnalytics = () => {
+  const context = useContext(AnalyticsContext);
+  if (!context) {
+    throw new Error("useAnalytics debe usarse dentro de un AnalyticsProvider");
+  }
+  return context;
+};
 
 interface AnalyticsProviderProps extends React.PropsWithChildren<{}> {
   trackingId: string;
@@ -34,12 +43,13 @@ export const AnalyticsProvider = ({
   };
 
   // Función para rastrear eventos personalizados
-  const trackEvent = (eventName: string, params: Record<string,string>) => {
+  const trackEvent = (event: AnalyticsEvent) => {
     if (!trackingId) return;
-    ReactGA.event(eventName, params); // Envía el evento a GA4
+    ReactGA.event(event); // Envía el evento a GA4
   };
   const analyticsEvents = {
     FAVORITE_MARK: (itemName: string) => ({
+      eventName: "Artwork Liked",
       category: "Audioguide",
       action: "Liked",
       label: itemName,
@@ -56,7 +66,4 @@ export const AnalyticsProvider = ({
   );
 };
 
-// Hook para usar el contexto en otros componentes
-export const useAnalytics = () => {
-  return useContext(AnalyticsContext);
-};
+

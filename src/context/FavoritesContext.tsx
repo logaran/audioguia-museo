@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 import { useAnalytics } from "./AnaliticsContext";
 import { useArtworks } from "./ArtworksContext";
 import { useLanguage } from "./LanguageContext";
-import { FavoritesContextValue } from "../types";
+import { Artwork, FavoritesContextValue } from "../types";
 
 const FavoritesContext = createContext<FavoritesContextValue | undefined>(
   undefined
@@ -23,23 +23,32 @@ export const FavoritesProvider: React.FC<React.PropsWithChildren<{}>> = ({
   const [cookies, setCookie] = useCookies(["likes"]);
   const { trackEvent, analyticsEvents } = useAnalytics();
   const { selectedLanguage } = useLanguage();
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState<Artwork[]>([]);
 
-  const toggleLike = (e) => {
+  const toggleLike = (e: TouchEvent | MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
+  
+    if (!currentArtwork) {
+      console.warn("No hay obra de arte seleccionada.");
+      return;
+    }
+  
     const currentLikes = cookies.likes ? [...cookies.likes] : [];
     let updatedLikes;
+  
     if (currentLikes.includes(currentArtwork.id)) {
       updatedLikes = currentLikes.filter((id) => id !== currentArtwork.id);
     } else {
       updatedLikes = [...currentLikes, currentArtwork.id];
       trackEvent(
-        analyticsEvents.FAVORITE_MARK(currentArtwork.name[selectedLanguage])
+        analyticsEvents.FAVORITE_MARK(currentArtwork.name[selectedLanguage] || "Obra desconocida")
       );
     }
+  
     setCookie("likes", updatedLikes, { path: "/" });
   };
+  
 
   useEffect(() => {
     if (cookies.likes) {

@@ -36,18 +36,19 @@ export interface ArtworksContextValue {
   loading: boolean;
   error: string | null;
 }
-export interface AnalitycsEvent {
+export interface AnalyticsEvent {
+  eventName: string;
   category: string;
   action: string;
   label: string;
   [key: string]: string | null;
 }
 
-export type AnalyticsEventFunction = (itemName: string) => AnalitycsEvent;
+export type AnalyticsEventFunction = (itemName: string) => AnalyticsEvent;
 
 export interface AnalitycsContextValue {
   trackPageView: (path: string) => void;
-  trackEvent: (eventName: string, params: Record<string, string>) => void;
+  trackEvent: (event: AnalyticsEvent) => void;
   analyticsEvents: { [key: string]: AnalyticsEventFunction };
 }
 
@@ -64,7 +65,12 @@ export type MyCookies = {
   likes?: string[];
 };
 export interface FavoritesContextValue {
-  favorites: string[];
+  favorites: Artwork[];
   cookies: MyCookies;
-  toggleLike: (e: Event) => void;
+  toggleLike: (e: MouseEvent | TouchEvent) => void;
+}
+
+export interface LanguageContextValue {
+  selectedLanguage: LanguageCodes;
+  setSelectedLanguage: (key: LanguageCodes)=> void;
 }
