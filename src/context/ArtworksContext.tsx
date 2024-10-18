@@ -21,9 +21,11 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
     null
   );
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string|null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [currentArtwork, setCurrentartwork] = useState<Artwork | undefined>(undefined);
+  const [currentArtwork, setCurrentartwork] = useState<Artwork | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     let isMounted = true;
@@ -52,7 +54,9 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
         }
       } finally {
         if (isMounted) {
-          setLoading(false);
+          setTimeout(() => {
+            setLoading(false);
+          }, 500);
         }
       }
     };

@@ -1,15 +1,12 @@
 import React from 'react';
 import ArtworkThumbnail from './ArtworkThumbnail';
-import { Artwork } from '../types';
-import { LanguageCodes } from '../types';
+import { useArtworks } from '../context/ArtworksContext';
+import { useLanguage } from '../context/LanguageContext';
 
-interface ArtworksListProps {
-    artworks: Artwork[];
-    selectedLanguage: LanguageCodes;
-}
-
-const ArtworksList = ({ artworks, selectedLanguage }: ArtworksListProps) => {
-
+const ArtworksList = () => {
+    const {artworks} = useArtworks();
+    const {selectedLanguage} = useLanguage();
+    
     return (
         <div>
             <div className="flex w-full flex-wrap gap-2 overflow-auto absolute inset-0 p-2 bg-white dark:bg-gray-800 z-50">

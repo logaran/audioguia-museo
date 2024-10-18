@@ -99,6 +99,4 @@ export interface AudioGuideAppProps {
 
 export interface AudioPlayerProps {
   isMobile: boolean;
-  mediaRef: React.LegacyRef<HTMLAudioElement> | undefined;
-  activeResourceUrl: string;
 }
