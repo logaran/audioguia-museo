@@ -77,9 +77,10 @@ export interface LanguageContextValue {
 }
 
 export type Direction = "right" | "left";
+
 export interface GesturesContextValue {
-  handleTouchStart: (e: TouchEvent) => void;
-  handleTouchMove: (e: TouchEvent) => void;
+  handleTouchStart: (e: React.TouchEvent) => void;
+  handleTouchMove: (e: React.TouchEvent) => void;
   handleTouchEnd: () => void;
   handleSwipe: (direction: Direction) => void;
   swipeOffset: number;
@@ -98,6 +99,6 @@ export interface AudioGuideAppProps {
 
 export interface AudioPlayerProps {
   isMobile: boolean;
-  mediaRef: HTMLAudioElement;
+  mediaRef: React.LegacyRef<HTMLAudioElement> | undefined;
   activeResourceUrl: string;
 }

@@ -27,13 +27,13 @@ export const GesturesProvider: React.FC<React.PropsWithChildren<{}>> = ({
   const { currentIndex, setCurrentIndex, artworks } = useArtworks();
   const navigate = useNavigate();
 
-  const handleTouchStart = (e: TouchEvent) => {
+  const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     setSwipeOffset(0);
     isSwipe.current = false;
   };
 
-  const handleTouchMove = (e: TouchEvent) => {
+  const handleTouchMove = (e: React.TouchEvent) => {
     touchEndX.current = e.touches[0].clientX;
     const offset = touchEndX.current - touchStartX.current;
     setSwipeOffset(offset);

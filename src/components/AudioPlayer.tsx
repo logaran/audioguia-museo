@@ -37,10 +37,10 @@ const AudioPlayer = ({ isMobile, mediaRef, activeResourceUrl }: AudioPlayerProps
           <div
             className={`absolute inset-0 flex h-full flex-col justify-between p-4 z-30 transition duration-300 ${isPlaying ? 'pointer-events-auto' : 'bg-black bg-opacity-30 pointer-events-auto'
               }`}
-            onTouchStart={isMobile ? handleTouchStart : null}
-            onTouchMove={isMobile ? handleTouchMove : null}
-            onTouchEnd={isMobile ? handleTouchEnd : null}
-            onClick={!isMobile ? togglePlayPause : null}
+            onTouchStart={isMobile ? handleTouchStart : undefined}
+            onTouchMove={isMobile ? handleTouchMove : undefined}
+            onTouchEnd={isMobile ? handleTouchEnd : undefined}
+            onClick={!isMobile ? togglePlayPause : undefined}
           >
             <PlayIcon />
           </div>
@@ -71,7 +71,7 @@ const AudioPlayer = ({ isMobile, mediaRef, activeResourceUrl }: AudioPlayerProps
         src={activeResourceUrl}
         onEnded={() => setIsPlaying(false)}
       />)}
-      <ControlsBar currentArtwork={currentArtwork} selectedLanguage={selectedLanguage} />
+      <ControlsBar />
 
     </div>
 
