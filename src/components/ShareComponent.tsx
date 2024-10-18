@@ -1,7 +1,11 @@
 import React from 'react';
-import { Facebook, Twitter, MessageCircle, Send } from 'lucide-react'; 
+import { Facebook, Twitter, MessageCircle, Send } from 'lucide-react';
 
-const ShareComponent = ({ url, title }) => {
+interface ShareComponentProps {
+    url: string;
+    title: string;
+}
+const ShareComponent: React.FC<ShareComponentProps> = ({ url, title }: ShareComponentProps) => {
     const encodedURL = encodeURIComponent(url);
     const encodedTitle = encodeURIComponent(title);
 
@@ -22,7 +26,7 @@ const ShareComponent = ({ url, title }) => {
             label: 'WhatsApp'
         }, {
             icon: <Send size={24} />,
-            url:`https://t.me/share/url?url=${encodedURL}&text=${encodedTitle}`,
+            url: `https://t.me/share/url?url=${encodedURL}&text=${encodedTitle}`,
             label: 'Telegram'
         }
     ];
@@ -41,7 +45,7 @@ const ShareComponent = ({ url, title }) => {
                     <span className="hidden sm:inline">{option.label}</span>
                 </a>
             ))}
-            
+
         </div>
     );
 };

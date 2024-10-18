@@ -8,18 +8,28 @@ import ArtworkInfo from "./ArtworkInfo";
 import { useLanguage } from "../context/LanguageContext";
 import { useArtworks } from "../context/ArtworksContext";
 import { useGestures } from "../context/GesturesContext";
+import BackButtonHandler from "./BackButtonHandler";
+import { useNavigate } from "react-router-dom";
+import { AudioPlayerProps } from "../types";
 
-const AudioPlayer = ({ isMobile, mediaRef, activeResourceUrl }) => {
+const AudioPlayer = ({ isMobile, mediaRef, activeResourceUrl }: AudioPlayerProps) => {
+  
   const {handleSwipe, handleTouchEnd, handleTouchMove, handleTouchStart, swipeOffset} = useGestures();
   const { isPlaying, togglePlayPause, setIsPlaying } = usePlayback();
   const { selectedLanguage } = useLanguage();
   const { currentArtwork } = useArtworks();
-  
+  const navigate = useNavigate();
+
+  const handleBackButton = ()=>{
+    navigate('/list');
+  }
+
   return (
 
     <div className="relative h-full flex flex-col justify-between">
+      <BackButtonHandler onBack={handleBackButton}/>
       <div className="relative h-full flex flex-col sm:flex-row sm:justify-evenly items-center justify-start w-auto pt-3">
-        <ArtworkInfo artwok={currentArtwork} selectedLanguage={selectedLanguage} isPlaying={isPlaying}/>
+        <ArtworkInfo artwork={currentArtwork} selectedLanguage={selectedLanguage} isPlaying={isPlaying}/>
 
         {/* Controles de reproducción y pase de obras*/}
         <>
@@ -27,10 +37,10 @@ const AudioPlayer = ({ isMobile, mediaRef, activeResourceUrl }) => {
           <div
             className={`absolute inset-0 flex h-full flex-col justify-between p-4 z-30 transition duration-300 ${isPlaying ? 'pointer-events-auto' : 'bg-black bg-opacity-30 pointer-events-auto'
               }`}
-            onTouchStart={isMobile ? handleTouchStart : null}
-            onTouchMove={isMobile ? handleTouchMove : null}
-            onTouchEnd={isMobile ? handleTouchEnd : null}
-            onClick={!isMobile ? togglePlayPause : null}
+            onTouchStart={isMobile ? handleTouchStart : undefined}
+            onTouchMove={isMobile ? handleTouchMove : undefined}
+            onTouchEnd={isMobile ? handleTouchEnd : undefined}
+            onClick={!isMobile ? togglePlayPause : undefined}
           >
             <PlayIcon />
           </div>
@@ -61,7 +71,7 @@ const AudioPlayer = ({ isMobile, mediaRef, activeResourceUrl }) => {
         src={activeResourceUrl}
         onEnded={() => setIsPlaying(false)}
       />)}
-      <ControlsBar currentArtwork={currentArtwork} selectedLanguage={selectedLanguage} />
+      <ControlsBar />
 
     </div>
 

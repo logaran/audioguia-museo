@@ -1,4 +1,8 @@
-const ThemeAdaptableImage = ({isDarkMode}) => {
+import React from "react";
+interface ThemeAdaptableImageProps {
+    isDarkMode: boolean;
+}
+const ThemeAdaptableImage = ({isDarkMode } : ThemeAdaptableImageProps) => {
    
     return (
         <img

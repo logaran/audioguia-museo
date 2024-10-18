@@ -1,9 +1,10 @@
+import { AppData } from "../types";
 
-const appData = {
+const appData: AppData = {
     locals: {
         museumName: {
             es: "Museo Carmen Thyssen Málaga",
-            en: "Museo Carmen Thyssen Málaga"
+            en: "Museo Carmen Thyssen Málaga",
         },
         appName: {
             es: "Audioguía",
@@ -24,4 +25,4 @@ const appData = {
     },
 };
 
-export default appData;
+export default appData; // Asegúrate de que esta línea tenga el punto y coma

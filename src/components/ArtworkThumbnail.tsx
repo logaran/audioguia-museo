@@ -2,13 +2,23 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFavorites } from '../context/FavoritesContext';
 import { Heart } from 'lucide-react';
+import { useArtworks } from '../context/ArtworksContext';
+import { Artwork, LanguageCodes } from '../types';
 
-const ArtworkThumbnail = ({ artwork, selectedLanguage, setIndex, selectedIndex }) => {
+interface ArtworkThumbnailProps {
+    artwork: Artwork;
+    selectedLanguage: LanguageCodes;
+    selectedIndex: number;
+}
+const ArtworkThumbnail = ({ artwork, selectedLanguage, selectedIndex }:ArtworkThumbnailProps) => {
+
+
     const navigate = useNavigate();
     const { cookies } = useFavorites();
-
-    const handleClick = (index) => {
-        setIndex(selectedIndex);
+    const { setCurrentIndex} = useArtworks();
+    
+    const handleClick = () => {
+        setCurrentIndex(selectedIndex);
         navigate('/guide');
     }
     return (
@@ -19,9 +29,10 @@ const ArtworkThumbnail = ({ artwork, selectedLanguage, setIndex, selectedIndex }
             <div className='w-2/6'>
                 <img src={`${process.env.PUBLIC_URL}/img/${artwork.id}${selectedLanguage}.jpg`}
                     onError={(e) => {
-                        e.target.src = `${process.env.PUBLIC_URL}/img/${artwork.id}.jpg`;
-                        e.target.onerror = () => {
-                            e.target.src = `${process.env.PUBLIC_URL}/img/placeholder.jpg`;
+                        const target = e.target as HTMLImageElement;
+                        target.src = `${process.env.PUBLIC_URL}/img/${artwork.id}.jpg`;
+                        target.onerror = () => {
+                            target.src = `${process.env.PUBLIC_URL}/img/placeholder.jpg`;
                         };
                     }} alt={artwork.name[selectedLanguage]} className="w-16 h-16 object-scale-down rounded mr-4" /> {/* Miniatura */}
             </div>

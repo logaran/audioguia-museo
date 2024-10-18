@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-    const handleChange = (e) => {
+    const handleChange = (e:MediaQueryListEvent) => {
       setIsDarkMode(e.matches);
     };
     setIsDarkMode(mediaQuery.matches);
