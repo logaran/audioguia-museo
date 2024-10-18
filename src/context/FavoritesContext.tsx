@@ -25,7 +25,7 @@ export const FavoritesProvider: React.FC<React.PropsWithChildren<{}>> = ({
   const { selectedLanguage } = useLanguage();
   const [favorites, setFavorites] = useState<Artwork[]>([]);
 
-  const toggleLike = (e: TouchEvent | MouseEvent) => {
+  const toggleLike = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     e.preventDefault();
   

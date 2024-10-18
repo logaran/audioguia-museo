@@ -16,7 +16,7 @@ export const useAnalytics = () => {
 };
 
 interface AnalyticsProviderProps extends React.PropsWithChildren<{}> {
-  trackingId: string;
+  trackingId?: string;
 }
 
 export const AnalyticsProvider = ({

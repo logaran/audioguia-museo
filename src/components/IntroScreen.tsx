@@ -23,7 +23,7 @@ const IntroScreen:React.FC<IntroScreenProps> = ({ isDarkMode }: IntroScreenProps
     <div
       className="h-full flex items-center justify-center p-8 sm:p-2 text-gray-800 bg-white dark:bg-gray-900 overflow-hidden" // Fondos para modo claro y oscuro
       style={{
-        backgroundImage: `url(${process.env.PUBLIC_URL}${expositionData.imageUrl})`,
+        backgroundImage: `url(${process.env.PUBLIC_URL}${expositionData?.imageUrl})`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "160%",
@@ -33,13 +33,13 @@ const IntroScreen:React.FC<IntroScreenProps> = ({ isDarkMode }: IntroScreenProps
 
         <div className='flex flex-col sm:w-4/5 sm:h-1/2 items-center sm:justify-between gap-2'>
           {/* <h1 className="text-2xl font-chronicle text-gray-900 dark:text-gray-100">{appData.locals.museumName[selectedLanguage]}</h1> */}
-          <div className='flex flex-col items-center'>
+        { expositionData &&  <div className='flex flex-col items-center'>
             <h2 className='text-4xl uppercase text-gray-900 dark:text-gray-100'>{expositionData.name[selectedLanguage]}</h2>
             <p className="text-gray-800 dark:text-gray-200">{expositionData.description[selectedLanguage]}</p> {/* Colores de texto */}
             <p className="text-gray-800 dark:text-gray-200">{expositionData.date[selectedLanguage]}</p>
             <p className="text-sm text-gray-800 dark:text-gray-200 mt-3">{expositionData.copy[selectedLanguage]}</p>
             <ThemeAdaptableImage isDarkMode={isDarkMode} />
-          </div>
+          </div>}
           <h3 className="text-2xl text-gray-900 dark:text-gray-100">{appData.locals.appName[selectedLanguage] || "Esto no pirula"}</h3>
         </div>
 

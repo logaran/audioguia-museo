@@ -12,11 +12,12 @@ export type LanguageCodes =
 
 export type LocalizedString = { [key in LanguageCodes]?: string };
 
-export interface ExpositionInfo {
+export interface ExpositionData {
   name: LocalizedString;
   description: LocalizedString;
   date: LocalizedString;
   imageUrl: string;
+  copy: LocalizedString;
 }
 
 export interface Artwork {
@@ -29,10 +30,10 @@ export interface Artwork {
 
 export interface ArtworksContextValue {
   artworks: Artwork[];
-  currentArtwork: Artwork | null;
+  currentArtwork: Artwork | undefined;
   currentIndex: number;
   setCurrentIndex: (index: number) => void;
-  expositionData: ExpositionInfo | null;
+  expositionData: ExpositionData | null;
   loading: boolean;
   error: string | null;
 }
@@ -67,10 +68,36 @@ export type MyCookies = {
 export interface FavoritesContextValue {
   favorites: Artwork[];
   cookies: MyCookies;
-  toggleLike: (e: MouseEvent | TouchEvent) => void;
+  toggleLike: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export interface LanguageContextValue {
   selectedLanguage: LanguageCodes;
-  setSelectedLanguage: (key: LanguageCodes)=> void;
+  setSelectedLanguage: (key: LanguageCodes) => void;
+}
+
+export type Direction = "right" | "left";
+export interface GesturesContextValue {
+  handleTouchStart: (e: TouchEvent) => void;
+  handleTouchMove: (e: TouchEvent) => void;
+  handleTouchEnd: () => void;
+  handleSwipe: (direction: Direction) => void;
+  swipeOffset: number;
+}
+
+export interface PlayBackContextValue {
+  isPlaying: boolean;
+  setIsPlaying: (isPlaying: boolean) => void;
+  togglePlayPause: () => void;
+}
+
+export interface AudioGuideAppProps {
+  isMobile: boolean;
+  isDarkMode: boolean;
+}
+
+export interface AudioPlayerProps {
+  isMobile: boolean;
+  mediaRef: HTMLAudioElement;
+  activeResourceUrl: string;
 }

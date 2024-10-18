@@ -10,8 +10,10 @@ import { useArtworks } from "../context/ArtworksContext";
 import { useGestures } from "../context/GesturesContext";
 import BackButtonHandler from "./BackButtonHandler";
 import { useNavigate } from "react-router-dom";
+import { AudioPlayerProps } from "../types";
 
-const AudioPlayer = ({ isMobile, mediaRef, activeResourceUrl }) => {
+const AudioPlayer = ({ isMobile, mediaRef, activeResourceUrl }: AudioPlayerProps) => {
+  
   const {handleSwipe, handleTouchEnd, handleTouchMove, handleTouchStart, swipeOffset} = useGestures();
   const { isPlaying, togglePlayPause, setIsPlaying } = usePlayback();
   const { selectedLanguage } = useLanguage();

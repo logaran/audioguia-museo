@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es6",                      // Versión de ECMAScript
-    "module": "commonjs",                 // Módulos de JavaScript
-    "strict": true,                        // Activa todas las verificaciones de tipo
-    "jsx": "react",                        // Para proyectos de React
-    "esModuleInterop": true,               // Para facilitar la importación de módulos
-    "skipLibCheck": true   ,
-    "allowJs": true         
+    "target": "es6", // Versión de ECMAScript
+    "module": "commonjs", // Módulos de JavaScript
+    "strict": true, // Activa todas las verificaciones de tipo
+    "jsx": "react", // Para proyectos de React
+    "esModuleInterop": true, // Para facilitar la importación de módulos
+    "skipLibCheck": true,
+    "allowJs": true
   },
-  "include": ["src/**/*"],                 // Carpeta de origen
-  "exclude": ["node_modules"]              // Exclusión de módulos
+  "include": ["src/**/*"], // Carpeta de origen
+  "exclude": ["node_modules"] // Exclusión de módulos
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 import IntroScreen from './IntroScreen';
 import FavoritesScreen from './FavoritesScreen';
-import Header from './Header.tsx';
+import Header from './Header';
 import ArtworkInfo from './ArtworkInfo';
 import ArtworksList from './ArtworksList';
 import AudioPlayer from './AudioPlayer';
@@ -10,13 +10,14 @@ import { useArtworks } from '../context/ArtworksContext';
 import { usePlayback } from '../context/PlaybackContext';
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { AudioGuideAppProps } from '../types';
 
-const AudioGuideApp = ({ isMobile, isDarkMode }) => {
+const AudioGuideApp = ({ isMobile, isDarkMode }:AudioGuideAppProps) => {
 
   const { selectedLanguage } = useLanguage();
   const { isPlaying, setIsPlaying } = usePlayback();
   const { artworks, currentArtwork, setCurrentIndex } = useArtworks();
-  const mediaRef = useRef(null);
+  const mediaRef = useRef<HTMLAudioElement | null>(null);
 
   const navigate = useNavigate();
 
@@ -31,7 +32,7 @@ const AudioGuideApp = ({ isMobile, isDarkMode }) => {
   }, [isPlaying]);
 
 
-  const handleShowArtworksList = (show) => {
+  const handleShowArtworksList = (show: boolean) => {
     if (show) {
       setIsPlaying(false);
       navigate('/list');

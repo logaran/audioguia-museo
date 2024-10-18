@@ -1,6 +1,6 @@
 // ArtworksContext.js
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { Artwork, ArtworksContextValue, ExpositionInfo } from "../types";
+import { Artwork, ArtworksContextValue, ExpositionData } from "../types";
 
 const ArtworksContext = createContext<ArtworksContextValue | undefined>(
   undefined
@@ -17,13 +17,13 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
   children,
 }) => {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
-  const [expositionData, setExpositionData] = useState<ExpositionInfo | null>(
+  const [expositionData, setExpositionData] = useState<ExpositionData | null>(
     null
   );
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string|null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [currentArtwork, setCurrentartwork] = useState<Artwork | null>(null);
+  const [currentArtwork, setCurrentartwork] = useState<Artwork | undefined>(undefined);
 
   useEffect(() => {
     let isMounted = true;
