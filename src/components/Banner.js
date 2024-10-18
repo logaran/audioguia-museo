@@ -1,10 +1,11 @@
 import React from 'react';
-import logoMuseo from '../logo-museo.svg'; // Ajusta la ruta si es necesario
 
-const Banner = () => {
+const Banner = ({ isDarkMode }) => {
+  
+  const logo = isDarkMode ? process.env.PUBLIC_URL + '/img/logo-dark.svg' : process.env.PUBLIC_URL + '/img/logo.svg';
   return (
-    <div className="h-20 flex items-center justify-center bg-white p-2 z-20">
-      <img src={logoMuseo} alt="Logo del Museo" className="h-full object-contain" />
+    <div className="flex items-center justify-center bg-white dark:bg-gray-900 p-6 z-20">
+      <img src={logo} alt="Logo del Museo" className="h-full object-contain" />
     </div>
   );
 };

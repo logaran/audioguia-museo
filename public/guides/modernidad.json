@@ -1,0 +1,227 @@
+{
+    "exposition":{
+        "name":{
+            "es": "Modernidad Latente",
+            "en": "Latent Modernity"
+        },
+        "description":{
+            "es":"Vanguardistas y renovadores en la figuración española (1920-1970).",
+            "en":"Avant-garde and Innovative Painters in Spanish Figurative Art (1920–1970)."
+        },
+        "copy":{
+            "es":"Colección Telefónica",
+            "en":"Telefónica Collection"
+        },
+        "date":{
+            "es":"Del 16 de marzo al 08 de septiembre de 2024",
+            "en":"From March 16 to September 08, 2024"
+        },
+        "imageUrl":"/img/introImage.jpg"
+    },
+    "artworks":[
+    {
+        "name": {
+            "es": "Modernidad Latente",
+            "en": "Latent Modernity"
+        },
+        "audioUrl": {
+            "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/es/100.modernidadlatente_es.mp3",
+            "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/en/100.modernidadlatente_en.mp3"
+        },
+        "author": "Museo Carmen Thyssen Málaga",
+        "date": "1920-1970",
+        "description": "Introducción",
+        "imageUrl": {
+            "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/100_es.jpg",
+            "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/100_en.jpg"
+        }
+    },
+        {
+            "name": {
+                "es": "Nature morte sur le mur (Naturaleza muerta sobre la pared)",
+                "en": "Nature morte sur le mur (Still Life on the Wall)"
+            },
+            "audioUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/es/101.modernidadlatente_es.mp3",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/en/101.modernidadlatente_en.mp3"
+            },
+            "author": "Francisco Bores",
+            "date": "1927",
+            "description": "Audio 101",
+            "imageUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/101.jpg",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/101.jpg"
+            }
+        },
+        {
+            "name": {
+                "es": "Ventana sobre Portugal",
+                "en": "Window over Portugal"
+            },
+            "audioUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/es/102.modernidadlatente_es.mp3",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/en/102.modernidadlatente_en.mp3"
+            },
+            "author": "Daniel Vázquez Díaz",
+            "date": "c. 1922-1923",
+            "description": "Audio 102",
+            "imageUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/102.jpg",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/102.jpg"
+            }
+        },
+        {
+            "name": {
+                "es": "Nature morte cubiste (Naturaleza muerta cubista)",
+                "en": "Nature morte cubiste (Cubist Still Life)"
+            },
+            "audioUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/es/103.modernidadlatente_es.mp3",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/en/103.modernidadlatente_en.mp3"
+            },
+            "author": "María Blanchard",
+            "date": "c. 1919",
+            "description": "Audio 103",
+            "imageUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/103.jpg",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/103.jpg"
+            }
+        },
+        {
+            "name": {
+                "es": "La fenêtre aux collines (Ventana abierta con colinas)",
+                "en": "La fenêtre aux collines (Open Window with Hills)"
+            },
+            "audioUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/es/104.modernidadlatente_es.mp3",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/en/104.modernidadlatente_en.mp3"
+            },
+            "author": "Juan Gris",
+            "date": "1923",
+            "description": "Audio 104",
+            "imageUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/104.jpg",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/104.jpg"
+            }
+        },
+        {
+            "name": {
+                "es": "Nature morte (Naturaleza muerta)",
+                "en": "Nature morte (Still Life)"
+            },
+            "audioUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/es/105.modernidadlatente_es.mp3",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/en/105.modernidadlatente_en.mp3"
+            },
+            "author": "Pablo Picasso",
+            "date": "1944",
+            "description": "Audio 105",
+            "imageUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/105.jpg",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/105.jpg"
+            }
+        },
+        {
+            "name": {
+                "es": "Le Coup de grâce (La estocada)",
+                "en": "Le Coup de grâce (The Death Blow)"
+            },
+            "audioUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/es/106.modernidadlatente_es.mp3",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/en/106.modernidadlatente_en.mp3"
+            },
+            "author": "Óscar Domínguez",
+            "date": "1945",
+            "description": "Audio 106",
+            "imageUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/106.jpg",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/106.jpg"
+            }
+        },
+        {
+            "name": {
+                "es": "Tierras silúricas",
+                "en": "Silurian Lands"
+            },
+            "audioUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/es/107.modernidadlatente_es.mp3",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/en/107.modernidadlatente_en.mp3"
+            },
+            "author": "Benjamín Palencia",
+            "date": "1931",
+            "description": "Audio 107",
+            "imageUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/107.jpg",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/107.jpg"
+            }
+        },
+        {
+            "name": {
+                "es": "Tierras y paredes",
+                "en": "Plots of Land and Walls"
+            },
+            "audioUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/es/108.modernidadlatente_es.mp3",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/en/108.modernidadlatente_en.mp3"
+            },
+            "author": "Godofredo Ortega Muñoz",
+            "date": "c. 1966",
+            "description": "Audio 108",
+            "imageUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/108.jpg",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/108.jpg"
+            }
+        },
+        {
+            "name": {
+                "es": "Sin título",
+                "en": "Untitled"
+            },
+            "audioUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/es/109.modernidadlatente_es.mp3",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/en/109.modernidadlatente_en.mp3"
+            },
+            "author": "Juan Manuel Díaz-Caneja",
+            "date": "",
+            "description": "Audio 109",
+            "imageUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/109.jpg",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/109.jpg"
+            }
+        },
+        {
+            "name": {
+                "es": "Sevilla",
+                "en": "Seville"
+            },
+            "audioUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/es/110.modernidadlatente_es.mp3",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/en/110.modernidadlatente_en.mp3"
+            },
+            "author": "Carmen Laffón",
+            "date": "1962",
+            "description": "Audio 110",
+            "imageUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/110.jpg",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/110.jpg"
+            }
+        },
+        {
+            "name": {
+                "es": "Bodegón de la sandía",
+                "en": "Still Life with Watermelon"
+            },
+            "audioUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/es/111.modernidadlatente_es.mp3",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/audio/en/111.modernidadlatente_en.mp3"
+            },
+            "author": "Pancho Cossío",
+            "date": "c. 1965",
+            "description": "Audio 111",
+            "imageUrl": {
+                "es": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/111.jpg",
+                "en": "https://www.carmenthyssenmalaga.org/exposiciones/2024/ModernidadLatente/audioguia/img/111.jpg"
+            }
+        }
+    ]
+}

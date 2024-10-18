@@ -1,0 +1,152 @@
+{
+    "exposition": {
+        "name": {
+            "es": "Desnudos",
+            "en": "Naked"
+        },
+        "description": {
+            "es": "Cuerpos normativos e insurrectos en el arte español (1870-1970)",
+            "en": "Normative and Rebellious Nudes in Spanish Art (1870-1970)"
+        },
+        "copy": {
+            "es": "Con la colaboración de",
+            "en": "In collaboration with"
+        },
+        "date": {
+            "es": "Del 8 de octubre de 2024 al 9 de marzo de 2025",
+            "en": "From October 8, 2024 to March 9, 2025"
+        },
+        "imageUrl": "/img/introImage.jpg"
+    },
+    "artworks": [{
+            "name": {
+                "es": "Desnudos",
+                "en": "Naked"
+            },
+            "author": "Museo Carmen Thyssen Málaga",
+            "date": "1870-1970",
+            "description": "Introducción",
+            "id": "100"
+        },
+        {
+            "name": {
+                "es": "Las señoritas de Aviñón",
+                "en": "The Young Ladies of Avignon"
+            },
+            "author": "Salvador Dalí",
+            "date": "1970",
+            "description": "Audio 101",
+            "id": "101"
+        },
+        {
+            "name": {
+                "es": "El modelo",
+                "en": "The Model"
+            },
+            "author": "Pablo Picasso",
+            "date": "c.1895-1896",
+            "description": "Audio 102",
+            "id": "102"
+        },
+        {
+            "name": {
+                "es": "Desnudo de frente",
+                "en": "Nude from the Front"
+            },
+            "author": "Ignacio Pinazo",
+            "date": "c.1879-1880",
+            "description": "Audio 103",
+            "id": "103"
+        },
+        {
+            "name": {
+                "es": "Viejo al sol",
+                "en": "Old Man in the Sun"
+            },
+            "author": "Mariano Fortuny",
+            "date": "1871",
+            "description": "Audio 104",
+            "id": "104"
+        },
+        {
+            "name": {
+                "es": "Retrato de La Oterito en su camerino",
+                "en": "Portrait of La Oterito in her Dressing Room"
+            },
+            "author": "Ignacio Zuloaga",
+            "date": "1936",
+            "description": "Audio 105",
+            "id": "105"
+        },
+        {
+            "name": {
+                "es": "Desnudo de mujer",
+                "en": "Female Nude"
+            },
+            "author": "Aurelia Navarro",
+            "date": "1908",
+            "description": "Audio 106",
+            "id": "106"
+        },
+        {
+            "name": {
+                "es": "Desnudo femenino",
+                "en": "Female Nude"
+            },
+            "author": "Menchu Gal",
+            "date": "1948",
+            "description": "Audio 107",
+            "id": "107"
+        },
+        {
+            "name": {
+                "es": "Sin título",
+                "en": "Untitled"
+            },
+            "author": "Ismael Smith",
+            "date": "s.f.",
+            "description": "Audio 108",
+            "id": "108"
+        },
+        {
+            "name": {
+                "es": "Torso",
+                "en": "Torso"
+            },
+            "author": "Eduardo Chillida",
+            "date": "1948",
+            "description": "Audio 109",
+            "id": "109"
+        },
+        {
+            "name": {
+                "es": "Dios de la fruta",
+                "en": "God of Fruit"
+            },
+            "author": "Gabriel Morcillo",
+            "date": "1936",
+            "description": "Audio 110",
+            "id": "110"
+        },
+        {
+            "name": {
+                "es": "Los maniquíes",
+                "en": "The Mannequins"
+            },
+            "author": "Gregorio Prieto",
+            "date": "c.1932",
+            "description": "Audio 111",
+            "id": "111"
+        },
+        {
+            "name": {
+                "es": "Ágata",
+                "en": "Ágata"
+            },
+            "author": "Antonio Saura",
+            "date": "1960",
+            "description": "Audio 112",
+            "id": "112"
+        }
+    ]
+}

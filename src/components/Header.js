@@ -1,9 +1,9 @@
 import React from 'react';
 import Banner from './Banner';
 
-const Header = () => (
+const Header = ({ isDarkMode }) => (
   <header className="relative z-10">
-    <Banner />
+    <Banner isDarkMode={isDarkMode}/>
   </header>
 );
 
