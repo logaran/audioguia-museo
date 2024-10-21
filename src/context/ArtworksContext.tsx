@@ -89,7 +89,7 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
     if (currentArtworkNode?.prev) {
       const prevNode = artworks[currentArtworkNode.prev];
       setCurrentArtworkNode(prevNode);
-      return currentArtworkNode.next;
+      return currentArtworkNode.prev;
     }else {
       return null;
     }
