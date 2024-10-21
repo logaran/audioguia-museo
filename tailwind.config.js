@@ -5,6 +5,9 @@ module.exports = {
   ],
   darkmode: 'class',
   theme: {
+    screens: {
+      'xs' : '270px'
+    },
     extend: {
       fontFamily: {
         chronicle:['Chronicle', 'sans-serif'],

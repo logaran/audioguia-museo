@@ -41,6 +41,7 @@ const FavoritesScreen: React.FC = () => {
                   };
                 }}
                 alt={favorite.artwork.name[selectedLanguage]}
+                title={favorite.artwork.name[selectedLanguage]}
                 className="w-14 h-14 object-contain rounded-md mr-4"
               />
               <div className="flex-1">
