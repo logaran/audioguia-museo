@@ -24,7 +24,7 @@ export const GesturesProvider: React.FC<React.PropsWithChildren<{}>> = ({
   const isSwipe = useRef(false);
   const [swipeOffset, setSwipeOffset] = useState(0);
   const { togglePlayPause, setIsPlaying } = usePlayback();
-  const { currentIndex, artworks } = useArtworks();
+  const { next, prev, currentArtworkNode } = useArtworks();
   const navigate = useNavigate();
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -56,22 +56,21 @@ export const GesturesProvider: React.FC<React.PropsWithChildren<{}>> = ({
   };
 
   const handleSwipe = (direction: Direction) => {
-    let newIndex = currentIndex;
-
+    const newArtworkNode = currentArtworkNode;
     if (direction === "right") {
-      if (currentIndex === 0) {
+      if (!newArtworkNode?.prev) {
         navigate("/intro");
       } else {
-        newIndex--;
-        navigate(`/guide/?index=${newIndex}`);
+        const newArtworkId = prev();
+        navigate(`/guide/?id=${newArtworkId}`);
         setIsPlaying(false);
       }
     } else if (direction === "left") {
-      if (currentIndex === artworks.length - 1) {
+      if (!newArtworkNode?.next) {
         navigate("/favorites");
       } else {
-        newIndex++;
-        navigate(`/guide/?index=${newIndex}`);
+        const newArtworkId = next();
+        navigate(`/guide/?id=${newArtworkId}`);
         setIsPlaying(false);
       }
     }

@@ -19,7 +19,7 @@ const ArtworkThumbnail = ({ artwork, selectedLanguage, selectedId }:ArtworkThumb
     
     const handleClick = () => {
         setCurrentArtworkNode(artworks[selectedId]);
-        navigate(`/guide/?index=${selectedId}`);
+        navigate(`/guide/?id=${selectedId}`);
     }
     return (
         <div

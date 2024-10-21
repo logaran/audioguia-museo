@@ -1,13 +1,12 @@
 import React from "react";
-import { Artwork, LanguageCodes } from "../types";
 
-interface ArtworkInfoProps {
-  artwork?: Artwork;
-  selectedLanguage: LanguageCodes;
-  isPlaying: boolean;
-}
+import { useArtworks } from "../context/ArtworksContext";
+import { useLanguage } from "../context/LanguageContext";
 
-const ArtworkInfo = ({ artwork, selectedLanguage }: ArtworkInfoProps) => {
+const ArtworkInfo = () => {
+  const {currentArtworkNode} =useArtworks();
+  const {selectedLanguage} = useLanguage();
+  const artwork = currentArtworkNode?.artwork;
   return (
     <div
       className="w-full sm:w-1/2 p-4 z-50 truncate"

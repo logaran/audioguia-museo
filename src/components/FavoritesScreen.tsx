@@ -23,32 +23,32 @@ const FavoritesScreen: React.FC = () => {
 
       <ul className="h-full w-full border-3 overflow-auto">
         {favorites.map((favorite) => {
-          const imageUrl = `${process.env.PUBLIC_URL}/img/${favorite.id}${selectedLanguage}.jpg`;
-          const fallbackImageUrl = `${process.env.PUBLIC_URL}/img/${favorite.id}.jpg`;
+          const shareUrl = `${process.env.PUBLIC_URL}/guide/?id=${favorite.artwork.id}`;
+          const fallbackImageUrl = `${process.env.PUBLIC_URL}/img/${favorite.artwork.id}.jpg`;
           const placeholderUrl = `${process.env.PUBLIC_URL}/img/placeholder.jpg`;
 
           return (
             <li
-              key={favorite.id}
+              key={favorite.artwork.id}
               className="mb-6 w-full flex items-center justify-between"
             >
               <img
-                src={imageUrl}
+                src={shareUrl}
                 onError={({ currentTarget }) => {
                   currentTarget.src = fallbackImageUrl;
                   currentTarget.onerror = () => {
                     currentTarget.src = placeholderUrl;
                   };
                 }}
-                alt={favorite.name[selectedLanguage]}
+                alt={favorite.artwork.name[selectedLanguage]}
                 className="w-14 h-14 object-contain rounded-md mr-4"
               />
               <div className="flex-1">
                 <h2 className="text-xl font-semibold">
-                  {favorite.name[selectedLanguage]}
+                  {favorite.artwork.name[selectedLanguage]}
                 </h2>
                 <ShareComponent
-                  url={imageUrl}
+                  url={shareUrl}
                   title={`He estado en el Museo Carmen Thyssen Málaga y me ha encantado esta obra`}
                 />
               </div>

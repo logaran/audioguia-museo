@@ -9,11 +9,11 @@ import { useFavorites } from "../context/FavoritesContext";
 
 const ControlsBar = () => {
   const { selectedLanguage, setSelectedLanguage } = useLanguage();
-  const { currentArtwork } = useArtworks();
+  const { currentArtworkNode } = useArtworks();
   const { setIsPlaying } = usePlayback();
   const navigate = useNavigate();
   const { cookies, toggleLike } = useFavorites();
-
+  const currentArtwork = currentArtworkNode?.artwork;
   const switchLang = () => {
     const newLang = selectedLanguage === "es" ? "en" : "es";
     setIsPlaying(false);

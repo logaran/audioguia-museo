@@ -39,8 +39,8 @@ export interface ArtworksContextValue {
   currentArtworkNode: ArtworkNode | undefined;
   setCurrentArtworkNode: (node: ArtworkNode | undefined) => void;
   expositionData: ExpositionData | null;
-  next: () => void;
-  prev: () => void;
+  next: () => string | null;
+  prev: () => string | null;
   loading: boolean;
   error: string | null;
 }
@@ -73,7 +73,7 @@ export type MyCookies = {
   likes?: string[];
 };
 export interface FavoritesContextValue {
-  favorites: Artwork[];
+  favorites: ArtworkNode[];
   cookies: MyCookies;
   toggleLike: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }

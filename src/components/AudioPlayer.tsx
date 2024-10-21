@@ -33,7 +33,7 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
     const queryParams = new URLSearchParams(location.search);
     const id = queryParams.get("id") || "100";
     if (id in artworks) {
-      setCurrentArtworkNode(artworks.id);
+      setCurrentArtworkNode(artworks[id]);
     } else {
       setCurrentArtworkNode(artworks["100"]);
     }
@@ -67,11 +67,7 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
         }}
       />
       <div className="relative h-full flex flex-col sm:flex-row sm:justify-evenly items-center justify-start w-auto pt-3">
-        <ArtworkInfo
-          artwork={currentArtworkNode?.artwork}
-          selectedLanguage={selectedLanguage}
-          isPlaying={isPlaying}
-        />
+        <ArtworkInfo  />
 
         {/* Controles de reproducción y pase de obras*/}
         <>
@@ -106,11 +102,7 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
           </button>
         </>
 
-        <ArtworkImage
-          currentArtwork={currentArtworkNode?.artwork}
-          selectedLanguage={selectedLanguage}
-          swipeOffset={swipeOffset}
-        />
+        <ArtworkImage />
       </div>
 
       {activeResourceUrl && (
