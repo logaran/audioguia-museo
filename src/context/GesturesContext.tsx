@@ -24,7 +24,7 @@ export const GesturesProvider: React.FC<React.PropsWithChildren<{}>> = ({
   const isSwipe = useRef(false);
   const [swipeOffset, setSwipeOffset] = useState(0);
   const { togglePlayPause, setIsPlaying } = usePlayback();
-  const { currentIndex, setCurrentIndex, artworks } = useArtworks();
+  const { currentIndex, artworks } = useArtworks();
   const navigate = useNavigate();
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -63,7 +63,7 @@ export const GesturesProvider: React.FC<React.PropsWithChildren<{}>> = ({
         navigate("/intro");
       } else {
         newIndex--;
-        setCurrentIndex(newIndex);
+        navigate(`/guide/?index=${newIndex}`);
         setIsPlaying(false);
       }
     } else if (direction === "left") {
@@ -71,7 +71,7 @@ export const GesturesProvider: React.FC<React.PropsWithChildren<{}>> = ({
         navigate("/favorites");
       } else {
         newIndex++;
-        setCurrentIndex(newIndex);
+        navigate(`/guide/?index=${newIndex}`);
         setIsPlaying(false);
       }
     }

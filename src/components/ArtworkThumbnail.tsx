@@ -19,7 +19,7 @@ const ArtworkThumbnail = ({ artwork, selectedLanguage, selectedIndex }:ArtworkTh
     
     const handleClick = () => {
         setCurrentIndex(selectedIndex);
-        navigate('/guide');
+        navigate(`/guide/?index=${selectedIndex}`);
     }
     return (
         <div

@@ -9,7 +9,7 @@ import { useLanguage } from "../context/LanguageContext";
 import { useArtworks } from "../context/ArtworksContext";
 import { useGestures } from "../context/GesturesContext";
 import BackButtonHandler from "./BackButtonHandler";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AudioPlayerProps } from "../types";
 
 const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
@@ -22,11 +22,23 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
   } = useGestures();
   const { isPlaying, togglePlayPause, setIsPlaying } = usePlayback();
   const { selectedLanguage } = useLanguage();
-  const { currentArtwork } = useArtworks();
+  const { currentArtwork, setCurrentIndex, artworks } = useArtworks();
   const navigate = useNavigate();
   const activeBackgroundUrl = `url(${process.env.PUBLIC_URL}/img/${currentArtwork?.id}.jpg)`;
   const mediaRef = useRef<HTMLAudioElement | null>(null);
   const activeResourceUrl = `${process.env.PUBLIC_URL}/audios/${selectedLanguage}/${currentArtwork?.id}.mp3`;
+  const location = useLocation();
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const index = parseInt(queryParams.get("index") || "0");
+    if (!isNaN(index) && index >= 0 && index < artworks.length) {
+      setCurrentIndex(index);
+    } else {
+      setCurrentIndex(0);
+    }
+
+  }, [location.search, setCurrentIndex, artworks.length]);
 
   const handleBackButton = () => {
     navigate("/list");
