@@ -8,18 +8,18 @@ import { Artwork, LanguageCodes } from '../types';
 interface ArtworkThumbnailProps {
     artwork: Artwork;
     selectedLanguage: LanguageCodes;
-    selectedIndex: number;
+    selectedId: string;
 }
-const ArtworkThumbnail = ({ artwork, selectedLanguage, selectedIndex }:ArtworkThumbnailProps) => {
+const ArtworkThumbnail = ({ artwork, selectedLanguage, selectedId }:ArtworkThumbnailProps) => {
 
 
     const navigate = useNavigate();
     const { cookies } = useFavorites();
-    const { setCurrentIndex} = useArtworks();
+    const { artworks, setCurrentArtworkNode} = useArtworks();
     
     const handleClick = () => {
-        setCurrentIndex(selectedIndex);
-        navigate(`/guide/?index=${selectedIndex}`);
+        setCurrentArtworkNode(artworks[selectedId]);
+        navigate(`/guide/?index=${selectedId}`);
     }
     return (
         <div

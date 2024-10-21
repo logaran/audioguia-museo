@@ -1,6 +1,6 @@
 // ArtworksContext.js
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { Artwork, ArtworksContextValue, ExpositionData } from "../types";
+import { ArtworkNode, ArtworksContextValue, ExpositionData } from "../types";
 
 const ArtworksContext = createContext<ArtworksContextValue | undefined>(
   undefined
@@ -16,16 +16,15 @@ export const useArtworks = () => {
 export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
   children,
 }) => {
-  const [artworks, setArtworks] = useState<Artwork[]>([]);
+  const [artworks, setArtworks] = useState<{ [key: string]: ArtworkNode }>({});
   const [expositionData, setExpositionData] = useState<ExpositionData | null>(
     null
   );
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [currentArtwork, setCurrentartwork] = useState<Artwork | undefined>(
-    undefined
-  );
+  const [currentArtworkNode, setCurrentArtworkNode] = useState<
+    ArtworkNode | undefined
+  >(undefined);
 
   useEffect(() => {
     let isMounted = true;
@@ -44,7 +43,7 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
 
         // Validar si los datos tienen la estructura esperada
         if (isMounted) {
-          setArtworks(data.artworks || []); // Asegura que artworks sea un array
+          setArtworks(data.artworks || {});
           setExpositionData(data.exposition || null);
         }
       } catch (error) {
@@ -70,18 +69,34 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
   }, []);
 
   useEffect(() => {
-    const newArtwork = artworks[currentIndex];
-    setCurrentartwork(newArtwork);
-  }, [currentIndex, artworks]);
+    if (Object.keys(artworks).length > 0) {
+      const firstArtworkNode = artworks[Object.keys(artworks)[0]];
+      setCurrentArtworkNode(firstArtworkNode);
+    }
+  }, [artworks]);
+
+  const next = () => {
+    if (currentArtworkNode?.next) {
+      const nextNode = artworks[currentArtworkNode.next];
+      setCurrentArtworkNode(nextNode);
+    }
+  };
+  const prev = () => {
+    if (currentArtworkNode?.next) {
+      const nextNode = artworks[currentArtworkNode.next];
+      setCurrentArtworkNode(nextNode);
+    }
+  };
 
   return (
     <ArtworksContext.Provider
       value={{
         artworks,
-        currentArtwork,
-        currentIndex,
-        setCurrentIndex,
+        currentArtworkNode,
+        setCurrentArtworkNode,
         expositionData,
+        next,
+        prev,
         loading,
         error,
       }}

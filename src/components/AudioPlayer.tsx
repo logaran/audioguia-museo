@@ -22,23 +22,23 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
   } = useGestures();
   const { isPlaying, togglePlayPause, setIsPlaying } = usePlayback();
   const { selectedLanguage } = useLanguage();
-  const { currentArtwork, setCurrentIndex, artworks } = useArtworks();
+  const { currentArtworkNode, setCurrentArtworkNode, artworks } = useArtworks();
   const navigate = useNavigate();
-  const activeBackgroundUrl = `url(${process.env.PUBLIC_URL}/img/${currentArtwork?.id}.jpg)`;
+  const activeBackgroundUrl = `url(${process.env.PUBLIC_URL}/img/${currentArtworkNode?.artwork.id}.jpg)`;
   const mediaRef = useRef<HTMLAudioElement | null>(null);
-  const activeResourceUrl = `${process.env.PUBLIC_URL}/audios/${selectedLanguage}/${currentArtwork?.id}.mp3`;
+  const activeResourceUrl = `${process.env.PUBLIC_URL}/audios/${selectedLanguage}/${currentArtworkNode?.artwork.id}.mp3`;
   const location = useLocation();
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    const index = parseInt(queryParams.get("index") || "0");
-    if (!isNaN(index) && index >= 0 && index < artworks.length) {
-      setCurrentIndex(index);
+    const id = queryParams.get("id") || "100";
+    if (id in artworks) {
+      setCurrentArtworkNode(artworks.id);
     } else {
-      setCurrentIndex(0);
+      setCurrentArtworkNode(artworks["100"]);
     }
 
-  }, [location.search, setCurrentIndex, artworks.length]);
+  }, [location.search, artworks, setCurrentArtworkNode]);
 
   const handleBackButton = () => {
     navigate("/list");
@@ -68,7 +68,7 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
       />
       <div className="relative h-full flex flex-col sm:flex-row sm:justify-evenly items-center justify-start w-auto pt-3">
         <ArtworkInfo
-          artwork={currentArtwork}
+          artwork={currentArtworkNode?.artwork}
           selectedLanguage={selectedLanguage}
           isPlaying={isPlaying}
         />
@@ -107,7 +107,7 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
         </>
 
         <ArtworkImage
-          currentArtwork={currentArtwork}
+          currentArtwork={currentArtworkNode?.artwork}
           selectedLanguage={selectedLanguage}
           swipeOffset={swipeOffset}
         />

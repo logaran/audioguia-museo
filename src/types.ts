@@ -28,12 +28,19 @@ export interface Artwork {
   id: string;
 }
 
+export interface ArtworkNode {
+  artwork: Artwork;
+  next: string | null;
+  prev: string | null;
+}
+
 export interface ArtworksContextValue {
-  artworks: Artwork[];
-  currentArtwork: Artwork | undefined;
-  currentIndex: number;
-  setCurrentIndex: (index: number) => void;
+  artworks: { [key: string]: ArtworkNode };
+  currentArtworkNode: ArtworkNode | undefined;
+  setCurrentArtworkNode: (node: ArtworkNode | undefined) => void;
   expositionData: ExpositionData | null;
+  next: () => void;
+  prev: () => void;
   loading: boolean;
   error: string | null;
 }
