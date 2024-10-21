@@ -23,7 +23,7 @@ const FavoritesScreen: React.FC = () => {
 
       <ul className="h-full w-full border-3 overflow-auto">
         {favorites.map((favorite) => {
-          const shareUrl = `${process.env.PUBLIC_URL}/guide/?id=${favorite.artwork.id}`;
+          const shareUrl = `${window.location.origin}/guide/?id=${favorite.artwork.id}`;
           const fallbackImageUrl = `${process.env.PUBLIC_URL}/img/${favorite.artwork.id}.jpg`;
           const placeholderUrl = `${process.env.PUBLIC_URL}/img/placeholder.jpg`;
 
