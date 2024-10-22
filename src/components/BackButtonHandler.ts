@@ -7,7 +7,7 @@ interface BackButtonHandlerProps {
 const BackButtonHandler: React.FC<BackButtonHandlerProps> = ({ onBack }: BackButtonHandlerProps) => {
     useEffect(() => {
         const handlePopState = (event: Event) => {
-            // Llama a la función onBack cuando se detecta un evento popstate
+            console.log("has pulsado atras, truhan!!!");
             if (onBack) {
                 onBack();
             }

@@ -17,8 +17,7 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
     handleSwipe,
     handleTouchEnd,
     handleTouchMove,
-    handleTouchStart,
-    swipeOffset,
+    handleTouchStart
   } = useGestures();
   const { isPlaying, togglePlayPause, setIsPlaying } = usePlayback();
   const { selectedLanguage } = useLanguage();
@@ -41,7 +40,8 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
   }, [location.search, artworks, setCurrentArtworkNode]);
 
   const handleBackButton = () => {
-    navigate("/list");
+    console.log("Esto pirula!");
+    navigate("/list", {replace: true});
   };
 
   useEffect(() => {
