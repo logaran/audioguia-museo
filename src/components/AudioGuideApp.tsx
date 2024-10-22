@@ -22,8 +22,8 @@ const AudioGuideApp = ({ isMobile, isDarkMode }: AudioGuideAppProps) => {
   };
 
   return (
-    <div className="relative h-screen w-full text-black dark:text-white flex flex-col">
-      <Header isDarkMode={isDarkMode} />
+    <div className="relative h-full w-full text-black dark:text-white flex flex-col">
+      {isMobile && <Header isDarkMode={isDarkMode} />}
 
       <Routes>
         <Route path="/guide" element={<AudioPlayer isMobile={isMobile} />} />

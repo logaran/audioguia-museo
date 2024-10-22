@@ -11,14 +11,11 @@ import { useGestures } from "../context/GesturesContext";
 import BackButtonHandler from "./BackButtonHandler";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AudioPlayerProps } from "../types";
+import Banner from "./Banner";
 
 const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
-  const {
-    handleSwipe,
-    handleTouchEnd,
-    handleTouchMove,
-    handleTouchStart
-  } = useGestures();
+  const { handleSwipe, handleTouchEnd, handleTouchMove, handleTouchStart } =
+    useGestures();
   const { isPlaying, togglePlayPause, setIsPlaying } = usePlayback();
   const { selectedLanguage } = useLanguage();
   const { currentArtworkNode, setCurrentArtworkNode, artworks } = useArtworks();
@@ -36,12 +33,11 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
     } else {
       setCurrentArtworkNode(artworks["100"]);
     }
-
   }, [location.search, artworks, setCurrentArtworkNode]);
 
   const handleBackButton = () => {
     console.log("Esto pirula!");
-    navigate("/list", {replace: true});
+    navigate("/list", { replace: true });
   };
 
   useEffect(() => {
@@ -55,7 +51,7 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
   }, [isPlaying]);
 
   return (
-    <div className="relative h-full flex flex-col justify-between">
+    <div className="relative flex flex-col flex-1 justify-between">
       <BackButtonHandler onBack={handleBackButton} />
       <div
         className="absolute inset-0 filter blur-md -z-10"
@@ -67,8 +63,8 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
         }}
       />
       <div className="relative h-full flex flex-col sm:flex-row sm:justify-evenly items-center justify-start w-auto pt-3">
-        <ArtworkInfo  />
-
+        <ArtworkInfo />
+     
         {/* Controles de reproducción y pase de obras*/}
         <>
           {/*Play*/}

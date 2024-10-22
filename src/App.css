@@ -1,6 +1,8 @@
 
 html,
 :host {
+  height: 100%;
+  width: 100%;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -32,6 +34,12 @@ html,
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-content {
+  padding: 0 env(safe-area-inset-left) env(safe-area-inset-bottom) env(safe-area-inset-right);
+  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); /* Ajusta el contenido */
+  overflow: auto; /* Permite el desplazamiento si es necesario */
 }
 
 .App-link {
