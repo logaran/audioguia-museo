@@ -5,12 +5,12 @@ module.exports = {
   ],
   darkmode: 'class',
   theme: {
-    screens: {
-      'xs' : '270px'
-    },
     extend: {
+      screens: {
+        'xs': '270px'
+      },
       fontFamily: {
-        chronicle:['Chronicle', 'sans-serif'],
+        chronicle: ['Chronicle', 'sans-serif'],
       }
     },
   },
