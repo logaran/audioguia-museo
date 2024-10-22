@@ -11,7 +11,6 @@ import { useGestures } from "../context/GesturesContext";
 import BackButtonHandler from "./BackButtonHandler";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AudioPlayerProps } from "../types";
-import Banner from "./Banner";
 
 const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
   const { handleSwipe, handleTouchEnd, handleTouchMove, handleTouchStart } =
@@ -63,8 +62,9 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
         }}
       />
       <div className="relative h-full flex flex-col sm:flex-row sm:justify-evenly items-center justify-start w-auto pt-3">
-        <ArtworkInfo artwork={currentArtworkNode?.artwork}/>
-     
+        <div>
+          <ArtworkInfo artwork={currentArtworkNode?.artwork} />
+        </div>
         {/* Controles de reproducción y pase de obras*/}
         <>
           {/*Play*/}
@@ -97,8 +97,9 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
             <ChevronRight size={48} />
           </button>
         </>
-
-        <ArtworkImage />
+        <div>
+          <ArtworkImage />
+        </div>
       </div>
 
       {activeResourceUrl && (
