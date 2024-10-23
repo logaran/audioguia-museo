@@ -26,7 +26,7 @@ const ArtworkThumbnail = ({
   };
   return (
     <div
-      className="relative w-full md:[width:calc(50%-0.3rem)] lg:[width:calc(33%-0.3rem)] flex items-center p-4 border border-gray-300 rounded cursor-pointer hover:bg-gray-100"
+      className="relative w-full md:[width:calc(50%-0.3rem)] lg:[width:calc(33%-0.2rem)] flex items-center p-4 border border-gray-300 rounded cursor-pointer hover:bg-gray-100"
       onClick={handleClick}
     >
       {/* Miniatura */}

@@ -40,7 +40,7 @@ function App() {
 
 
   return (
-    <div className='h-screen w-screen'>
+    <div style={{height:'100dvh',width:'100dvw'}}>
       <AnalyticsProvider trackingId={trackingId} >
         <LanguageProvider>
           <ArtworksProvider>
