@@ -9,7 +9,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { AudioGuideAppProps } from "../types";
 import { useArtworks } from "../context/ArtworksContext";
 
-const AudioGuideApp = ({ isMobile, isDarkMode }: AudioGuideAppProps) => {
+const AudioGuideApp = ({ isMobile, isDarkMode, isAdmin }: AudioGuideAppProps) => {
   const { loading } = useArtworks();
 
   if (loading) {
@@ -24,7 +24,7 @@ const AudioGuideApp = ({ isMobile, isDarkMode }: AudioGuideAppProps) => {
   return (
     <div className="relative h-full w-full text-black dark:text-white flex flex-col">
       {isMobile && <Header isDarkMode={isDarkMode} />}
-
+    {isAdmin && (<div className="absolute left-4 top-4 text-red-600 z-50">Modo Administrador</div>)}
       <Routes>
         <Route path="/guide" element={<AudioPlayer isMobile={isMobile} />} />
         <Route

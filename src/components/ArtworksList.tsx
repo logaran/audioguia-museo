@@ -8,7 +8,7 @@ const ArtworksList = () => {
   const { selectedLanguage } = useLanguage();
 
   return (
-    <div className="flex w-full justify-center flex-wrap gap-2 overflow-auto p-2 bg-white dark:bg-gray-800 z-50">
+    <div className="flex w-full justify-center flex-wrap gap-2 overflow-auto p-2 bg-white dark:bg-gray-800 z-40">
       {Object.keys(artworks).map((id) => {
         const artworkNode = artworks[id];
         return (

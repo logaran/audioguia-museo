@@ -102,6 +102,7 @@ export interface PlayBackContextValue {
 export interface AudioGuideAppProps {
   isMobile: boolean;
   isDarkMode: boolean;
+  isAdmin: boolean;
 }
 
 export interface AudioPlayerProps {

@@ -29,7 +29,7 @@ const IntroScreen:React.FC<IntroScreenProps> = ({ isDarkMode }: IntroScreenProps
         backgroundSize: "160%",
       }}
     >
-      <div className="h-full sm:w-full md:w-[70%] md:h-[90%] text-center flex flex-col sm:flex-row lg:flex-col lg:items-center items-center justify-evenly sm:items-start bg-white dark:bg-gray-800 bg-opacity-80 dark:bg-opacity-90 p-2 rounded-lg">
+      <div className="h-[80dvh] sm:h-[40dvh] sm:w-[80dvw] text-center flex flex-col sm:flex-row lg:items-center items-center justify-evenly bg-white dark:bg-gray-800 bg-opacity-80 dark:bg-opacity-90 p-2 rounded-lg">
 
         <div className='flex flex-col sm:w-4/5 sm:h-1/2 items-center sm:justify-between gap-2'>
           {/* <h1 className="text-2xl font-chronicle text-gray-900 dark:text-gray-100">{appData.locals.museumName[selectedLanguage]}</h1> */}
