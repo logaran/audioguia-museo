@@ -30,12 +30,11 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
     let isMounted = true;
 
     const fetchArtworks = async () => {
+      const apiUrl = 'http://127.0.0.1:3030/';
       try {
         setLoading(true);
         setError(null); // Reinicia el error antes de cargar
-        const response = await fetch(
-          `${process.env.PUBLIC_URL}/guides/desnudos.json`
-        );
+        const response = await fetch(apiUrl);
         if (!response.ok) {
           throw new Error("Error al cargar el JSON");
         }
