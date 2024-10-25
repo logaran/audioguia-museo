@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization"); 
 
-$dataFile = './guides/desnudos.json';
+$dataFile = './data/guides/desnudos.json';
 $guide = json_decode(file_get_contents($dataFile));
 
 if ($guide === null) {
