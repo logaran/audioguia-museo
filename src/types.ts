@@ -43,6 +43,7 @@ export interface ArtworksContextValue {
   prev: () => string | null;
   loading: boolean;
   error: string | null;
+  deleteArtwork: (id: string) => Promise<boolean>;
 }
 export interface AnalyticsEvent {
   eventName: string;

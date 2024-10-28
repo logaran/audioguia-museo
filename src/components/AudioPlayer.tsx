@@ -62,7 +62,7 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
         }}
       />
       <div className="relative h-full flex flex-col sm:flex-row sm:justify-evenly items-center justify-start w-auto pt-3">
-        <div>
+        <div className="self-start sm:self-auto">
           <ArtworkInfo artwork={currentArtworkNode?.artwork} />
         </div>
         {/* Controles de reproducción y pase de obras*/}

@@ -25,12 +25,12 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
   const [currentArtworkNode, setCurrentArtworkNode] = useState<
     ArtworkNode | undefined
   >(undefined);
+  const apiUrl = "http://127.0.0.1:3030/";
 
   useEffect(() => {
     let isMounted = true;
 
     const fetchArtworks = async () => {
-      const apiUrl = 'http://127.0.0.1:3030/';
       try {
         setLoading(true);
         setError(null); // Reinicia el error antes de cargar
@@ -89,8 +89,31 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
       const prevNode = artworks[currentArtworkNode.prev];
       setCurrentArtworkNode(prevNode);
       return currentArtworkNode.prev;
-    }else {
+    } else {
       return null;
+    }
+  };
+
+  const deleteArtwork = async (id: string) => {
+    try {
+      const response = await fetch(`apiUrl/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setArtworks(data);
+        return true;
+      } else {
+        const errorData = await response.json();
+        console.error("Error de red: " + errorData);
+        return false;
+      }
+    } catch (error) {
+      console.error("Error de red: " + error);
+      return false;
     }
   };
 
@@ -105,6 +128,7 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
         prev,
         loading,
         error,
+        deleteArtwork
       }}
     >
       {children}
