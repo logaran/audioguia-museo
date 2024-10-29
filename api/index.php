@@ -4,6 +4,13 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
+// Manejar solicitudes OPTIONS para el preflight de CORS
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header('HTTP/1.1 200 OK');
+    exit;
+}
+
+
 $dataFile = './data/guides/desnudos.json';
 $guide = json_decode(file_get_contents($dataFile));
 
@@ -27,5 +34,6 @@ switch ($method) {
             http_response_code(404);
             echo json_encode(['message' => 'Obra no encontrada']);
         }
+        exit;
 }
 echo json_encode($guide);

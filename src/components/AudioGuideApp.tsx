@@ -31,7 +31,7 @@ const AudioGuideApp = ({ isMobile, isDarkMode, isAdmin }: AudioGuideAppProps) =>
           path="/intro"
           element={<IntroScreen isDarkMode={isDarkMode} />}
         />
-        <Route path="/list" element={<ArtworksList />} />
+        <Route path="/list" element={<ArtworksList isAdmin={isAdmin} />} />
         <Route path="/favorites" element={<FavoritesScreen />} />
         <Route path="*" element={<Navigate to="/intro" />} />
       </Routes>

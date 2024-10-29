@@ -3,7 +3,10 @@ import ArtworkThumbnail from "./ArtworkThumbnail";
 import { useArtworks } from "../context/ArtworksContext";
 import { useLanguage } from "../context/LanguageContext";
 
-const ArtworksList = () => {
+interface ArtworkListProps {
+  isAdmin: boolean;
+}
+const ArtworksList = ({ isAdmin }: ArtworkListProps) => {
   const { artworks } = useArtworks();
   const { selectedLanguage } = useLanguage();
 
@@ -17,6 +20,7 @@ const ArtworksList = () => {
             artwork={artworkNode.artwork}
             selectedLanguage={selectedLanguage}
             selectedId={artworkNode.artwork.id}
+            isAdmin={isAdmin}
           />
         );
       })}

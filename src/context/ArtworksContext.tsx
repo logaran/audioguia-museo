@@ -25,8 +25,8 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
   const [currentArtworkNode, setCurrentArtworkNode] = useState<
     ArtworkNode | undefined
   >(undefined);
+  
   const apiUrl = "http://127.0.0.1:3030/";
-
   useEffect(() => {
     let isMounted = true;
 
@@ -96,15 +96,18 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
 
   const deleteArtwork = async (id: string) => {
     try {
-      const response = await fetch(`apiUrl/${id}`, {
+      const response = await fetch(`${apiUrl}${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
       });
       if (response.ok) {
-        const data = await response.json();
-        setArtworks(data);
+        setArtworks((prevArtworks)=>{
+          const newArtworks = {...prevArtworks};
+          delete newArtworks[id];
+          return newArtworks;
+        });
         return true;
       } else {
         const errorData = await response.json();
