@@ -5,6 +5,7 @@ import { Heart, CircleX } from "lucide-react";
 import { useArtworks } from "../context/ArtworksContext";
 import { Artwork, LanguageCodes } from "../types";
 import ArtworkInfo from "./ArtworkInfo";
+import AdminControls from "./AdminControls";
 
 interface ArtworkThumbnailProps {
   artwork: Artwork | undefined;
@@ -20,15 +21,11 @@ const ArtworkThumbnail = ({
 }: ArtworkThumbnailProps) => {
   const navigate = useNavigate();
   const { cookies } = useFavorites();
-  const { artworks, setCurrentArtworkNode, deleteArtwork } = useArtworks();
+  const { artworks, setCurrentArtworkNode } = useArtworks();
 
   const handleClick = () => {
     setCurrentArtworkNode(artworks[selectedId]);
     navigate(`/guide/?id=${selectedId}`);
-  };
-
-  const handleDeleteClick = (id: string) => {
-    deleteArtwork(id);
   };
 
   return (
@@ -59,12 +56,7 @@ const ArtworkThumbnail = ({
       )}
 
       {isAdmin && (
-        <div className="absolute top-1 right-1">
-          <CircleX
-            fill="red"
-            onClick={() => artwork?.id && handleDeleteClick(artwork.id)}
-          />
-        </div>
+       <AdminControls artwork={artwork}/>
       )}
     </div>
   );

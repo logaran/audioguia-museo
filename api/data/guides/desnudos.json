@@ -5,47 +5,33 @@
             "en": "Naked"
         },
         "description": {
-            "es": "Cuerpos normativos e insurrectos en el arte español (1870-1970)",
+            "es": "Cuerpos normativos e insurrectos en el arte espa\u00f1ol (1870-1970)",
             "en": "Normative and Rebellious Nudes in Spanish Art (1870-1970)"
         },
         "copy": {
-            "es": "Con la colaboración de",
+            "es": "Con la colaboraci\u00f3n de",
             "en": "In collaboration with"
         },
         "date": {
             "es": "Del 8 de octubre de 2024 al 9 de marzo de 2025",
             "en": "From October 8, 2024 to March 9, 2025"
         },
-        "imageUrl": "/img/introImage.jpg"
+        "imageUrl": "\/img\/introImage.jpg"
     },
     "artworks": {
-        "100": {
-            "artwork": {
-                "name": {
-                    "es": "Desnudos",
-                    "en": "Naked"
-                },
-                "author": "Museo Carmen Thyssen Málaga",
-                "date": "1870-1970",
-                "description": "Introducción",
-                "id": "100"
-            },
-            "next": "101",
-            "prev": null
-        },
         "101": {
             "artwork": {
                 "name": {
-                    "es": "Las señoritas de Aviñón",
+                    "es": "Las se\u00f1oritas de Avi\u00f1\u00f3n",
                     "en": "The Young Ladies of Avignon"
                 },
-                "author": "Salvador Dalí",
+                "author": "Salvador Dal\u00ed",
                 "date": "1970",
                 "description": "Audio 101",
                 "id": "101"
             },
             "next": "102",
-            "prev": "100"
+            "prev": null
         },
         "102": {
             "artwork": {
@@ -134,7 +120,7 @@
         "108": {
             "artwork": {
                 "name": {
-                    "es": "Sin título",
+                    "es": "Sin t\u00edtulo",
                     "en": "Untitled"
                 },
                 "author": "Ismael Smith",
@@ -176,7 +162,7 @@
         "111": {
             "artwork": {
                 "name": {
-                    "es": "Los maniquíes",
+                    "es": "Los maniqu\u00edes",
                     "en": "The Mannequins"
                 },
                 "author": "Gregorio Prieto",
@@ -190,8 +176,8 @@
         "112": {
             "artwork": {
                 "name": {
-                    "es": "Ágata",
-                    "en": "Ágata"
+                    "es": "\u00c1gata",
+                    "en": "\u00c1gata"
                 },
                 "author": "Antonio Saura",
                 "date": "1960",

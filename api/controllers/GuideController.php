@@ -18,6 +18,7 @@ class GuideController
     private function saveGuideFile(array $guideData): void
     {
         $filePath = "{$this->dataDir}{$this->filename}";
+        error_log(json_encode($guideData, JSON_PRETTY_PRINT));
         file_put_contents($filePath, json_encode($guideData, JSON_PRETTY_PRINT));
     }
 
@@ -39,8 +40,24 @@ class GuideController
     public function deleteArtwork($id): bool
     {
         $guideData = $this->readGuideFile();
+        if(!isset($guideData['artworks'][$id])) {
+            return false;
+        }
+        $artworkToDelete = $guideData['artworks'][$id];
+        $prevId = $artworkToDelete['prev'];
+        $nextId = $artworkToDelete['next'];
+
+        if ($prevId !== null && isset($guideData['artworks'][$prevId])) {
+            $guideData['artworks'][$prevId]['next'] = $nextId;
+        }
+    
+        if ($nextId !== null && isset($guideData['artworks'][$nextId])) {
+            $guideData['artworks'][$nextId]['prev'] = $prevId;
+        }
+
         unset($guideData['artworks'][$id]);
-        $this->saveGuideFile($guideData); 
+
+        $this->saveGuideFile($guideData);
         return true;
     }
 

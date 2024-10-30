@@ -21,6 +21,7 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
     null
   );
   const [loading, setLoading] = useState<boolean>(false);
+  const [shouldFetch, setShouldFetch] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [currentArtworkNode, setCurrentArtworkNode] = useState<
     ArtworkNode | undefined
@@ -29,21 +30,24 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
   const apiUrl = "http://127.0.0.1:3030/";
   useEffect(() => {
     let isMounted = true;
-
+  
     const fetchArtworks = async () => {
       try {
-        setLoading(true);
-        setError(null); // Reinicia el error antes de cargar
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          throw new Error("Error al cargar el JSON");
-        }
-        const data = await response.json();
-
-        // Validar si los datos tienen la estructura esperada
-        if (isMounted) {
-          setArtworks(data.artworks || {});
-          setExpositionData(data.exposition || null);
+        if (shouldFetch) { // Solo se ejecuta si shouldFetch es true
+          setLoading(true);
+          setError(null); // Reinicia el error antes de cargar
+          const response = await fetch(apiUrl);
+          if (!response.ok) {
+            throw new Error("Error al cargar el JSON");
+          }
+          const data = await response.json();
+  
+          // Validar si los datos tienen la estructura esperada
+          if (isMounted) {
+            setArtworks(data.artworks || []);
+            setExpositionData(data.exposition || null);
+            setShouldFetch(false); // Cambia shouldFetch a false para evitar bucles
+          }
         }
       } catch (error) {
         if (isMounted) {
@@ -58,14 +62,14 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
         }
       }
     };
-
+  
     fetchArtworks();
-
+  
     // Cleanup function para evitar actualizaciones de estado si el componente se desmonta
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [shouldFetch]);
 
   useEffect(() => {
     if (Object.keys(artworks).length > 0) {
@@ -98,6 +102,7 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
     try {
       const response = await fetch(`${apiUrl}${id}`, {
         method: "DELETE",
+        mode: "cors",
         headers: {
           "Content-Type": "application/json",
         },
@@ -108,6 +113,7 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
           delete newArtworks[id];
           return newArtworks;
         });
+        setShouldFetch(true);
         return true;
       } else {
         const errorData = await response.json();

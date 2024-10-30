@@ -1,0 +1,17 @@
+# Activar mod_rewrite
+RewriteEngine On
+
+# Habilitar CORS para todos los orígenes
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+
+# Permitir todos los métodos HTTP necesarios
+<Limit GET POST PUT DELETE OPTIONS>
+    Require all granted
+</Limit>
+
+# Opcional: Si necesitas redirigir todas las peticiones a index.php (típico en aplicaciones de una sola página o APIs)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]

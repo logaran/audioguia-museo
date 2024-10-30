@@ -11,6 +11,7 @@ import { useGestures } from "../context/GesturesContext";
 import BackButtonHandler from "./BackButtonHandler";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AudioPlayerProps } from "../types";
+import AdminControls from "./AdminControls";
 
 const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
   const { handleSwipe, handleTouchEnd, handleTouchMove, handleTouchStart } =
@@ -101,6 +102,9 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
           <ArtworkImage />
         </div>
       </div>
+      {isAdmin && (
+       <AdminControls artwork={artwork}/>
+      )}
 
       {activeResourceUrl && (
         <audio
