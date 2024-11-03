@@ -11,9 +11,9 @@ import { useGestures } from "../context/GesturesContext";
 import BackButtonHandler from "./BackButtonHandler";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AudioPlayerProps } from "../types";
-import AdminControls from "./AdminControls";
 
-const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
+
+const AudioPlayer = ({ isMobile, isAdmin }: AudioPlayerProps) => {
   const { handleSwipe, handleTouchEnd, handleTouchMove, handleTouchStart } =
     useGestures();
   const { isPlaying, togglePlayPause, setIsPlaying } = usePlayback();
@@ -98,13 +98,10 @@ const AudioPlayer = ({ isMobile }: AudioPlayerProps) => {
             <ChevronRight size={48} />
           </button>
         </>
-        <div>
-          <ArtworkImage />
+        <div className="h-72">
+          <ArtworkImage currentArtwork={currentArtworkNode?.artwork}/>
         </div>
       </div>
-      {isAdmin && (
-       <AdminControls artwork={artwork}/>
-      )}
 
       {activeResourceUrl && (
         <audio

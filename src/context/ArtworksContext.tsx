@@ -1,6 +1,10 @@
 // ArtworksContext.js
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { ArtworkNode, ArtworksContextValue, ExpositionData } from "../types";
+import {
+  ArtworkNode,
+  ArtworksContextValue,
+  ExpositionData,
+} from "../types";
 
 const ArtworksContext = createContext<ArtworksContextValue | undefined>(
   undefined
@@ -26,22 +30,25 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
   const [currentArtworkNode, setCurrentArtworkNode] = useState<
     ArtworkNode | undefined
   >(undefined);
-  
-  const apiUrl = "http://127.0.0.1:3030/";
+
+  const apiUrl = "http://guideapi:3030/";
+  const guideName = "desnudos";
+
   useEffect(() => {
     let isMounted = true;
-  
+
     const fetchArtworks = async () => {
       try {
-        if (shouldFetch) { // Solo se ejecuta si shouldFetch es true
+        if (shouldFetch) {
+          // Solo se ejecuta si shouldFetch es true
           setLoading(true);
           setError(null); // Reinicia el error antes de cargar
-          const response = await fetch(apiUrl);
+          const response = await fetch(apiUrl+guideName);
           if (!response.ok) {
             throw new Error("Error al cargar el JSON");
           }
           const data = await response.json();
-  
+
           // Validar si los datos tienen la estructura esperada
           if (isMounted) {
             setArtworks(data.artworks || []);
@@ -56,15 +63,13 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
         }
       } finally {
         if (isMounted) {
-          setTimeout(() => {
-            setLoading(false);
-          }, 500);
+          setLoading(false);
         }
       }
     };
-  
+
     fetchArtworks();
-  
+
     // Cleanup function para evitar actualizaciones de estado si el componente se desmonta
     return () => {
       isMounted = false;
@@ -108,11 +113,6 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
         },
       });
       if (response.ok) {
-        setArtworks((prevArtworks)=>{
-          const newArtworks = {...prevArtworks};
-          delete newArtworks[id];
-          return newArtworks;
-        });
         setShouldFetch(true);
         return true;
       } else {
@@ -122,6 +122,26 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
       }
     } catch (error) {
       console.error("Error de red: " + error);
+      return false;
+    }
+  };
+
+  const putArtwork = async (formData: FormData): Promise<boolean> => {
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        body: formData,
+      });
+  
+      if (!response.ok) {
+        console.error('Error al enviar el formulario:', response.statusText);
+        return false;
+      }
+  
+      const result = await response.json();
+      return result.status === 'success';
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
       return false;
     }
   };
@@ -137,7 +157,8 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
         prev,
         loading,
         error,
-        deleteArtwork
+        deleteArtwork,
+        putArtwork,
       }}
     >
       {children}

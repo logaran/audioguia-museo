@@ -2,22 +2,25 @@
 
 class GuideController
 {
-    private $dataDir = __DIR__ . '/../data/guides/';
-    private $filename = 'desnudos.json';
-
-    private function readGuideFile(): mixed
+    private $dataDir;
+    public function __construct(string $dataDir)
     {
-        $filePath = "{$this->dataDir}{$this->filename}";
-        if (!file_exists(filename: $filePath)) {
-            return null;
-        }
-        $data = file_get_contents(filename: $filePath);
-        return json_decode(json: $data, associative: true) ?: null;
+        $this->dataDir = rtrim($dataDir, '/') . '/';
     }
 
-    private function saveGuideFile(array $guideData): void
+    private function readGuideFile(string $filename): ?array
     {
-        $filePath = "{$this->dataDir}{$this->filename}";
+        $filePath = "{$this->dataDir}{$filename}";
+        if (!file_exists($filePath)) {
+            return null;
+        }
+        $data = file_get_contents($filePath);
+        return json_decode($data, true) ?: null;
+    }
+
+    private function saveGuideFile(string $filename, array $guideData): void
+    {
+        $filePath = "{$this->dataDir}{$filename}";
         error_log(json_encode($guideData, JSON_PRETTY_PRINT));
         file_put_contents($filePath, json_encode($guideData, JSON_PRETTY_PRINT));
     }
@@ -26,7 +29,7 @@ class GuideController
     public function listGuides(): array
     {
         $guides = [];
-        foreach (glob(pattern: $this->dataDir . '*.json') as $filepath) {
+        foreach (glob($this->dataDir . '*.json') as $filepath) {
             $guide = json_decode(file_get_contents($filepath), true);
             if ($guide) {
                 $guides[] = $guide;
@@ -37,12 +40,13 @@ class GuideController
 
     // Eliminar obra de la guía
 
-    public function deleteArtwork($id): bool
+    public function deleteArtwork($id, string $guideName): bool
     {
-        $guideData = $this->readGuideFile();
+        $guideData = $this->readGuideFile($guideName);
         if(!isset($guideData['artworks'][$id])) {
             return false;
         }
+
         $artworkToDelete = $guideData['artworks'][$id];
         $prevId = $artworkToDelete['prev'];
         $nextId = $artworkToDelete['next'];
@@ -57,8 +61,26 @@ class GuideController
 
         unset($guideData['artworks'][$id]);
 
-        $this->saveGuideFile($guideData);
+        $this->saveGuideFile($guideName, $guideData);
         return true;
+    }
+
+    public function addOrUpdateArtwork(string $guideName): void
+    {
+        $artworkJson = $_POST['artwork'];
+        $artworkData = json_decode($artworkJson, true);
+
+        if(!$artworkData) {
+            http_response_code(400);
+            echo json_encode(['error'=> 'Datos de Artwork no válidos']);
+            exit;
+        }
+
+        $guideData = $this->readGuideFile($guideName);
+        
+        if(!isset($guideData['artworks'][$id])) {
+            ;
+        }
     }
 
 }

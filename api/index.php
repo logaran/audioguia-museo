@@ -4,15 +4,29 @@ header('Content-type: application/json');
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
+
+require_once './controllers/GuideController.php';
+
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit;
 }
 
-$dataFile = './data/guides/desnudos.json';
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$segments = explode('/', trim($uri, '/'));
+$guideName = $segments[0] ?? null;
+
+if (!$guideName) {
+    http_response_code(400);
+    echo json_encode(['error' => 'No se especificó el nombre de la guía.']);
+    exit;
+}
+$dataDir = "./data/guides/{$guideName}/";
+$dataFile = "{$dataDir}{$guideName}.json";
+
 $guide = json_decode(file_get_contents($dataFile));
 
-if ($guide === null) {
+if (!$guide) {
     http_response_code(500);
     echo json_encode(['error' => 'Error al leer el archivo de guía.']);
     exit;
@@ -21,10 +35,9 @@ if ($guide === null) {
 $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
     case 'DELETE':
-        require_once './controllers/GuideController.php';
         $id = basename((parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)));
-        $controller = new GuideController();
-        $result = $controller->deleteArtwork($id);
+        $controller = new GuideController($dataDir);
+        $result = $controller->deleteArtwork($id, $guideName);
 
         if ($result) {
             http_response_code(204);
@@ -34,5 +47,8 @@ switch ($method) {
             echo json_encode(['message' => 'Obra no encontrada']);
         }
         exit;
+    case 'POST':
+        $controller = new GuideController($dataDir);
+        $result = $controller->addOrUpdateArtwork($guideName);
 }
 echo json_encode($guide);

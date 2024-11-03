@@ -44,6 +44,7 @@ export interface ArtworksContextValue {
   loading: boolean;
   error: string | null;
   deleteArtwork: (id: string) => Promise<boolean>;
+  putArtwork: (formData: FormData) => Promise<boolean>;
 }
 export interface AnalyticsEvent {
   eventName: string;
@@ -108,4 +109,5 @@ export interface AudioGuideAppProps {
 
 export interface AudioPlayerProps {
   isMobile: boolean;
+  isAdmin: boolean;
 }

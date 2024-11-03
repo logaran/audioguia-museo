@@ -1,29 +1,39 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
-import { useArtworks } from '../context/ArtworksContext';
-import { useLanguage } from '../context/LanguageContext';
-import { useGestures } from '../context/GesturesContext';
+import React, { useEffect, useState } from "react";
+import { useLanguage } from "../context/LanguageContext";
+import { useGestures } from "../context/GesturesContext";
+import { Artwork } from "../types";
 
-const ArtworkImage = () => {
-    const {swipeOffset} = useGestures();
-    const {selectedLanguage} = useLanguage();
-    const {currentArtworkNode } = useArtworks();
-    const currentArtwork = currentArtworkNode?.artwork;
-    const [imageSrc, setImageSrc] = useState('');
-    useEffect(() => {
+interface ArtworkImageProps {
+  currentArtwork?: Artwork;
+}
 
-        currentArtwork?.id === '100' ? setImageSrc(`${process.env.PUBLIC_URL}/img/${currentArtwork.id}${selectedLanguage}.jpg`) : setImageSrc(`${process.env.PUBLIC_URL}/img/${currentArtwork?.id}.jpg`);
+const ArtworkImage = ({ currentArtwork }: ArtworkImageProps) => {
+  const { swipeOffset } = useGestures();
+  const { selectedLanguage } = useLanguage();
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
+  
+  useEffect(() => {
+    if (currentArtwork) {
+      
+      const imageUrl = `${process.env.PUBLIC_URL}/img/${selectedLanguage}/${currentArtwork.id}.jpg`;
+      setImageSrc(imageUrl);
+    }
+  }, [currentArtwork, selectedLanguage]);
 
-    }, [currentArtwork?.id, selectedLanguage]);
+  const handleError = () => {
+    const fallbackUrl = `${process.env.PUBLIC_URL}/img/es/${currentArtwork?.id}.jpg`;
+    setImageSrc(fallbackUrl);
+  };
 
-    return (
-        <img
-            src={imageSrc}
-            alt={currentArtwork?.name[selectedLanguage]}
-            className="transition-transform h-[50vh] duration-300 object-contain object-top"
-            style={{ transform: `translateX(${swipeOffset}px)` }}
-        />
-    );
+  return (
+    <img
+      src={imageSrc || undefined} // Cargar imagen o fallback
+      alt={currentArtwork?.name[selectedLanguage] || "Imagen por defecto"}
+      className="max-w-full max-h-full transition-transform duration-300 object-top m-auto"
+      style={{ transform: `translateX(${swipeOffset}px)` }}
+      onError={handleError} // Manejar error de carga
+    />
+  );
 };
 
 export default ArtworkImage;
