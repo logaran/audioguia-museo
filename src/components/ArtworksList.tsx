@@ -7,8 +7,9 @@ interface ArtworkListProps {
   isAdmin: boolean;
   isEditMode: boolean;
   setIsEditMode: (editMode: boolean)=>void;
+  isDarkMode: boolean;
 }
-const ArtworksList = ({ isAdmin, isEditMode, setIsEditMode }: ArtworkListProps) => {
+const ArtworksList = ({ isAdmin, isEditMode, setIsEditMode, isDarkMode }: ArtworkListProps) => {
   const { artworks } = useArtworks();
   const { selectedLanguage } = useLanguage();
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ const ArtworksList = ({ isAdmin, isEditMode, setIsEditMode }: ArtworkListProps) 
             isAdmin={isAdmin}
             isEditMode= {isEditMode}
             setIsEditMode = {setIsEditMode}
+            isDarkMode={isDarkMode}
           />
         );
       })}

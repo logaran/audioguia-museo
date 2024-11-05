@@ -109,5 +109,5 @@ export interface AudioGuideAppProps {
 
 export interface AudioPlayerProps {
   isMobile: boolean;
-  isAdmin: boolean;
+  isDarkMode: boolean;
 }

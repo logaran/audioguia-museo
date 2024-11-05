@@ -1,10 +1,6 @@
 // ArtworksContext.js
 import React, { createContext, useState, useEffect, useContext } from "react";
-import {
-  ArtworkNode,
-  ArtworksContextValue,
-  ExpositionData,
-} from "../types";
+import { ArtworkNode, ArtworksContextValue, ExpositionData } from "../types";
 
 const ArtworksContext = createContext<ArtworksContextValue | undefined>(
   undefined
@@ -31,8 +27,9 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
     ArtworkNode | undefined
   >(undefined);
 
-  const apiUrl = "http://guideapi:3030/";
+  // const apiUrl = "http://guideapi:3030/"; //En casa
   const guideName = "desnudos";
+  const apiUrl = "http://127.0.0.1:3030/" + guideName; //En el Museo
 
   useEffect(() => {
     let isMounted = true;
@@ -43,7 +40,7 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
           // Solo se ejecuta si shouldFetch es true
           setLoading(true);
           setError(null); // Reinicia el error antes de cargar
-          const response = await fetch(apiUrl+guideName);
+          const response = await fetch(apiUrl);
           if (!response.ok) {
             throw new Error("Error al cargar el JSON");
           }
@@ -74,7 +71,7 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
     return () => {
       isMounted = false;
     };
-  }, [shouldFetch]);
+  }, [shouldFetch, apiUrl]);
 
   useEffect(() => {
     if (Object.keys(artworks).length > 0) {
@@ -126,22 +123,23 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
     }
   };
 
-  const putArtwork = async (formData: FormData): Promise<boolean> => {
+  const addOrUpdateArtwork = async (formData: FormData): Promise<boolean> => {
     try {
       const response = await fetch(apiUrl, {
-        method: 'POST',
+        method: "POST",
         body: formData,
       });
-  
+
       if (!response.ok) {
-        console.error('Error al enviar el formulario:', response.statusText);
+        console.error("Error al enviar el formulario:", response.statusText);
         return false;
       }
-  
+
       const result = await response.json();
-      return result.status === 'success';
+      setShouldFetch(true);
+      return result.status === "success";
     } catch (error) {
-      console.error('Error en la solicitud:', error);
+      console.error("Error en la solicitud:", error);
       return false;
     }
   };
@@ -158,7 +156,7 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
         loading,
         error,
         deleteArtwork,
-        putArtwork,
+        putArtwork: addOrUpdateArtwork,
       }}
     >
       {children}

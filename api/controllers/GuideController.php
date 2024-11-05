@@ -8,19 +8,21 @@ class GuideController
         $this->dataDir = rtrim($dataDir, '/') . '/';
     }
 
-    private function readGuideFile(string $filename): ?array
+    private function readGuideFile(string $guideName): ?array
     {
-        $filePath = "{$this->dataDir}{$filename}";
+        $filePath = "{$this->dataDir}{$guideName}.json";
+
         if (!file_exists($filePath)) {
             return null;
         }
+
         $data = file_get_contents($filePath);
         return json_decode($data, true) ?: null;
     }
 
-    private function saveGuideFile(string $filename, array $guideData): void
+    private function saveGuideFile(string $guideName, array $guideData): void
     {
-        $filePath = "{$this->dataDir}{$filename}";
+        $filePath = "{$this->dataDir}{$guideName}.json";
         error_log(json_encode($guideData, JSON_PRETTY_PRINT));
         file_put_contents($filePath, json_encode($guideData, JSON_PRETTY_PRINT));
     }
@@ -38,11 +40,18 @@ class GuideController
         return $guides;
     }
 
+    public function getGuide(string $guideName): ?array
+{
+    return $this->readGuideFile($guideName);
+}
+
+
     // Eliminar obra de la guía
 
     public function deleteArtwork($id, string $guideName): bool
     {
         $guideData = $this->readGuideFile($guideName);
+       
         if(!isset($guideData['artworks'][$id])) {
             return false;
         }
@@ -77,10 +86,17 @@ class GuideController
         }
 
         $guideData = $this->readGuideFile($guideName);
-        
-        if(!isset($guideData['artworks'][$id])) {
-            ;
+        $id = $artworkData['id'] ?? null;
+
+        if ($id === null) {
+            http_response_code(400);
+            echo json_encode(['error' => 'ID de Artwork no proporcionado']);
+            exit;
         }
+        $guideData['artworks'][$id]['artwork'] = $artworkData;
+        $this->saveGuideFile($guideName,$guideData);
+        
+        echo json_encode(['message' => 'Artwork añadido o actualizado correctamente']);
     }
 
 }

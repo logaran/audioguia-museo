@@ -15,7 +15,7 @@ const AdminControls = ({
   isEditMode,
   setIsEditMode,
 }: AdminControlsProps) => {
-  const { deleteArtwork, putArtwork } = useArtworks();
+  const { deleteArtwork, putArtwork: addOrUpdateArtwork } = useArtworks();
   const navigate = useNavigate();
   const [showArtworkForm, setShowArtworkForm] = useState(false);
 
@@ -54,7 +54,7 @@ const AdminControls = ({
       )}
       {showArtworkForm && artwork && (
         <ArtworkForm
-          onSubmit={putArtwork}
+          onSubmit={addOrUpdateArtwork}
           existingArtwork={artwork}
           setIsEditMode={setIsEditMode}
           setShowArtworkForm={setShowArtworkForm}

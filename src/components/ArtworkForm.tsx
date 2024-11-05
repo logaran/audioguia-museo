@@ -57,22 +57,30 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
     setPreviewEs(
       imageFileEs
         ? URL.createObjectURL(imageFileEs)
-        : `/img/es/${existingArtwork?.id}.jpg`
+        : existingArtwork
+        ? `/img/es/${existingArtwork.id}.jpg`
+        : ""
     );
     setAudioPreviewEs(
       audioFileEs
         ? URL.createObjectURL(audioFileEs)
-        : `${process.env.PUBLIC_URL}/audios/es/${existingArtwork?.id}.mp3`
+        : existingArtwork
+        ? `${process.env.PUBLIC_URL}/audios/es/${existingArtwork.id}.mp3`
+        : ""
     );
     setPreviewEn(
       imageFileEn
         ? URL.createObjectURL(imageFileEn)
-        : `/img/en/${existingArtwork?.id}.jpg`
+        : existingArtwork
+        ? `/img/en/${existingArtwork.id}.jpg`
+        : ""
     );
     setAudioPreviewEn(
       audioFileEn
         ? URL.createObjectURL(audioFileEn)
-        : `${process.env.PUBLIC_URL}/audios/en/${existingArtwork?.id}.mp3`
+        : existingArtwork
+        ? `${process.env.PUBLIC_URL}/audios/en/${existingArtwork.id}.mp3`
+        : ""
     );
   }, [
     selectedLanguage,
@@ -120,7 +128,7 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
     if (imageFileEn) formData.append("imageFileEn", imageFileEn);
     if (audioFileEs) formData.append("audioFileEs", audioFileEs);
     if (audioFileEn) formData.append("audioFileEn", audioFileEn);
-    
+
     onSubmit(formData);
     setIsEditMode(false);
     setShowArtworkForm(false);
@@ -129,9 +137,9 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="absolute inset-0 bg-white flex space-y-1 p-1 gap-1.5 rounded-sm z-50"
+      className="absolute w-full h-full bg-white flex space-y-1 p-1 gap-1.5 rounded-sm z-50"
     >
-      <div className="flex flex-col flex-grow space-y-1">
+      <div className="flex flex-1 flex-shrink-1 flex-col space-y-1 text-gray-700"> {/** Formulario */}
         {selectedLanguage === "es" && (
           <input
             className="p-0.5 rounded-md border border-gray-400"
@@ -183,7 +191,15 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
           style={{ display: "none" }}
         />
         <div className="flex">
-          <audio className="h-8" controls src={selectedLanguage === 'es' ? audioPreviewEs || undefined : audioPreviewEn || undefined} />
+          <audio
+            className="h-8"
+            controls
+            src={
+              selectedLanguage === "es"
+                ? audioPreviewEs || undefined
+                : audioPreviewEn || undefined
+            }
+          />
           <button
             type="button"
             onClick={handleAudioClick}
@@ -193,7 +209,7 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
           </button>
         </div>
       </div>
-      <div className="flex flex-col gap-4 justify-between items-center p-2">
+      <div className="flex flex-col h-full justify-between items-center p-2">{/** Imagen e idiomas */}
         <div className="relative w-14 rounded">
           <input
             type="file"
@@ -203,7 +219,11 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
             style={{ display: "none" }}
           />
           <img
-            src={selectedLanguage === 'es' ? previewEs || undefined : previewEn || undefined }
+            src={
+              selectedLanguage === "es"
+                ? previewEs || undefined
+                : previewEn || undefined
+            }
             alt="Vista previa"
             className=""
             onClick={handleImageClick}

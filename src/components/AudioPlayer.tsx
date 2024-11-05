@@ -13,7 +13,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { AudioPlayerProps } from "../types";
 
 
-const AudioPlayer = ({ isMobile, isAdmin }: AudioPlayerProps) => {
+const AudioPlayer = ({ isMobile, isDarkMode }: AudioPlayerProps) => {
   const { handleSwipe, handleTouchEnd, handleTouchMove, handleTouchStart } =
     useGestures();
   const { isPlaying, togglePlayPause, setIsPlaying } = usePlayback();
@@ -64,7 +64,7 @@ const AudioPlayer = ({ isMobile, isAdmin }: AudioPlayerProps) => {
       />
       <div className="relative h-full flex flex-col sm:flex-row sm:justify-evenly items-center justify-start w-auto pt-3">
         <div className="self-start sm:self-auto">
-          <ArtworkInfo artwork={currentArtworkNode?.artwork} />
+          <ArtworkInfo artwork={currentArtworkNode?.artwork} isDarkMode={isDarkMode} />
         </div>
         {/* Controles de reproducción y pase de obras*/}
         <>

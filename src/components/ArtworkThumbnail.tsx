@@ -15,14 +15,15 @@ interface ArtworkThumbnailProps {
   isAdmin: boolean;
   isEditMode: boolean;
   setIsEditMode: (editMode: boolean) => void;
+  isDarkMode: boolean;
 }
 const ArtworkThumbnail = ({
   artwork,
-  selectedLanguage,
   selectedId,
   isAdmin,
   isEditMode,
   setIsEditMode,
+  isDarkMode
 }: ArtworkThumbnailProps) => {
   const navigate = useNavigate();
   const { cookies } = useFavorites();
@@ -44,7 +45,7 @@ const ArtworkThumbnail = ({
       <div className="w-16 h-16 object-scale-down rounded mr-4">
         <ArtworkImage currentArtwork={artwork} />
       </div>
-      <ArtworkInfo artwork={artwork} />
+      <ArtworkInfo artwork={artwork} isDarkMode={isDarkMode} />
       {artwork?.id && cookies?.likes?.includes(artwork.id) && (
         <div className="absolute top-1 right-1">
           <Heart fill="pink" />
@@ -52,7 +53,7 @@ const ArtworkThumbnail = ({
       )}
 
       {isAdmin && (
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 w-full h-full">
           <AdminControls
             artwork={artwork}
             setIsEditMode={setIsEditMode}

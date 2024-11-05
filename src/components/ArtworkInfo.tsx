@@ -5,9 +5,10 @@ import { Artwork } from "../types";
 
 interface ArtworkInfoProps {
   artwork: Artwork | undefined;
+  isDarkMode: boolean;
 }
 
-const ArtworkInfo = ({artwork}: ArtworkInfoProps) => {
+const ArtworkInfo = ({artwork, isDarkMode}: ArtworkInfoProps) => {
   
   const {selectedLanguage} = useLanguage();
   return (
@@ -16,9 +17,9 @@ const ArtworkInfo = ({artwork}: ArtworkInfoProps) => {
       style={{ pointerEvents: "none" }}
     >
       <p className="text-sm">{artwork?.description}</p>
-      <p className="text-md text-gray-900 font-bold">{artwork?.author || ""}</p>
+      <p className={`text-md ${isDarkMode ? 'text-gray-50':'text-gray-900'} font-bold`}>{artwork?.author || ""}</p>
       <p
-        className="text-gray-900 text-xl font-bold min-h-[4.5rem]"
+        className={`${isDarkMode ? 'text-gray-50':'text-gray-900'} text-xl font-bold min-h-[4.5rem]`}
       >
         <span className="italic">{artwork?.name[selectedLanguage] || ""}</span>
         {artwork?.date ? `, ${artwork.date}` : ""}
