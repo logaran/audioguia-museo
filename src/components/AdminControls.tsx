@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { CircleX, Edit, Plus } from "lucide-react";
 import { useArtworks } from "../context/ArtworksContext";
-import { Artwork } from "../types";
+import { ArtworkNode } from "../types";
 import { useNavigate } from "react-router-dom";
 import ArtworkForm from "./ArtworkForm";
 
 interface AdminControlsProps {
-  artwork: Artwork | undefined;
+  artwork: ArtworkNode | undefined;
   isEditMode: boolean;
   setIsEditMode: (editMode: boolean) => void;
 }
@@ -43,12 +43,12 @@ const AdminControls = ({
         <div className="absolute flex gap-1 bottom-1 right-1 p-1 border border-cyan-300 rounded-md z-50">
           <Edit
             className="hover:text-blue-300 transition duration-200"
-            onClick={(e) => artwork && handleEditClick(e, artwork.id)}
+            onClick={(e) => artwork && handleEditClick(e, artwork['artwork'].id)}
           />
           <Plus className="hover:text-green-600 transition duration-200" />
           <CircleX
             className="hover:text-red-600 transition duration-200"
-            onClick={(e) => artwork?.id && handleDeleteClick(e, artwork.id)}
+            onClick={(e) => artwork && artwork['artwork'].id && handleDeleteClick(e, artwork['artwork'].id)}
           />
         </div>
       )}

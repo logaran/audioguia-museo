@@ -30,8 +30,8 @@ export interface Artwork {
 
 export interface ArtworkNode {
   artwork: Artwork;
-  next: string | null;
-  prev: string | null;
+  next: string | null | undefined;
+  prev: string | null | undefined;
 }
 
 export interface ArtworksContextValue {

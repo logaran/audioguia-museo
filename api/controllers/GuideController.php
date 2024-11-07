@@ -41,9 +41,9 @@ class GuideController
     }
 
     public function getGuide(string $guideName): ?array
-{
-    return $this->readGuideFile($guideName);
-}
+    {
+        return $this->readGuideFile($guideName);
+    }
 
 
     // Eliminar obra de la guía
@@ -51,15 +51,24 @@ class GuideController
     public function deleteArtwork($id, string $guideName): bool
     {
         $guideData = $this->readGuideFile($guideName);
-       
-        if(!isset($guideData['artworks'][$id])) {
+        $oldImageFileEs = "{$this->dataDir}images/es/{$id}.jpg";
+        $oldImageFileEn = "{$this->dataDir}images/en/{$id}.jpg";
+        $oldAudioFileEs = "{$this->dataDir}audios/es/{$id}.mp3";
+        $oldAudioFileEn = "{$this->dataDir}audios/en/{$id}.mp3";
+    
+        // Inicializar los flags de eliminación
+        $artworkDeleted = true;
+        $filesDeleted = true;
+    
+        if (!isset($guideData['artworks'][$id])) {
             return false;
         }
-
+    
         $artworkToDelete = $guideData['artworks'][$id];
         $prevId = $artworkToDelete['prev'];
         $nextId = $artworkToDelete['next'];
-
+    
+        // Actualizar las relaciones de los artworks vecinos
         if ($prevId !== null && isset($guideData['artworks'][$prevId])) {
             $guideData['artworks'][$prevId]['next'] = $nextId;
         }
@@ -67,36 +76,72 @@ class GuideController
         if ($nextId !== null && isset($guideData['artworks'][$nextId])) {
             $guideData['artworks'][$nextId]['prev'] = $prevId;
         }
-
+    
+        // Eliminar el artwork
         unset($guideData['artworks'][$id]);
-
-        $this->saveGuideFile($guideName, $guideData);
-        return true;
+        $artworkDeleted = true;  // Si llegamos aquí es porque el artwork fue eliminado de la estructura
+    
+        // Eliminar los archivos asociados si existen
+        if (file_exists($oldAudioFileEs)) {
+            if (!unlink($oldAudioFileEs)) {
+                $filesDeleted = false;
+            }
+        }
+        if (file_exists($oldAudioFileEn)) {
+            if (!unlink($oldAudioFileEn)) {
+                $filesDeleted = false;
+            }
+        }
+        if (file_exists($oldImageFileEs)) {
+            if (!unlink($oldImageFileEs)) {
+                $filesDeleted = false;
+            }
+        }
+        if (file_exists($oldImageFileEn)) {
+            if (!unlink($oldImageFileEn)) {
+                $filesDeleted = false;
+            }
+        }
+    
+        // Guardar el archivo de guía después de la eliminación
+        if ($artworkDeleted && $filesDeleted) {
+            $this->saveGuideFile($guideName, $guideData);
+            return true; // Ambas eliminaciones fueron exitosas
+        }
+    
+        return false; // Algún paso falló, ya sea la eliminación del artwork o de los archivos
     }
+    
 
     public function addOrUpdateArtwork(string $guideName): void
     {
         $artworkJson = $_POST['artwork'];
         $artworkData = json_decode($artworkJson, true);
 
-        if(!$artworkData) {
+        if (!$artworkData) {
             http_response_code(400);
-            echo json_encode(['error'=> 'Datos de Artwork no válidos']);
+            echo json_encode(['error' => 'Datos de Artwork no válidos']);
             exit;
         }
 
         $guideData = $this->readGuideFile($guideName);
-        $id = $artworkData['id'] ?? null;
+        $id = $artworkData['artwork']['id'] ?? null;
 
         if ($id === null) {
             http_response_code(400);
             echo json_encode(['error' => 'ID de Artwork no proporcionado']);
             exit;
         }
-        $guideData['artworks'][$id]['artwork'] = $artworkData;
-        $this->saveGuideFile($guideName,$guideData);
+
+        $existingArtwork = $guideData[$id] ?? null;
+        if ($existingArtwork) {
+            $prevId = $existingArtwork['prev'];
+            $nextId = $existingArtwork['next'];
+        }
         
+        $guideData['artworks'][$id] = $artworkData;
+        $this->saveGuideFile($guideName, $guideData);
+
         echo json_encode(['message' => 'Artwork añadido o actualizado correctamente']);
     }
-
 }

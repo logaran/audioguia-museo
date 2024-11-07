@@ -64,7 +64,7 @@ const AudioPlayer = ({ isMobile, isDarkMode }: AudioPlayerProps) => {
       />
       <div className="relative h-full flex flex-col sm:flex-row sm:justify-evenly items-center justify-start w-auto pt-3">
         <div className="self-start sm:self-auto">
-          <ArtworkInfo artwork={currentArtworkNode?.artwork} isDarkMode={isDarkMode} />
+          <ArtworkInfo artwork={currentArtworkNode} isDarkMode={isDarkMode} />
         </div>
         {/* Controles de reproducción y pase de obras*/}
         <>
@@ -99,7 +99,7 @@ const AudioPlayer = ({ isMobile, isDarkMode }: AudioPlayerProps) => {
           </button>
         </>
         <div className="h-72">
-          <ArtworkImage currentArtwork={currentArtworkNode?.artwork}/>
+          <ArtworkImage currentArtwork={currentArtworkNode}/>
         </div>
       </div>
 

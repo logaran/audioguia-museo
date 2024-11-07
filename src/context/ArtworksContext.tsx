@@ -28,7 +28,7 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
   >(undefined);
 
   // const apiUrl = "http://guideapi:3030/"; //En casa
-  const guideName = "desnudos";
+  const guideName = "desnudos/";
   const apiUrl = "http://127.0.0.1:3030/" + guideName; //En el Museo
 
   useEffect(() => {

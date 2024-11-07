@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Artwork } from "../types";
+import { ArtworkNode } from "../types";
 import { useLanguage } from "../context/LanguageContext";
 import { Check, Edit } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 interface ArtworkFormProps {
-  existingArtwork?: Artwork; // Objeto de la obra existente para editar
+  existingArtwork?: ArtworkNode; // Objeto de la obra existente para editar
   onSubmit: (formData: FormData) => void; // Callback para manejar el envío
   setIsEditMode: (editMode: boolean) => void;
   setShowArtworkForm: (show: boolean) => void;
@@ -20,37 +20,37 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
   const { selectedLanguage } = useLanguage();
   // Estado para los campos del formulario
   const [nameEs, setNameEs] = useState(
-    existingArtwork ? existingArtwork.name.es : ""
+    existingArtwork ? existingArtwork['artwork'].name.es : ""
   );
   const [nameEn, setNameEn] = useState(
-    existingArtwork ? existingArtwork.name.en : ""
+    existingArtwork ? existingArtwork['artwork'].name.en : ""
   );
   const [author, setAuthor] = useState(
-    existingArtwork ? existingArtwork.author : ""
+    existingArtwork ? existingArtwork['artwork'].author : ""
   );
-  const [date, setDate] = useState(existingArtwork ? existingArtwork.date : "");
+  const [date, setDate] = useState(existingArtwork ? existingArtwork['artwork'].date : "");
   const [description, setDescription] = useState(
-    existingArtwork ? existingArtwork.description : ""
+    existingArtwork ? existingArtwork['artwork'].description : ""
   );
   const [imageFileEs, setImageFileEs] = useState<File | null>(null);
   const [imageFileEn, setImageFileEn] = useState<File | null>(null);
   const [previewEs, setPreviewEs] = useState<string | null>(
     existingArtwork
-      ? `${process.env.PUBLIC_URL}/img/es/${existingArtwork.id}.jpg`
+      ? `${process.env.PUBLIC_URL}/img/es/${existingArtwork['artwork'].id}.jpg`
       : null
   );
   const [previewEn, setPreviewEn] = useState<string | null>(
     existingArtwork
-      ? `${process.env.PUBLIC_URL}/img/en/${existingArtwork.id}.jpg`
+      ? `${process.env.PUBLIC_URL}/img/en/${existingArtwork['artwork'].id}.jpg`
       : null
   );
   const [audioFileEs, setAudioFileEs] = useState<File | null>(null);
   const [audioFileEn, setAudioFileEn] = useState<File | null>(null);
   const [audioPreviewEs, setAudioPreviewEs] = useState<string | null>(
-    `${process.env.PUBLIC_URL}/audios/es/${existingArtwork?.id}.mp3`
+    `${process.env.PUBLIC_URL}/audios/es/${existingArtwork && existingArtwork['artwork'].id}.mp3`
   );
   const [audioPreviewEn, setAudioPreviewEn] = useState<string | null>(
-    `${process.env.PUBLIC_URL}/audios/en/${existingArtwork?.id}.mp3`
+    `${process.env.PUBLIC_URL}/audios/en/${existingArtwork && existingArtwork['artwork'].id}.mp3`
   );
 
   useEffect(() => {
@@ -58,28 +58,28 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
       imageFileEs
         ? URL.createObjectURL(imageFileEs)
         : existingArtwork
-        ? `/img/es/${existingArtwork.id}.jpg`
+        ? `/img/es/${existingArtwork['artwork'].id}.jpg`
         : ""
     );
     setAudioPreviewEs(
       audioFileEs
         ? URL.createObjectURL(audioFileEs)
         : existingArtwork
-        ? `${process.env.PUBLIC_URL}/audios/es/${existingArtwork.id}.mp3`
+        ? `${process.env.PUBLIC_URL}/audios/es/${existingArtwork['artwork'].id}.mp3`
         : ""
     );
     setPreviewEn(
       imageFileEn
         ? URL.createObjectURL(imageFileEn)
         : existingArtwork
-        ? `/img/en/${existingArtwork.id}.jpg`
+        ? `/img/en/${existingArtwork['artwork'].id}.jpg`
         : ""
     );
     setAudioPreviewEn(
       audioFileEn
         ? URL.createObjectURL(audioFileEn)
         : existingArtwork
-        ? `${process.env.PUBLIC_URL}/audios/en/${existingArtwork.id}.mp3`
+        ? `${process.env.PUBLIC_URL}/audios/en/${existingArtwork['artwork'].id}.mp3`
         : ""
     );
   }, [
@@ -111,15 +111,19 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const artwork: Artwork = {
-      name: {
-        es: nameEs,
-        en: nameEn,
+    const artwork: ArtworkNode = {
+      artwork: {
+        name: {
+          es: nameEs,
+          en: nameEn,
+        },
+        author,
+        date,
+        description,
+        id: existingArtwork ? existingArtwork['artwork'].id : Date.now().toString(), // Generar un nuevo ID si es una nueva obra
       },
-      author,
-      date,
-      description,
-      id: existingArtwork ? existingArtwork.id : Date.now().toString(), // Generar un nuevo ID si es una nueva obra
+      prev: existingArtwork?.prev,
+      next: existingArtwork?.next,
     };
 
     const formData = new FormData();
@@ -139,7 +143,9 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
       onSubmit={handleSubmit}
       className="absolute w-full h-full bg-white flex space-y-1 p-1 gap-1.5 rounded-sm z-50"
     >
-      <div className="flex flex-1 flex-shrink-1 flex-col space-y-1 text-gray-700"> {/** Formulario */}
+      <div className="flex flex-1 flex-shrink-1 flex-col space-y-1 text-gray-700">
+        {" "}
+        {/** Formulario */}
         {selectedLanguage === "es" && (
           <input
             className="p-0.5 rounded-md border border-gray-400"
@@ -209,7 +215,8 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
           </button>
         </div>
       </div>
-      <div className="flex flex-col h-full justify-between items-center p-2">{/** Imagen e idiomas */}
+      <div className="flex flex-col h-full justify-between items-center p-2">
+        {/** Imagen e idiomas */}
         <div className="relative w-14 rounded">
           <input
             type="file"

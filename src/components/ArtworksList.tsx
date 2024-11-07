@@ -28,7 +28,7 @@ const ArtworksList = ({ isAdmin, isEditMode, setIsEditMode, isDarkMode }: Artwor
         return (
           <ArtworkThumbnail
             key={id}
-            artwork={artworkNode.artwork}
+            artwork={artworkNode}
             selectedLanguage={selectedLanguage}
             selectedId={artworkNode.artwork.id}
             isAdmin={isAdmin}
