@@ -11,17 +11,17 @@ const ArtworkImage = ({ currentArtwork }: ArtworkImageProps) => {
   const { swipeOffset } = useGestures();
   const { selectedLanguage } = useLanguage();
   const [imageSrc, setImageSrc] = useState<string | null>(null);
-  
+  const apiUrl = 'http://127.0.0.1/3030'
   useEffect(() => {
     if (currentArtwork) {
-      
-      const imageUrl = `${process.env.PUBLIC_URL}/img/${selectedLanguage}/${currentArtwork['artwork'].id}.jpg`;
+      const imageUrl = `${apiUrl}/api/data/guides/desnudos/images/${selectedLanguage}/${currentArtwork['artwork'].id}.jpg`;
       setImageSrc(imageUrl);
+      console.log("Accediendo a la url: " +imageUrl );
     }
   }, [currentArtwork, selectedLanguage]);
 
   const handleError = () => {
-    const fallbackUrl = `${process.env.PUBLIC_URL}/img/es/${currentArtwork && currentArtwork['artwork'].id}.jpg`;
+    const fallbackUrl = `${process.env.PUBLIC_URL}/api/data/guides/desnudos/images/es/${currentArtwork && currentArtwork['artwork'].id}.jpg`;
     setImageSrc(fallbackUrl);
   };
 

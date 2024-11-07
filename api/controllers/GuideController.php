@@ -132,14 +132,49 @@ class GuideController
             echo json_encode(['error' => 'ID de Artwork no proporcionado']);
             exit;
         }
-
-        $existingArtwork = $guideData[$id] ?? null;
-        if ($existingArtwork) {
-            $prevId = $existingArtwork['prev'];
-            $nextId = $existingArtwork['next'];
-        }
         
         $guideData['artworks'][$id] = $artworkData;
+
+        if (isset($_FILES['imageFileEs']) && $_FILES['imageFileEs']['error'] === UPLOAD_ERR_OK) {
+            $imagePathEs = "{$this->dataDir}images/es/{$id}.jpg";
+            if (file_exists($imagePathEs)) unlink($imagePathEs);
+            if (!move_uploaded_file($_FILES['imageFileEs']['tmp_name'], $imagePathEs)) {
+                http_response_code(400);
+                echo json_encode(['error' => 'Error al subir el archivo de imagen (es)']);
+                exit;
+            }
+        }
+    
+        if (isset($_FILES['imageFileEn']) && $_FILES['imageFileEn']['error'] === UPLOAD_ERR_OK) {
+            $imagePathEn = "{$this->dataDir}images/en/{$id}.jpg";
+            if (file_exists($imagePathEn)) unlink($imagePathEn);
+            if (!move_uploaded_file($_FILES['imageFileEn']['tmp_name'], $imagePathEn)) {
+                http_response_code(400);
+                echo json_encode(['error' => 'Error al subir el archivo de imagen (en)']);
+                exit;
+            }
+        }
+    
+        if (isset($_FILES['audioFileEs']) && $_FILES['audioFileEs']['error'] === UPLOAD_ERR_OK) {
+            $audioPathEs = "{$this->dataDir}audios/es/{$id}.mp3";
+            if (file_exists($audioPathEs)) unlink($audioPathEs);
+            if (!move_uploaded_file($_FILES['audioFileEs']['tmp_name'], $audioPathEs)) {
+                http_response_code(400);
+                echo json_encode(['error' => 'Error al subir el archivo de audio (es)']);
+                exit;
+            }
+        }
+    
+        if (isset($_FILES['audioFileEn']) && $_FILES['audioFileEn']['error'] === UPLOAD_ERR_OK) {
+            $audioPathEn = "{$this->dataDir}audios/en/{$id}.mp3";
+            if (file_exists($audioPathEn)) unlink($audioPathEn);
+            if (!move_uploaded_file($_FILES['audioFileEn']['tmp_name'], $audioPathEn)) {
+                http_response_code(400);
+                echo json_encode(['error' => 'Error al subir el archivo de audio (en)']);
+                exit;
+            }
+        }
+    
         $this->saveGuideFile($guideName, $guideData);
 
         echo json_encode(['message' => 'Artwork añadido o actualizado correctamente']);
