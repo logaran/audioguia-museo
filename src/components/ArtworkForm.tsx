@@ -20,68 +20,94 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
   const { selectedLanguage } = useLanguage();
   // Estado para los campos del formulario
   const [nameEs, setNameEs] = useState(
-    existingArtwork ? existingArtwork['artwork'].name.es : ""
+    existingArtwork ? existingArtwork["artwork"].name.es : ""
   );
   const [nameEn, setNameEn] = useState(
-    existingArtwork ? existingArtwork['artwork'].name.en : ""
+    existingArtwork ? existingArtwork["artwork"].name.en : ""
   );
   const [author, setAuthor] = useState(
-    existingArtwork ? existingArtwork['artwork'].author : ""
+    existingArtwork ? existingArtwork["artwork"].author : ""
   );
-  const [date, setDate] = useState(existingArtwork ? existingArtwork['artwork'].date : "");
+  const [date, setDate] = useState(
+    existingArtwork ? existingArtwork["artwork"].date : ""
+  );
   const [description, setDescription] = useState(
-    existingArtwork ? existingArtwork['artwork'].description : ""
+    existingArtwork ? existingArtwork["artwork"].description : ""
   );
   const [imageFileEs, setImageFileEs] = useState<File | null>(null);
   const [imageFileEn, setImageFileEn] = useState<File | null>(null);
+  const baseDir = "http://guideapi:3030/api/data/guides/desnudos";
   const [previewEs, setPreviewEs] = useState<string | null>(
     existingArtwork
-      ? `${process.env.PUBLIC_URL}/img/es/${existingArtwork['artwork'].id}.jpg`
+      ? `${baseDir}/images/es/${existingArtwork["artwork"].id}.jpg`
       : null
   );
   const [previewEn, setPreviewEn] = useState<string | null>(
     existingArtwork
-      ? `${process.env.PUBLIC_URL}/img/en/${existingArtwork['artwork'].id}.jpg`
+      ? `${baseDir}/images/en/${existingArtwork["artwork"].id}.jpg`
       : null
   );
   const [audioFileEs, setAudioFileEs] = useState<File | null>(null);
   const [audioFileEn, setAudioFileEn] = useState<File | null>(null);
   const [audioPreviewEs, setAudioPreviewEs] = useState<string | null>(
-    `${process.env.PUBLIC_URL}/audios/es/${existingArtwork && existingArtwork['artwork'].id}.mp3`
+    `${baseDir}/audios/es/${
+      existingArtwork && existingArtwork["artwork"].id
+    }.mp3`
   );
   const [audioPreviewEn, setAudioPreviewEn] = useState<string | null>(
-    `${process.env.PUBLIC_URL}/audios/en/${existingArtwork && existingArtwork['artwork'].id}.mp3`
+    `${baseDir}/audios/en/${
+      existingArtwork && existingArtwork["artwork"].id
+    }.mp3`
   );
 
   useEffect(() => {
-    setPreviewEs(
-      imageFileEs
-        ? URL.createObjectURL(imageFileEs)
-        : existingArtwork
-        ? `/img/es/${existingArtwork['artwork'].id}.jpg`
-        : ""
-    );
-    setAudioPreviewEs(
-      audioFileEs
-        ? URL.createObjectURL(audioFileEs)
-        : existingArtwork
-        ? `${process.env.PUBLIC_URL}/audios/es/${existingArtwork['artwork'].id}.mp3`
-        : ""
-    );
-    setPreviewEn(
-      imageFileEn
-        ? URL.createObjectURL(imageFileEn)
-        : existingArtwork
-        ? `/img/en/${existingArtwork['artwork'].id}.jpg`
-        : ""
-    );
-    setAudioPreviewEn(
-      audioFileEn
-        ? URL.createObjectURL(audioFileEn)
-        : existingArtwork
-        ? `${process.env.PUBLIC_URL}/audios/en/${existingArtwork['artwork'].id}.mp3`
-        : ""
-    );
+    const setPreviews = async () => {
+      if (existingArtwork) {
+        const id = existingArtwork["artwork"].id;
+  
+        // Rutas para los archivos en inglés y en español
+        const imageUrlEs = `${baseDir}/images/es/${id}.jpg`;
+        const audioUrlEs = `${baseDir}/audios/es/${id}.mp3`;
+        const imageUrlEn = `${baseDir}/images/en/${id}.jpg`;
+        const audioUrlEn = `${baseDir}/audios/en/${id}.mp3`;
+  
+        // Verificación para la imagen en inglés
+        let imagePreviewEn = imageFileEn ? URL.createObjectURL(imageFileEn) : "";
+        if (!imageFileEn) {
+          try {
+            const response = await fetch(imageUrlEn, { method: "HEAD" });
+            imagePreviewEn = response.ok ? imageUrlEn : imageUrlEs;
+          } catch {
+            imagePreviewEn = imageUrlEs;
+          }
+        }
+  
+        
+        let audioPreviewEn = audioFileEn ? URL.createObjectURL(audioFileEn) : "";
+        if (!audioFileEn) {
+          try {
+            const response = await fetch(audioUrlEn, { method: "HEAD" });
+            audioPreviewEn = response.ok ? audioUrlEn : audioUrlEs;
+          } catch {
+            audioPreviewEn = audioUrlEs;
+          }
+        }
+
+        const imagePreviewEs = imageFileEs
+          ? URL.createObjectURL(imageFileEs)
+          : imageUrlEs;
+        const audioPreviewEs = audioFileEs
+          ? URL.createObjectURL(audioFileEs)
+          : audioUrlEs;
+  
+        setPreviewEs(imagePreviewEs);
+        setAudioPreviewEs(audioPreviewEs);
+        setPreviewEn(imagePreviewEn);
+        setAudioPreviewEn(audioPreviewEn);
+      }
+    };
+  
+    setPreviews();
   }, [
     selectedLanguage,
     imageFileEn,
@@ -90,6 +116,7 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
     audioFileEs,
     existingArtwork,
   ]);
+  
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -120,7 +147,9 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
         author,
         date,
         description,
-        id: existingArtwork ? existingArtwork['artwork'].id : Date.now().toString(), // Generar un nuevo ID si es una nueva obra
+        id: existingArtwork
+          ? existingArtwork["artwork"].id
+          : Date.now().toString(), // Generar un nuevo ID si es una nueva obra
       },
       prev: existingArtwork?.prev,
       next: existingArtwork?.next,

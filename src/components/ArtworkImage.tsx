@@ -11,7 +11,8 @@ const ArtworkImage = ({ currentArtwork }: ArtworkImageProps) => {
   const { swipeOffset } = useGestures();
   const { selectedLanguage } = useLanguage();
   const [imageSrc, setImageSrc] = useState<string | null>(null);
-  const baseDir = 'http://127.0.0.1:3030/api/data/';
+  //const baseDir = 'http://127.0.0.1:3030/api/data/';
+  const baseDir = 'http://guideapi:3030/api/data/';
   useEffect(() => {
     if (currentArtwork) {
       const imageUrl = `${baseDir}guides/desnudos/images/${selectedLanguage}/${currentArtwork.id}.jpg`;
@@ -21,7 +22,7 @@ const ArtworkImage = ({ currentArtwork }: ArtworkImageProps) => {
   }, [currentArtwork, selectedLanguage]);
 
   const handleError = () => {
-    const fallbackUrl = `${process.env.PUBLIC_URL}/api/data/guides/desnudos/images/es/${currentArtwork && currentArtwork.id}.jpg`;
+    const fallbackUrl = `${baseDir}guides/desnudos/images/es/${currentArtwork && currentArtwork.id}.jpg`;
     setImageSrc(fallbackUrl);
   };
 

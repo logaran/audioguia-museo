@@ -19,7 +19,7 @@ const FavoritesScreen: React.FC<ArtworkInfoProps> = ({isDarkMode}:ArtworkInfoPro
   };
 
   return (
-    <div className="w-screen h-full flex flex-col items-center justify-start bg-white text-gray-700 dark:bg-gray-900 dark:text-white px-8 py-2">
+    <div className="w-screen h-full flex flex-col items-center justify-start bg-white text-gray-700 dark:bg-gray-900 dark:text-white px-1 md:px-8 py-2">
       <h1 className="text-2xl font-bold mb-4">
         {selectedLanguage === "es"
           ? "Comparte tus obras favoritas"
@@ -33,7 +33,7 @@ const FavoritesScreen: React.FC<ArtworkInfoProps> = ({isDarkMode}:ArtworkInfoPro
           return (
             <li
               key={favorite.artwork.id}
-              className="h-48 w-full md:[width:calc(50%-0.3rem)] lg:[width:calc(33%-0.2rem)] overflow-x-auto flex items-center p-4 border border-gray-300 rounded cursor-pointer hover:bg-gray-100}"
+              className="w-full md:[width:calc(50%-0.3rem)] lg:[width:calc(33%-0.2rem)] overflow-x-auto flex flex-col sm:flex-row items-center p-4 border border-gray-300 rounded cursor-pointer hover:bg-gray-100}"
             >
               <div className="w-36 h-36">
                 <ArtworkImage currentArtwork={favorite.artwork} />

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { usePlayback } from "../context/PlaybackContext";
 import ArtworkImage from "./ArtworkImage";
@@ -12,7 +12,6 @@ import BackButtonHandler from "./BackButtonHandler";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AudioPlayerProps } from "../types";
 
-
 const AudioPlayer = ({ isMobile, isDarkMode }: AudioPlayerProps) => {
   const { handleSwipe, handleTouchEnd, handleTouchMove, handleTouchStart } =
     useGestures();
@@ -20,9 +19,13 @@ const AudioPlayer = ({ isMobile, isDarkMode }: AudioPlayerProps) => {
   const { selectedLanguage } = useLanguage();
   const { currentArtworkNode, setCurrentArtworkNode, artworks } = useArtworks();
   const navigate = useNavigate();
-  const activeBackgroundUrl = `url(${process.env.PUBLIC_URL}/img/${currentArtworkNode?.artwork.id}.jpg)`;
+  const [activeBackgroundUrl, setActiveBackground] = useState<
+    string | undefined
+  >(undefined);
+  const [activeResourceUrl, setActiveResourceUrl] = useState<
+    string | undefined
+  >(undefined);
   const mediaRef = useRef<HTMLAudioElement | null>(null);
-  const activeResourceUrl = `${process.env.PUBLIC_URL}/audios/${selectedLanguage}/${currentArtworkNode?.artwork.id}.mp3`;
   const location = useLocation();
 
   useEffect(() => {
@@ -41,6 +44,40 @@ const AudioPlayer = ({ isMobile, isDarkMode }: AudioPlayerProps) => {
   };
 
   useEffect(() => {
+    if (currentArtworkNode && selectedLanguage) {
+      setActiveResourceUrl(
+        `http://guideapi:3030/api/data/guides/desnudos/audios/${selectedLanguage}/${currentArtworkNode?.artwork.id}.mp3`
+      );
+    }
+  }, [currentArtworkNode, selectedLanguage]);
+
+  useEffect(() => {
+    const setBackground = async () => {
+      if (currentArtworkNode && selectedLanguage) {
+        const englishBackgroundUrl = `http://guideapi:3030/api/data/guides/desnudos/images/en/${currentArtworkNode.artwork.id}.jpg?ts=${new Date().getTime()}`;
+        const spanishBackgroundUrl = `http://guideapi:3030/api/data/guides/desnudos/images/es/${currentArtworkNode.artwork.id}.jpg?ts=${new Date().getTime()}`;
+  
+        try {
+          // Intenta cargar la imagen en inglés
+          const response = await fetch(englishBackgroundUrl, { method: "HEAD" });
+          
+          if (response.ok && selectedLanguage === 'en') {
+            setActiveBackground(englishBackgroundUrl);
+          } else {
+            // Si la imagen en inglés no existe, usa la imagen en español
+            setActiveBackground(spanishBackgroundUrl);
+          }
+        } catch (error) {
+          // En caso de error, también usa la imagen en español
+          setActiveBackground(spanishBackgroundUrl);
+        }
+      }
+    };
+  
+    setBackground();
+  }, [currentArtworkNode, selectedLanguage]);
+
+  useEffect(() => {
     if (mediaRef.current) {
       if (isPlaying) {
         mediaRef.current.play();
@@ -53,15 +90,17 @@ const AudioPlayer = ({ isMobile, isDarkMode }: AudioPlayerProps) => {
   return (
     <div className="relative flex flex-col flex-1 justify-between">
       <BackButtonHandler onBack={handleBackButton} />
-      <div
-        className="absolute inset-0 filter blur-md -z-10"
-        style={{
-          backgroundImage: activeBackgroundUrl,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: 0.7, // Ajusta la opacidad aquí
-        }}
-      />
+      {activeBackgroundUrl && (
+        <div
+          className="absolute inset-0 filter blur-md -z-10"
+          style={{
+            backgroundImage: `url(${activeBackgroundUrl})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: 0.7, // Ajusta la opacidad aquí
+          }}
+        />
+      )}
       <div className="relative h-full flex flex-col sm:flex-row sm:justify-evenly items-center justify-start w-auto pt-3">
         <div className="self-start sm:self-auto">
           <ArtworkInfo artwork={currentArtworkNode} isDarkMode={isDarkMode} />
@@ -99,7 +138,7 @@ const AudioPlayer = ({ isMobile, isDarkMode }: AudioPlayerProps) => {
           </button>
         </>
         <div className="h-72">
-          <ArtworkImage currentArtwork={currentArtworkNode?.artwork}/>
+          <ArtworkImage currentArtwork={currentArtworkNode?.artwork} />
         </div>
       </div>
 
