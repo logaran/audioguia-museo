@@ -3,8 +3,13 @@ import ShareComponent from "./ShareComponent";
 import { useLanguage } from "../context/LanguageContext";
 import { useNavigate } from "react-router-dom";
 import { useFavorites } from "../context/FavoritesContext";
+import ArtworkImage from "./ArtworkImage";
+import ArtworkInfo from './ArtworkInfo';
 
-const FavoritesScreen: React.FC = () => {
+interface ArtworkInfoProps {
+  isDarkMode: boolean;
+}
+const FavoritesScreen: React.FC<ArtworkInfoProps> = ({isDarkMode}:ArtworkInfoProps) => {
   const { selectedLanguage } = useLanguage();
   const navigate = useNavigate();
   const { favorites } = useFavorites();
@@ -21,33 +26,20 @@ const FavoritesScreen: React.FC = () => {
           : "Share your favourite artworks"}
       </h1>
 
-      <ul className="h-full w-full border-3 overflow-auto">
+      <ul className="flex w-full justify-center flex-wrap gap-2 overflow-auto p-2 bg-white dark:bg-gray-800 z-40">
         {favorites.map((favorite) => {
           const shareUrl = `${window.location.origin}/guide/?id=${favorite.artwork.id}`;
-          const fallbackImageUrl = `${process.env.PUBLIC_URL}/img/${favorite.artwork.id}.jpg`;
-          const placeholderUrl = `${process.env.PUBLIC_URL}/img/placeholder.jpg`;
 
           return (
             <li
               key={favorite.artwork.id}
-              className="mb-6 w-full flex items-center justify-between"
+              className="h-48 w-full md:[width:calc(50%-0.3rem)] lg:[width:calc(33%-0.2rem)] overflow-x-auto flex items-center p-4 border border-gray-300 rounded cursor-pointer hover:bg-gray-100}"
             >
-              <img
-                src={shareUrl}
-                onError={({ currentTarget }) => {
-                  currentTarget.src = fallbackImageUrl;
-                  currentTarget.onerror = () => {
-                    currentTarget.src = placeholderUrl;
-                  };
-                }}
-                alt={favorite.artwork.name[selectedLanguage]}
-                title={favorite.artwork.name[selectedLanguage]}
-                className="w-14 h-14 object-contain rounded-md mr-4"
-              />
+              <div className="w-36 h-36">
+                <ArtworkImage currentArtwork={favorite.artwork} />
+              </div>
+              <ArtworkInfo artwork={favorite} isDarkMode={isDarkMode}/>
               <div className="flex-1">
-                <h2 className="text-xl font-semibold">
-                  {favorite.artwork.name[selectedLanguage]}
-                </h2>
                 <ShareComponent
                   url={shareUrl}
                   title={`He estado en el Museo Carmen Thyssen Málaga y me ha encantado esta obra`}

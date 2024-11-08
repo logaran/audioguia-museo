@@ -99,7 +99,7 @@ const AudioPlayer = ({ isMobile, isDarkMode }: AudioPlayerProps) => {
           </button>
         </>
         <div className="h-72">
-          <ArtworkImage currentArtwork={currentArtworkNode}/>
+          <ArtworkImage currentArtwork={currentArtworkNode?.artwork}/>
         </div>
       </div>
 

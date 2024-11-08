@@ -1,34 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import { useGestures } from "../context/GesturesContext";
-import { ArtworkNode } from "../types";
+import { Artwork } from "../types";
 
 interface ArtworkImageProps {
-  currentArtwork?: ArtworkNode;
+  currentArtwork?: Artwork;
 }
 
 const ArtworkImage = ({ currentArtwork }: ArtworkImageProps) => {
   const { swipeOffset } = useGestures();
   const { selectedLanguage } = useLanguage();
   const [imageSrc, setImageSrc] = useState<string | null>(null);
-  const apiUrl = 'http://127.0.0.1/3030'
+  const baseDir = 'http://127.0.0.1:3030/api/data/';
   useEffect(() => {
     if (currentArtwork) {
-      const imageUrl = `${apiUrl}/api/data/guides/desnudos/images/${selectedLanguage}/${currentArtwork['artwork'].id}.jpg`;
+      const imageUrl = `${baseDir}guides/desnudos/images/${selectedLanguage}/${currentArtwork.id}.jpg`;
       setImageSrc(imageUrl);
       console.log("Accediendo a la url: " +imageUrl );
     }
   }, [currentArtwork, selectedLanguage]);
 
   const handleError = () => {
-    const fallbackUrl = `${process.env.PUBLIC_URL}/api/data/guides/desnudos/images/es/${currentArtwork && currentArtwork['artwork'].id}.jpg`;
+    const fallbackUrl = `${process.env.PUBLIC_URL}/api/data/guides/desnudos/images/es/${currentArtwork && currentArtwork.id}.jpg`;
     setImageSrc(fallbackUrl);
   };
 
   return (
     <img
       src={imageSrc || undefined} // Cargar imagen o fallback
-      alt={currentArtwork && (currentArtwork['artwork'].name[selectedLanguage] || "Imagen por defecto")}
+      alt={currentArtwork && (currentArtwork.name[selectedLanguage] || "Imagen por defecto")}
       className="max-w-full max-h-full transition-transform duration-300 object-top m-auto"
       style={{ transform: `translateX(${swipeOffset}px)` }}
       onError={handleError} // Manejar error de carga

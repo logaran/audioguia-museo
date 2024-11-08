@@ -43,7 +43,7 @@ const ArtworkThumbnail = ({
     >
       {/* Miniatura */}
       <div className="w-16 h-16 object-scale-down rounded mr-4">
-        <ArtworkImage currentArtwork={artwork} />
+        <ArtworkImage currentArtwork={artwork?.artwork} />
       </div>
       <ArtworkInfo artwork={artwork} isDarkMode={isDarkMode} />
       {artwork && artwork['artwork'].id && cookies?.likes?.includes(artwork['artwork'].id) && (
