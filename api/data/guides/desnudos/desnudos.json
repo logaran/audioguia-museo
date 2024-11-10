@@ -19,103 +19,19 @@
         "imageUrl": "\/img\/introImage.jpg"
     },
     "artworks": {
-        "100": {
+        "fed2da44-24a7-48e9-9188-ac3c0e355bbb": {
             "artwork": {
                 "name": {
-                    "es": "Desnudos",
-                    "en": "Naked"
+                    "es": "hgjsd",
+                    "en": ""
                 },
-                "author": "Museo Carmen Thyssen M\u00e1laga",
-                "date": "Hace un rato",
-                "description": "Introducci\u00f3n",
-                "id": "100"
+                "author": "sdgsdg",
+                "date": "kjlk",
+                "description": "ljlk",
+                "id": "fed2da44-24a7-48e9-9188-ac3c0e355bbb"
             },
             "prev": null,
-            "next": "107"
-        },
-        "107": {
-            "artwork": {
-                "name": {
-                    "es": "Desnudo femenino",
-                    "en": "Female Nude"
-                },
-                "author": "Menchu Gal",
-                "date": "1948",
-                "description": "Audio 107",
-                "id": "107"
-            },
-            "next": "108",
-            "prev": "100"
-        },
-        "108": {
-            "artwork": {
-                "name": {
-                    "es": "Sin t\u00edtulo",
-                    "en": "Untitled"
-                },
-                "author": "Ismael Smith",
-                "date": "s.f.",
-                "description": "Audio 108",
-                "id": "108"
-            },
-            "next": "109",
-            "prev": "107"
-        },
-        "109": {
-            "artwork": {
-                "name": {
-                    "es": "Torso",
-                    "en": "Torso"
-                },
-                "author": "Eduardo Chillida",
-                "date": "1948",
-                "description": "Audio 109",
-                "id": "109"
-            },
-            "next": "110",
-            "prev": "108"
-        },
-        "110": {
-            "artwork": {
-                "name": {
-                    "es": "Dios de la fruta",
-                    "en": "God of Fruit"
-                },
-                "author": "Gabriel Morcillo",
-                "date": "1936",
-                "description": "Audio 110",
-                "id": "110"
-            },
-            "next": "111",
-            "prev": "109"
-        },
-        "111": {
-            "artwork": {
-                "name": {
-                    "es": "Los maniqu\u00edes",
-                    "en": "The Mannequins"
-                },
-                "author": "Gregorio Prieto",
-                "date": "c.1932",
-                "description": "Audio 111",
-                "id": "111"
-            },
-            "next": "112",
-            "prev": "110"
-        },
-        "112": {
-            "artwork": {
-                "name": {
-                    "es": "\u00c1gata",
-                    "en": "\u00c1gata"
-                },
-                "author": "Antonio Saura",
-                "date": "1960",
-                "description": "Audio 112",
-                "id": "112"
-            },
-            "next": null,
-            "prev": "111"
+            "next": null
         }
     }
 }

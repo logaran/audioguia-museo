@@ -44,7 +44,7 @@ export interface ArtworksContextValue {
   loading: boolean;
   error: string | null;
   deleteArtwork: (id: string) => Promise<boolean>;
-  putArtwork: (formData: FormData) => Promise<boolean>;
+  addOrUpdateArtwork: (formData: FormData) => Promise<boolean>;
 }
 export interface AnalyticsEvent {
   eventName: string;

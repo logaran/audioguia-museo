@@ -64,15 +64,17 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
     const setPreviews = async () => {
       if (existingArtwork) {
         const id = existingArtwork["artwork"].id;
-  
+
         // Rutas para los archivos en inglés y en español
         const imageUrlEs = `${baseDir}/images/es/${id}.jpg`;
         const audioUrlEs = `${baseDir}/audios/es/${id}.mp3`;
         const imageUrlEn = `${baseDir}/images/en/${id}.jpg`;
         const audioUrlEn = `${baseDir}/audios/en/${id}.mp3`;
-  
+
         // Verificación para la imagen en inglés
-        let imagePreviewEn = imageFileEn ? URL.createObjectURL(imageFileEn) : "";
+        let imagePreviewEn = imageFileEn
+          ? URL.createObjectURL(imageFileEn)
+          : "";
         if (!imageFileEn) {
           try {
             const response = await fetch(imageUrlEn, { method: "HEAD" });
@@ -81,9 +83,10 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
             imagePreviewEn = imageUrlEs;
           }
         }
-  
-        
-        let audioPreviewEn = audioFileEn ? URL.createObjectURL(audioFileEn) : "";
+
+        let audioPreviewEn = audioFileEn
+          ? URL.createObjectURL(audioFileEn)
+          : "";
         if (!audioFileEn) {
           try {
             const response = await fetch(audioUrlEn, { method: "HEAD" });
@@ -99,14 +102,14 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
         const audioPreviewEs = audioFileEs
           ? URL.createObjectURL(audioFileEs)
           : audioUrlEs;
-  
+
         setPreviewEs(imagePreviewEs);
         setAudioPreviewEs(audioPreviewEs);
         setPreviewEn(imagePreviewEn);
         setAudioPreviewEn(audioPreviewEn);
       }
     };
-  
+
     setPreviews();
   }, [
     selectedLanguage,
@@ -116,7 +119,6 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
     audioFileEs,
     existingArtwork,
   ]);
-  
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -138,31 +140,31 @@ const ArtworkForm: React.FC<ArtworkFormProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const artwork: ArtworkNode = {
-      artwork: {
-        name: {
-          es: nameEs,
-          en: nameEn,
+    if (existingArtwork) {
+      const artwork: ArtworkNode = {
+        artwork: {
+          name: {
+            es: nameEs,
+            en: nameEn,
+          },
+          author,
+          date,
+          description,
+          id: existingArtwork["artwork"].id,
         },
-        author,
-        date,
-        description,
-        id: existingArtwork
-          ? existingArtwork["artwork"].id
-          : Date.now().toString(), // Generar un nuevo ID si es una nueva obra
-      },
-      prev: existingArtwork?.prev,
-      next: existingArtwork?.next,
-    };
+        prev: existingArtwork?.prev,
+        next: existingArtwork?.next,
+      };
+      const formData = new FormData();
+      formData.append("artwork", JSON.stringify(artwork));
+      if (imageFileEs) formData.append("imageFileEs", imageFileEs);
+      if (imageFileEn) formData.append("imageFileEn", imageFileEn);
+      if (audioFileEs) formData.append("audioFileEs", audioFileEs);
+      if (audioFileEn) formData.append("audioFileEn", audioFileEn);
+      onSubmit(formData);
+    }
 
-    const formData = new FormData();
-    formData.append("artwork", JSON.stringify(artwork));
-    if (imageFileEs) formData.append("imageFileEs", imageFileEs);
-    if (imageFileEn) formData.append("imageFileEn", imageFileEn);
-    if (audioFileEs) formData.append("audioFileEs", audioFileEs);
-    if (audioFileEn) formData.append("audioFileEn", audioFileEn);
 
-    onSubmit(formData);
     setIsEditMode(false);
     setShowArtworkForm(false);
   };

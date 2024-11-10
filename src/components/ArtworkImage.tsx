@@ -10,19 +10,19 @@ interface ArtworkImageProps {
 const ArtworkImage = ({ currentArtwork }: ArtworkImageProps) => {
   const { swipeOffset } = useGestures();
   const { selectedLanguage } = useLanguage();
+  const [timeStamp] = useState(new Date().getTime());
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   //const baseDir = 'http://127.0.0.1:3030/api/data/';
   const baseDir = 'http://guideapi:3030/api/data/';
   useEffect(() => {
     if (currentArtwork) {
-      const imageUrl = `${baseDir}guides/desnudos/images/${selectedLanguage}/${currentArtwork.id}.jpg`;
+      const imageUrl = `${baseDir}guides/desnudos/images/${selectedLanguage}/${currentArtwork.id}.jpg?ts=${timeStamp}`;
       setImageSrc(imageUrl);
-      console.log("Accediendo a la url: " +imageUrl );
     }
-  }, [currentArtwork, selectedLanguage]);
+  }, [currentArtwork, selectedLanguage, timeStamp]);
 
   const handleError = () => {
-    const fallbackUrl = `${baseDir}guides/desnudos/images/es/${currentArtwork && currentArtwork.id}.jpg`;
+    const fallbackUrl = `${baseDir}guides/desnudos/images/es/${currentArtwork && currentArtwork.id}.jpg?ts=${timeStamp}`;
     setImageSrc(fallbackUrl);
   };
 

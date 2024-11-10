@@ -10,6 +10,7 @@ import ArtworkImage from "./ArtworkImage";
 
 interface ArtworkThumbnailProps {
   artwork: ArtworkNode | undefined;
+  artworks: { [key: string]: ArtworkNode };
   selectedLanguage: LanguageCodes;
   selectedId: string;
   isAdmin: boolean;
@@ -23,7 +24,7 @@ const ArtworkThumbnail = ({
   isAdmin,
   isEditMode,
   setIsEditMode,
-  isDarkMode
+  isDarkMode,
 }: ArtworkThumbnailProps) => {
   const navigate = useNavigate();
   const { cookies } = useFavorites();
@@ -46,16 +47,19 @@ const ArtworkThumbnail = ({
         <ArtworkImage currentArtwork={artwork?.artwork} />
       </div>
       <ArtworkInfo artwork={artwork} isDarkMode={isDarkMode} />
-      {artwork && artwork['artwork'].id && cookies?.likes?.includes(artwork['artwork'].id) && (
-        <div className="absolute top-1 right-1">
-          <Heart fill="pink" />
-        </div>
-      )}
+      {artwork &&
+        artwork["artwork"].id &&
+        cookies?.likes?.includes(artwork["artwork"].id) && (
+          <div className="absolute top-1 right-1">
+            <Heart fill="pink" />
+          </div>
+        )}
 
       {isAdmin && (
         <div className="absolute inset-0 w-full h-full">
           <AdminControls
             artwork={artwork}
+            artworks={artworks}
             setIsEditMode={setIsEditMode}
             isEditMode={isEditMode}
           />

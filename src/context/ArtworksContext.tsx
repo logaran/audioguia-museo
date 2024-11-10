@@ -156,7 +156,7 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
         loading,
         error,
         deleteArtwork,
-        putArtwork: addOrUpdateArtwork,
+        addOrUpdateArtwork,
       }}
     >
       {children}

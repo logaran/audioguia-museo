@@ -7,6 +7,7 @@ import ArtworkForm from "./ArtworkForm";
 
 interface AdminControlsProps {
   artwork: ArtworkNode | undefined;
+  artworks: { [key: string]: ArtworkNode };
   isEditMode: boolean;
   setIsEditMode: (editMode: boolean) => void;
 }
@@ -15,7 +16,7 @@ const AdminControls = ({
   isEditMode,
   setIsEditMode,
 }: AdminControlsProps) => {
-  const { deleteArtwork, putArtwork: addOrUpdateArtwork } = useArtworks();
+  const { deleteArtwork, addOrUpdateArtwork } = useArtworks();
   const navigate = useNavigate();
   const [showArtworkForm, setShowArtworkForm] = useState(false);
 
@@ -24,7 +25,9 @@ const AdminControls = ({
     id: string
   ) => {
     event.stopPropagation();
-    deleteArtwork(id);
+    if (artwork?.next || artwork?.prev ) {
+      deleteArtwork(id);
+    }
     navigate("/list");
   };
 
@@ -37,18 +40,59 @@ const AdminControls = ({
     setShowArtworkForm(true);
   };
 
+  const handleAddClick = (event: React.MouseEvent<SVGSVGElement>) => {
+    event.stopPropagation();
+    const generateUUID = () => {
+      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+        const r = (Math.random() * 16) | 0;
+        const v = c === "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      });
+    };
+
+    const newId = generateUUID();
+    const newArtwork = {
+      name: {
+        es: "",
+        en: "",
+      },
+      author: "",
+      date: "",
+      description: "",
+      id: newId,
+    };
+
+    const newArtworkData = {
+      artwork: newArtwork,
+      prev: artwork?.artwork.id,
+      next: artwork?.next,
+    };
+
+    const formData = new FormData();
+    formData.append("artwork", JSON.stringify(newArtworkData));
+    addOrUpdateArtwork(formData);
+  };
   return (
     <>
       {!isEditMode && (
         <div className="absolute flex gap-1 bottom-1 right-1 p-1 border border-cyan-300 rounded-md z-50">
           <Edit
             className="hover:text-blue-300 transition duration-200"
-            onClick={(e) => artwork && handleEditClick(e, artwork['artwork'].id)}
+            onClick={(e) =>
+              artwork && handleEditClick(e, artwork["artwork"].id)
+            }
           />
-          <Plus className="hover:text-green-600 transition duration-200" />
+          <Plus
+            className="hover:text-green-600 transition duration-200"
+            onClick={(e) => handleAddClick(e)}
+          />
           <CircleX
             className="hover:text-red-600 transition duration-200"
-            onClick={(e) => artwork && artwork['artwork'].id && handleDeleteClick(e, artwork['artwork'].id)}
+            onClick={(e) =>
+              artwork &&
+              artwork["artwork"].id &&
+              handleDeleteClick(e, artwork["artwork"].id)
+            }
           />
         </div>
       )}

@@ -27,6 +27,7 @@ const AudioPlayer = ({ isMobile, isDarkMode }: AudioPlayerProps) => {
   >(undefined);
   const mediaRef = useRef<HTMLAudioElement | null>(null);
   const location = useLocation();
+  const [isValidUrl, setIsValidUrl] = useState<boolean>(true);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -52,16 +53,40 @@ const AudioPlayer = ({ isMobile, isDarkMode }: AudioPlayerProps) => {
   }, [currentArtworkNode, selectedLanguage]);
 
   useEffect(() => {
+    const checkAudioUrl = async () => {
+      if (activeResourceUrl) {
+        try {
+          const response = await fetch(activeResourceUrl, { method: "HEAD" });
+          if (response.ok) {
+            setIsValidUrl(true);
+          } else {
+            setIsValidUrl(false);
+          }
+        } catch (error) {
+          setIsValidUrl(false);
+          console.error(error);
+        }
+      }
+    };
+    checkAudioUrl();
+  }, [activeResourceUrl]);
+  useEffect(() => {
     const setBackground = async () => {
       if (currentArtworkNode && selectedLanguage) {
-        const englishBackgroundUrl = `http://guideapi:3030/api/data/guides/desnudos/images/en/${currentArtworkNode.artwork.id}.jpg?ts=${new Date().getTime()}`;
-        const spanishBackgroundUrl = `http://guideapi:3030/api/data/guides/desnudos/images/es/${currentArtworkNode.artwork.id}.jpg?ts=${new Date().getTime()}`;
-  
+        const englishBackgroundUrl = `http://guideapi:3030/api/data/guides/desnudos/images/en/${
+          currentArtworkNode.artwork.id
+        }.jpg?ts=${new Date().getTime()}`;
+        const spanishBackgroundUrl = `http://guideapi:3030/api/data/guides/desnudos/images/es/${
+          currentArtworkNode.artwork.id
+        }.jpg?ts=${new Date().getTime()}`;
+
         try {
           // Intenta cargar la imagen en inglés
-          const response = await fetch(englishBackgroundUrl, { method: "HEAD" });
-          
-          if (response.ok && selectedLanguage === 'en') {
+          const response = await fetch(englishBackgroundUrl, {
+            method: "HEAD",
+          });
+
+          if (response.ok && selectedLanguage === "en") {
             setActiveBackground(englishBackgroundUrl);
           } else {
             // Si la imagen en inglés no existe, usa la imagen en español
@@ -73,7 +98,7 @@ const AudioPlayer = ({ isMobile, isDarkMode }: AudioPlayerProps) => {
         }
       }
     };
-  
+
     setBackground();
   }, [currentArtworkNode, selectedLanguage]);
 
@@ -108,7 +133,7 @@ const AudioPlayer = ({ isMobile, isDarkMode }: AudioPlayerProps) => {
         {/* Controles de reproducción y pase de obras*/}
         <>
           {/*Play*/}
-          <div
+          {isValidUrl && (<div
             className={`absolute inset-0 flex h-full flex-col justify-between p-4 z-30 transition duration-300 ${
               isPlaying
                 ? "pointer-events-auto"
@@ -120,7 +145,7 @@ const AudioPlayer = ({ isMobile, isDarkMode }: AudioPlayerProps) => {
             onClick={!isMobile ? togglePlayPause : undefined}
           >
             <PlayIcon />
-          </div>
+          </div>)}
 
           {/*Flechas*/}
           <button
@@ -142,7 +167,7 @@ const AudioPlayer = ({ isMobile, isDarkMode }: AudioPlayerProps) => {
         </div>
       </div>
 
-      {activeResourceUrl && (
+      {isValidUrl && (
         <audio
           ref={mediaRef}
           src={activeResourceUrl}

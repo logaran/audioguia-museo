@@ -55,32 +55,32 @@ class GuideController
         $oldImageFileEn = "{$this->dataDir}images/en/{$id}.jpg";
         $oldAudioFileEs = "{$this->dataDir}audios/es/{$id}.mp3";
         $oldAudioFileEn = "{$this->dataDir}audios/en/{$id}.mp3";
-    
+
         // Inicializar los flags de eliminación
         $artworkDeleted = true;
         $filesDeleted = true;
-    
+
         if (!isset($guideData['artworks'][$id])) {
             return false;
         }
-    
+
         $artworkToDelete = $guideData['artworks'][$id];
         $prevId = $artworkToDelete['prev'];
         $nextId = $artworkToDelete['next'];
-    
+
         // Actualizar las relaciones de los artworks vecinos
         if ($prevId !== null && isset($guideData['artworks'][$prevId])) {
             $guideData['artworks'][$prevId]['next'] = $nextId;
         }
-    
+
         if ($nextId !== null && isset($guideData['artworks'][$nextId])) {
             $guideData['artworks'][$nextId]['prev'] = $prevId;
         }
-    
+
         // Eliminar el artwork
         unset($guideData['artworks'][$id]);
         $artworkDeleted = true;  // Si llegamos aquí es porque el artwork fue eliminado de la estructura
-    
+
         // Eliminar los archivos asociados si existen
         if (file_exists($oldAudioFileEs)) {
             if (!unlink($oldAudioFileEs)) {
@@ -102,16 +102,16 @@ class GuideController
                 $filesDeleted = false;
             }
         }
-    
+
         // Guardar el archivo de guía después de la eliminación
         if ($artworkDeleted && $filesDeleted) {
             $this->saveGuideFile($guideName, $guideData);
             return true; // Ambas eliminaciones fueron exitosas
         }
-    
+
         return false; // Algún paso falló, ya sea la eliminación del artwork o de los archivos
     }
-    
+
 
     public function addOrUpdateArtwork(string $guideName): void
     {
@@ -132,7 +132,20 @@ class GuideController
             echo json_encode(['error' => 'ID de Artwork no proporcionado']);
             exit;
         }
-        
+        if (!array_key_exists($id, $guideData['artworks'])) {
+            $prev = $artworkData['prev'];
+            $next = $artworkData['next'];
+
+            if (!empty($next) && array_key_exists($next, $guideData['artworks'])) {
+                $guideData['artworks'][$next]['prev'] = $id;
+            }
+
+            if (!empty($prev) && array_key_exists($prev, $guideData['artworks'])) {
+                $guideData['artworks'][$prev]['next'] = $id;
+            }
+        }
+
+
         $guideData['artworks'][$id] = $artworkData;
 
         if (isset($_FILES['imageFileEs']) && $_FILES['imageFileEs']['error'] === UPLOAD_ERR_OK) {
@@ -144,7 +157,7 @@ class GuideController
                 exit;
             }
         }
-    
+
         if (isset($_FILES['imageFileEn']) && $_FILES['imageFileEn']['error'] === UPLOAD_ERR_OK) {
             $imagePathEn = "{$this->dataDir}images/en/{$id}.jpg";
             if (file_exists($imagePathEn)) unlink($imagePathEn);
@@ -154,7 +167,7 @@ class GuideController
                 exit;
             }
         }
-    
+
         if (isset($_FILES['audioFileEs']) && $_FILES['audioFileEs']['error'] === UPLOAD_ERR_OK) {
             $audioPathEs = "{$this->dataDir}audios/es/{$id}.mp3";
             if (file_exists($audioPathEs)) unlink($audioPathEs);
@@ -164,7 +177,7 @@ class GuideController
                 exit;
             }
         }
-    
+
         if (isset($_FILES['audioFileEn']) && $_FILES['audioFileEn']['error'] === UPLOAD_ERR_OK) {
             $audioPathEn = "{$this->dataDir}audios/en/{$id}.mp3";
             if (file_exists($audioPathEn)) unlink($audioPathEn);
@@ -174,7 +187,7 @@ class GuideController
                 exit;
             }
         }
-    
+
         $this->saveGuideFile($guideName, $guideData);
 
         echo json_encode(['message' => 'Artwork añadido o actualizado correctamente']);
