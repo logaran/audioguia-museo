@@ -1,0 +1,275 @@
+{
+    "exposition": {
+        "name": {
+            "es": "Desnudos",
+            "en": "Naked"
+        },
+        "description": {
+            "es": "Cuerpos normativos e insurrectos en el arte espa\u00f1ol (1870-1970)",
+            "en": "Normative and Rebellious Nudes in Spanish Art (1870-1970)"
+        },
+        "copy": {
+            "es": "Con la colaboraci\u00f3n de",
+            "en": "In collaboration with"
+        },
+        "date": {
+            "es": "Del 8 de octubre de 2024 al 9 de marzo de 2025",
+            "en": "From October 8, 2024 to March 9, 2025"
+        },
+        "imageUrl": "\/img\/introImage.jpg"
+    },
+    "artworks": {
+        "fed2da44-24a7-48e9-9188-ac3c0e355bbb": {
+            "artwork": {
+                "name": {
+                    "es": "hgjsd",
+                    "en": ""
+                },
+                "author": "sdgsdg",
+                "date": "kjlk",
+                "description": "ljlk",
+                "id": "fed2da44-24a7-48e9-9188-ac3c0e355bbb"
+            },
+            "prev": null,
+            "next": "c027b4ec-f55c-418b-acd1-5990a541b49b"
+        },
+        "991d206f-48bc-4b32-ac07-eef53ab45754": {
+            "artwork": {
+                "name": {
+                    "es": "",
+                    "en": ""
+                },
+                "author": "",
+                "date": "",
+                "description": "",
+                "id": "991d206f-48bc-4b32-ac07-eef53ab45754"
+            },
+            "prev": null,
+            "next": null
+        },
+        "fdd585e9-9254-4b0d-a890-21f923de6e34": {
+            "artwork": {
+                "name": {
+                    "es": "",
+                    "en": ""
+                },
+                "author": "",
+                "date": "",
+                "description": "",
+                "id": "fdd585e9-9254-4b0d-a890-21f923de6e34"
+            },
+            "prev": null,
+            "next": null
+        },
+        "4ecf3c84-e6a3-4ba9-9d02-35f7a0ad2b0b": {
+            "artwork": {
+                "name": {
+                    "es": "",
+                    "en": ""
+                },
+                "author": "",
+                "date": "",
+                "description": "",
+                "id": "4ecf3c84-e6a3-4ba9-9d02-35f7a0ad2b0b"
+            },
+            "prev": null,
+            "next": null
+        },
+        "01d011bf-9441-4da5-9dee-2ad04e47c848": {
+            "artwork": {
+                "name": {
+                    "es": "",
+                    "en": ""
+                },
+                "author": "",
+                "date": "",
+                "description": "",
+                "id": "01d011bf-9441-4da5-9dee-2ad04e47c848"
+            },
+            "prev": null,
+            "next": null
+        },
+        "c027b4ec-f55c-418b-acd1-5990a541b49b": {
+            "artwork": {
+                "name": {
+                    "es": "Nueva tarjeta",
+                    "en": ""
+                },
+                "author": "Yo mismo",
+                "date": "hoy",
+                "description": "Una tarjeta fea como el demonio",
+                "id": "c027b4ec-f55c-418b-acd1-5990a541b49b"
+            },
+            "prev": "fed2da44-24a7-48e9-9188-ac3c0e355bbb",
+            "next": null
+        },
+        "31e7f9d1-a07f-4196-be3d-0a20c0521d38": {
+            "artwork": {
+                "name": {
+                    "es": "",
+                    "en": ""
+                },
+                "author": "",
+                "date": "",
+                "description": "",
+                "id": "31e7f9d1-a07f-4196-be3d-0a20c0521d38"
+            },
+            "prev": null,
+            "next": null
+        },
+        "a556ba46-b073-4883-8172-bbf95645036f": {
+            "artwork": {
+                "name": {
+                    "es": "",
+                    "en": ""
+                },
+                "author": "",
+                "date": "",
+                "description": "",
+                "id": "a556ba46-b073-4883-8172-bbf95645036f"
+            },
+            "prev": null,
+            "next": null
+        },
+        "a1d2827d-2ee4-4265-b90d-9b98846373c9": {
+            "artwork": {
+                "name": {
+                    "es": "",
+                    "en": ""
+                },
+                "author": "",
+                "date": "",
+                "description": "",
+                "id": "a1d2827d-2ee4-4265-b90d-9b98846373c9"
+            },
+            "prev": null,
+            "next": null
+        },
+        "c63ac60c-e8be-4814-af3c-09f69323bcc3": {
+            "artwork": {
+                "name": {
+                    "es": "",
+                    "en": ""
+                },
+                "author": "",
+                "date": "",
+                "description": "",
+                "id": "c63ac60c-e8be-4814-af3c-09f69323bcc3"
+            },
+            "prev": null,
+            "next": null
+        },
+        "fc14c8f7-6013-4d2e-84e4-b34d8a564ce6": {
+            "artwork": {
+                "name": {
+                    "es": "",
+                    "en": ""
+                },
+                "author": "",
+                "date": "",
+                "description": "",
+                "id": "fc14c8f7-6013-4d2e-84e4-b34d8a564ce6"
+            },
+            "prev": null,
+            "next": null
+        },
+        "6371fe8b-fb0e-4a6f-beff-532776647d4a": {
+            "artwork": {
+                "name": {
+                    "es": "",
+                    "en": ""
+                },
+                "author": "",
+                "date": "",
+                "description": "",
+                "id": "6371fe8b-fb0e-4a6f-beff-532776647d4a"
+            },
+            "prev": null,
+            "next": null
+        },
+        "6c75b58a-b9bf-4f0c-942e-8b12e2ea1b6e": {
+            "artwork": {
+                "name": {
+                    "es": "",
+                    "en": ""
+                },
+                "author": "",
+                "date": "",
+                "description": "",
+                "id": "6c75b58a-b9bf-4f0c-942e-8b12e2ea1b6e"
+            },
+            "prev": null,
+            "next": null
+        },
+        "c8dbe252-e541-4985-89a3-51ed16a2ff03": {
+            "artwork": {
+                "name": {
+                    "es": "",
+                    "en": ""
+                },
+                "author": "",
+                "date": "",
+                "description": "",
+                "id": "c8dbe252-e541-4985-89a3-51ed16a2ff03"
+            },
+            "prev": null,
+            "next": null
+        },
+        "3e5a0386-a879-4006-96d6-8efdbc0d1172": {
+            "artwork": {
+                "name": {
+                    "es": "",
+                    "en": ""
+                },
+                "author": "",
+                "date": "",
+                "description": "",
+                "id": "3e5a0386-a879-4006-96d6-8efdbc0d1172"
+            },
+            "prev": null,
+            "next": null
+        },
+        "45f7e927-3cc2-4088-943b-b8b570537d2b": {
+            "artwork": {
+                "name": {
+                    "es": "",
+                    "en": ""
+                },
+                "author": "",
+                "date": "",
+                "description": "",
+                "id": "45f7e927-3cc2-4088-943b-b8b570537d2b"
+            },
+            "prev": null,
+            "next": null
+        },
+        "27411a26-4472-4ceb-aa59-473e62e05991": {
+            "artwork": {
+                "name": {
+                    "es": "",
+                    "en": ""
+                },
+                "author": "",
+                "date": "",
+                "description": "",
+                "id": "27411a26-4472-4ceb-aa59-473e62e05991"
+            },
+            "prev": null,
+            "next": null
+        },
+        "ad951730-8e43-42ea-8d31-95d9ec47f2ad": {
+            "artwork": {
+                "name": {
+                    "es": "",
+                    "en": ""
+                },
+                "author": "",
+                "date": "",
+                "description": "",
+                "id": "ad951730-8e43-42ea-8d31-95d9ec47f2ad"
+            },
+            "prev": null,
+            "next": null
+        }
+    }
+}

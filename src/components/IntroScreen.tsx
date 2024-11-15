@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { languages } from './Languages'; // Importamos el array con idiomas y banderas
-import appData from '../config/appData';
+import appData from '../config/appConfig';
 import ThemeAdaptableImage from './ThemeAdaptableImage';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';

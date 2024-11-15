@@ -23,6 +23,7 @@ const appData: AppData = {
             en: "Share your favourite artworks",
         },
     },
+    apiUrl: "http://localhost:8000/api/"
 };
 
 export default appData; // Asegúrate de que esta línea tenga el punto y coma

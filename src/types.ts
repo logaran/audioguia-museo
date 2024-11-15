@@ -70,6 +70,7 @@ export interface AppData {
     backButton: LocalizedString;
     shareText: LocalizedString;
   };
+  apiUrl: string;
 }
 export type MyCookies = {
   likes?: string[];

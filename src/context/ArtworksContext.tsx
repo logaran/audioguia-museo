@@ -1,6 +1,7 @@
 // ArtworksContext.js
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { ArtworkNode, ArtworksContextValue, ExpositionData } from "../types";
+import appConfig from "../config/appConfig";
 
 const ArtworksContext = createContext<ArtworksContextValue | undefined>(
   undefined
@@ -27,9 +28,9 @@ export const ArtworksProvider: React.FC<React.PropsWithChildren<{}>> = ({
     ArtworkNode | undefined
   >(undefined);
 
-  const guideName = "desnudos/";
-  const apiUrl = "http://guideapi:3030/" + guideName; //En casa
-  //const apiUrl = "http://127.0.0.1:3030/" + guideName; //En el Museo
+  const guideName = "desnudos";
+  const apiUrl = appConfig.apiUrl + guideName;
+  
 
   useEffect(() => {
     let isMounted = true;

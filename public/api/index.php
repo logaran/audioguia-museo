@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $segments = explode('/', trim($uri, '/'));
 
-$guideName = $segments[0] ?? null;
+$guideName = $segments[1] ?? null;
 $dataDir = "./data/guides/{$guideName}/";
 
 
